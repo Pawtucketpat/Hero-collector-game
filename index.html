@@ -10,7 +10,19 @@
               </head>
               <body>
                 <div style="position:fixed;bottom:0;left:0;z-index:99;color:#ff0;font:20px sans-serif">index.html loaded</div>
-                  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.js"></script>
-                    <script src="main.js" onerror="document.body.insertAdjacentHTML('beforeend','<div style=&quot;color:#f88;font:20px sans-serif&quot;>main.js failed to load</div>')"></script>
-                    </body>
-                    </html>
+                  <script>
+                      window.onerror = function (m, s, l) {
+                            document.body.insertAdjacentHTML('beforeend', '<div style="color:#f88;font:20px sans-serif">ERROR: ' + m + ' (line ' + l + ')</div>');
+                                };
+                                    document.body.insertAdjacentHTML('beforeend', '<div style="color:#0f0;font:20px sans-serif">1. inline JS works</div>');
+                                      </script>
+                                        <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.js"></script>
+                                          <script>
+                                              document.body.insertAdjacentHTML('beforeend', '<div style="color:#0ff;font:20px sans-serif">2. Phaser is ' + typeof Phaser + '</div>');
+                                                </script>
+                                                  <script src="main.js"></script>
+                                                    <script>
+                                                        document.body.insertAdjacentHTML('beforeend', '<div style="color:#f0f;font:20px sans-serif">3. after main.js</div>');
+                                                          </script>
+                                                          </body>
+                                                          </html>
