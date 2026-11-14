@@ -11,9 +11,8 @@
     </head>
     <body>
         <script>
-            window.onerror = (m, s, l) => document.body.insertAdjacentHTML('beforeend', 'pre style="color:#f88;fontsize:18px">' + m + (line ' + l + ')</pre>');
-        </script>
+            window.onerror = (m, s, l) => document.body.insertAdjacentHTML('beforeend', 'pre style="color:#f88;fontsize:18px">' + m + (line ' + l + ')</pre>');        </script>
         <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.js"></script>
-        <script src= main.js></script>
+        <script src="main.js" onerror="document.body.insertAdjacentHTML('beforeend','<div style=&quot;color:#f88;font:20px sans-serif&quot;>main.js failed to load</div')"></script>
     </body>
 </html>
