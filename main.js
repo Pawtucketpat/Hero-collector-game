@@ -1,3 +1,4 @@
+document.body.insertAdjacentHTML('afterbegin', '<div style="position:fixed;top:0;left:99;color:#0f0;font:20px sans-serif">main.js running</div>');
 class BattleScene extend Phaser.Scene {
     constructor() { super("Battle"); }
 
