@@ -1,4 +1,4 @@
-document.body.insertAdjacentHTML('afterbegin', '<div style="position:fixed;top:0;left:0;z-index:99;color:#0f0;font:20px sans-serif">main.js v2 running</div>');
+
 
 function makeLabel(scene, x, y, str, size) {
   return scene.add.text(x, y, str, { fontSize: size + 'px', color: '#ffffff' }).setOrigin(0.5);
