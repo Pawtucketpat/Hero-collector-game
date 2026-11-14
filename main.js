@@ -2,11 +2,11 @@
 const ASSET_PATH = ''; // use 'assets/' if you move the images into a folder
 
 const SPRITE_FILES = {
-  druid: 'elf_druid.png',
-  goblin1: 'goblin_warrior.png',
-  goblin2: 'goblin_archer.png',
-  goblin3: 'orc_brute.png',
-  goblin4: 'goblin_shaman.png',
+  druid: 'druid.png',
+  goblin1: 'goblin1.png',
+  goblin2: 'goblin2.png',
+  goblin3: 'goblin3.png',
+  goblin4: 'goblin4.png',
 };
 
 // Colored circles used if an image is missing
@@ -296,6 +296,8 @@ const battleScene = {
     this.time.delayedCall(600, function () { scene.nextTurn(); });
   },
 
+  extend: {
+
   makeView: function (u) {
     const scene = this;
     const slot = (u.side === 'player' ? this.playerSlots : this.enemySlots)[u.slot];
@@ -348,100 +350,4 @@ const battleScene = {
       v.hpFill.width = Math.max(0, 60 * u.hp / u.maxHp);
       v.sprite.setAlpha(u.alive ? 1 : 0.25);
       const lines = [];
-      const shield = u.effects.filter(function (e) { return e.type === 'shield'; })
-        .reduce(function (n, e) { return n + e.charges; }, 0);
-      if (shield > 0) lines.push('Shield x' + shield);
-      if (u.ward > 0) lines.push('Ward ' + u.ward);
-      u.effects.filter(function (e) { return e.type === 'dot'; })
-        .forEach(function (e) { lines.push('DoT ' + e.damage + ' x' + e.charges); });
-      v.status.setText(u.alive ? lines.join('\n') : '');
-      v.hpFill.setFillStyle(u.hp / u.maxHp > 0.3 ? 0x44cc44 : 0xcc4444);
-    });
-    if (this.target) {
-      const tv = this.views[this.target.id];
-      this.targetRing.setPosition(tv.slot.x, tv.slot.y + 42).setVisible(true);
-    } else {
-      this.targetRing.setVisible(false);
-    }
-    this.buttons.forEach(function (b) {
-      const sk = SKILLS[b.key];
-      const cd = scene.hero.cd[b.key] || 0;
-      const ready = scene.awaitingPlayer && cd === 0;
-      b.box.setFillStyle(ready ? 0x446644 : 0x222222);
-      b.label.setText(sk.name + (cd > 0 ? '\ncd ' + cd : ''));
-      b.label.setColor(ready ? '#ffffff' : '#777777');
-    });
-  },
-
-  nextTurn: function () {
-    const scene = this;
-    const u = nextActor(this.battle);
-    if (!u) { this.showResult(); return; }
-    this.current = u;
-    for (const id in this.views) this.views[id].ring.setVisible(false);
-    this.views[u.id].ring.setVisible(true);
-    this.turnText.setText(u.name + "'s turn");
-
-    if (u.side === 'player') {
-      this.awaitingPlayer = true;
-      this.refresh();
-    } else {
-      this.awaitingPlayer = false;
-      this.refresh();
-      this.time.delayedCall(700, function () {
-        const act = chooseAction(scene.battle, u);
-        if (act) useSkill(scene.battle, u, act.key, act.target);
-        scene.refresh();
-        scene.time.delayedCall(700, function () { scene.finishTurn(u); });
-      });
-    }
-  },
-
-  playerUse: function (key) {
-    const scene = this;
-    if (!this.awaitingPlayer || this.battle.over) return;
-    if (!skillReady(this.hero, key)) return;
-    const sk = SKILLS[key];
-    let target = this.hero;
-    if (sk.target === 'enemy') {
-      target = this.target;
-      if (!target || !target.alive) return;
-    }
-    this.awaitingPlayer = false;
-    useSkill(this.battle, this.hero, key, target);
-    this.refresh();
-    this.time.delayedCall(700, function () { scene.finishTurn(scene.hero); });
-  },
-
-  finishTurn: function (u) {
-    const scene = this;
-    endTurn(this.battle, u);
-    this.refresh();
-    if (this.battle.over) {
-      this.time.delayedCall(600, function () { scene.showResult(); });
-    } else {
-      this.time.delayedCall(400, function () { scene.nextTurn(); });
-    }
-  },
-
-  showResult: function () {
-    const scene = this;
-    this.awaitingPlayer = false;
-    this.refresh();
-    const W = this.W;
-    const H = this.H;
-    this.add.rectangle(W / 2, H / 2, W, H, 0x000000, 0.6).setInteractive()
-      .on('pointerdown', function () { scene.scene.restart(); });
-    makeLabel(this, W / 2, H / 2 - 20, this.battle.over === 'victory' ? 'VICTORY' : 'DEFEAT', 72);
-    makeLabel(this, W / 2, H / 2 + 50, 'Tap to fight again', 28);
-  },
-};
-
-new Phaser.Game({
-  type: Phaser.CANVAS,
-  width: 1280,
-  height: 720,
-  backgroundColor: '#000000',
-  scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
-  scene: [battleScene],
-});
+      const shield = u.effects.filter(function (e) { ret
