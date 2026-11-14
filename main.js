@@ -2,11 +2,11 @@
 const ASSET_PATH = ''; // use 'assets/' if you move the images into a folder
 
 const SPRITE_FILES = {
-  druid: 'druid.png',
-  goblin1: 'goblin1.png',
-  goblin2: 'goblin2.png',
-  goblin3: 'goblin3.png',
-  goblin4: 'goblin4.png',
+  druid: 'elf_druid.png',
+  goblin1: 'goblin_warrior.png',
+  goblin2: 'orc_brute.png',
+  goblin3: 'goblin_archer.png',
+  goblin4: 'goblin_shaman.png',
 };
 
 // Colored circles used if an image is missing
