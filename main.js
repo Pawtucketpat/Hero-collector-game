@@ -350,16 +350,6 @@ const battleScene = {
       v.hpFill.width = Math.max(0, 60 * u.hp / u.maxHp);
       v.sprite.setAlpha(u.alive ? 1 : 0.25);
       const lines = [];
-      const shield = u.effects.filter(function (e) { ret  refresh: function () {
-    const scene = this;
-    if (this.target && !this.target.alive) {
-      this.target = this.battle.units.find(function (u) { return u.side === 'enemy' && u.alive; });
-    }
-    this.battle.units.forEach(function (u) {
-      const v = scene.views[u.id];
-      v.hpFill.width = Math.max(0, 60 * u.hp / u.maxHp);
-      v.sprite.setAlpha(u.alive ? 1 : 0.25);
-      const lines = [];
       const shield = u.effects.filter(function (e) { return e.type === 'shield'; })
         .reduce(function (n, e) { return n + e.charges; }, 0);
       if (shield > 0) lines.push('Shield x' + shield);
