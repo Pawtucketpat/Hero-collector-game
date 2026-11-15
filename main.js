@@ -1,4 +1,4 @@
-// ===== SETTINGS ====
+// ===== SETTINGS =====
 const ASSET_PATH = ''; // use 'assets/' if you move the images into a folder
 
 const SPRITE_FILES = {
@@ -18,8 +18,7 @@ const PLACEHOLDER_COLORS = {
   goblin4: 0xbb6633,
 };
 
-const SPRITE_HEIGHT = 140;                 
- // bigger number = bigger characters
+const SPRITE_HEIGHT = 140;                  // bigger number = bigger characters
 const FEET_Y = [215, 305, 395, 485, 575];  // screen height of each slot's feet, top to bottom
 const FORMATION_X = [0, 50, 100, 50, 0];   // how far each slot sits toward the middle (the stagger)
 const SIDE_MARGIN = 300;                   // how far the back line sits from the screen edge
@@ -268,7 +267,7 @@ const battleScene = {
       makePad(this, e.x, e.y, 0xcc3333);
       this.playerSlots.push(p);
       this.enemySlots.push(e);
-    };
+    }
 
     // Battle state
     const scene = this;
@@ -302,85 +301,8 @@ const battleScene = {
     this.refresh();
     this.time.delayedCall(600, function () { scene.nextTurn(); });
   },
-    this.load.setPath(ASSET_PATH);
-    for (const key in SPRITE_FILES) {
-      this.load.image(key, SPRITE_FILES[key]);
-    }
-  },
 
-  create: function () {
-    const W = this.scale.width;
-    const H = this.scale.height;
-    this.W = W;
-    this.H = H;
-
-    // Placeholders for any missing images
-    for (const key in PLACEHOLDER_COLORS) {
-      if (!this.textures.exists(key)) {
-        const g = this.make.graphics({ x: 0, y: 0, add: false });
-        g.fillStyle(PLACEHOLDER_COLORS[key], 1);
-        g.fillCircle(50, 50, 48);
-        g.generateTexture(key, 100, 100);
-        g.destroy();
-      }
-    }
-
-    this.add.rectangle(W / 2, H / 2, W, H, 0x2b3a2b);
-
-    // Top bar
-    this.add.rectangle(W / 2, 30, W, 60, 0x000000, 0.6);
-    makeLabel(this, 60, 30, 'HOME', 24);
-    makeLabel(this, W / 2 - 80, 30, 'Energy 0/0', 24);
-    makeLabel(this, W / 2 + 120, 30, 'Gold 0', 24);
-
-    // 5 slots per side
-    this.playerSlots = [];
-    this.enemySlots = [];
-    for (let i = 0; i < 5; i++) {
-      const y = 140 + i * 100;
-      const stagger = (i % 2) * 40;
-      const px = 250 + stagger;
-      const ex = W - 250 - stagger;
-      makeSlot(this, px, y, 0x3366cc);
-      makeSlot(this, ex, y, 0xcc3333);
-      this.playerSlots.push({ x: px, y: y });
-      this.enemySlots.push({ x: ex, y: y });
-    }
-
-    // Battle state
-    const scene = this;
-    this.battle = newBattle(function (type, unit, text) { scene.onEvent(type, unit, text); });
-    this.hero = this.battle.units.find(function (u) { return u.side === 'player'; });
-    this.awaitingPlayer = false;
-    this.logLines = [];
-
-    // Unit views
-    this.targetRing = this.add.ellipse(0, 0, 96, 26).setStrokeStyle(3, 0xff4444).setVisible(false);
-    this.views = {};
-    this.battle.units.forEach(function (u) { scene.makeView(u); });
-    this.target = this.battle.units.find(function (u) { return u.side === 'enemy' && u.alive; });
-
-    // Info text
-    this.turnText = makeLabel(this, W / 2, 100, '', 24);
-    makeLabel(this, W / 2, 130, 'Order: ' + this.battle.order.map(function (u) { return u.name; }).join(' > '), 14);
-    this.logText = this.add.text(20, H - 120, '', { fontSize: '16px', color: '#dddddd', lineSpacing: 4 });
-
-    // Skill buttons (the druid's four skills, bottom right)
-    this.buttons = [];
-    this.hero.skills.forEach(function (key, i) {
-      const x = W - 60 - (3 - i) * 100;
-      const y = H - 50;
-      const box = scene.add.rectangle(x, y, 90, 60, 0x444444).setStrokeStyle(2, 0xffffff).setInteractive();
-      const label = makeLabel(scene, x, y, '', 16);
-      box.on('pointerdown', function () { scene.playerUse(key); });
-      scene.buttons.push({ key: key, box: box, label: label });
-    });
-
-    this.refresh();
-    this.time.delayedCall(600, function () { scene.nextTurn(); });
-  },
-
-    extend: {
+  extend: {
 
   makeView: function (u) {
     const scene = this;
