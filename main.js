@@ -380,22 +380,24 @@ const battleScene = {
     this.time.delayedCall(600, function () { scene.nextTurn(); });
   },
 
-  extend: {
+    extend: {
 
   makeView: function (u) {
     const scene = this;
     const slot = (u.side === 'player' ? this.playerSlots : this.enemySlots)[u.slot];
-    const ring = this.add.ellipse(slot.x, slot.y + 42, 96, 26).setStrokeStyle(3, 0xffff00).setVisible(false);
-    const sprite = this.add.image(slot.x, slot.y, u.sprite);
+    const ring = this.add.ellipse(slot.x, slot.y - 4, 108, 30).setStrokeStyle(3, 0xffff00).setVisible(false);
+    const sprite = this.add.image(slot.x, slot.y, u.sprite).setOrigin(0.5, 1).setDepth(slot.y);
     sprite.setScale(SPRITE_HEIGHT / sprite.height);
     sprite.setFlipX(u.side === 'player' ? FLIP_PLAYER : FLIP_ENEMY);
     this.tweens.add({
       targets: sprite, y: slot.y - 6, duration: 700 + Math.random() * 300,
       yoyo: true, repeat: -1, ease: 'Sine.easeInOut',
     });
-    const hpBack = this.add.rectangle(slot.x - 30, slot.y - 62, 60, 8, 0x000000).setOrigin(0, 0.5);
-    const hpFill = this.add.rectangle(slot.x - 30, slot.y - 62, 60, 8, 0x44cc44).setOrigin(0, 0.5);
-    const status = this.add.text(slot.x, slot.y + 56, '', { fontSize: '14px', color: '#ffffff', align: 'center' }).setOrigin(0.5, 0);
+    const top = slot.y - SPRITE_HEIGHT - 10;
+    const hpBack = this.add.rectangle(slot.x - 35, top, 70, 9, 0x000000).setOrigin(0, 0.5).setDepth(1000);
+    const hpFill = this.add.rectangle(slot.x - 35, top, 70, 9, 0x44cc44).setOrigin(0, 0.5).setDepth(1000);
+    const status = this.add.text(slot.x, slot.y + 14, '', { fontSize: '14px', color: '#ffffff', align: 'center' })
+      .setOrigin(0.5, 0).setDepth(1000);
     if (u.side === 'enemy') {
       sprite.setInteractive();
       sprite.on('pointerdown', function () { scene.selectTarget(u); });
@@ -415,9 +417,9 @@ const battleScene = {
     if (this.logLines.length > 5) this.logLines.shift();
     if (this.logText) this.logText.setText(this.logLines.join('\n'));
     if (type === 'info' || !view) return;
-    const t = this.add.text(view.slot.x + (Math.random() * 30 - 15), view.slot.y - 30, text, {
+    const t = this.add.text(view.slot.x + (Math.random() * 30 - 15), view.slot.y - SPRITE_HEIGHT / 2, text, {
       fontSize: '24px', color: EVENT_COLORS[type] || '#ffffff', stroke: '#000000', strokeThickness: 4,
-    }).setOrigin(0.5);
+    }).setOrigin(0.5).setDepth(2000);
     this.tweens.add({
       targets: t, y: t.y - 50, alpha: 0, duration: 1000,
       onComplete: function () { t.destroy(); },
@@ -431,21 +433,21 @@ const battleScene = {
     }
     this.battle.units.forEach(function (u) {
       const v = scene.views[u.id];
-      v.hpFill.width = Math.max(0, 60 * u.hp / u.maxHp);
+      v.hpFill.width = Math.max(0, 70 * u.hp / u.maxHp);
       v.sprite.setAlpha(u.alive ? 1 : 0.25);
       const lines = [];
       const shield = u.effects.filter(function (e) { return e.type === 'shield'; })
         .reduce(function (n, e) { return n + e.charges; }, 0);
       if (shield > 0) lines.push('Shield x' + shield);
       if (u.ward > 0) lines.push('Ward ' + u.ward);
-      u.effects.filter(function (e) { return e.type === 'dot'; });
+      u.effects.filter(function (e) { return e.type === 'dot'; })
         .forEach(function (e) { lines.push('DoT ' + e.damage + ' x' + e.charges); });
       v.status.setText(u.alive ? lines.join('\n') : '');
       v.hpFill.setFillStyle(u.hp / u.maxHp > 0.3 ? 0x44cc44 : 0xcc4444);
     });
     if (this.target) {
       const tv = this.views[this.target.id];
-      this.targetRing.setPosition(tv.slot.x, tv.slot.y + 42).setVisible(true);
+      this.targetRing.setPosition(tv.slot.x, tv.slot.y - 4).setVisible(true);
     } else {
       this.targetRing.setVisible(false);
     }
@@ -516,10 +518,10 @@ const battleScene = {
     this.refresh();
     const W = this.W;
     const H = this.H;
-    this.add.rectangle(W / 2, H / 2, W, H, 0x000000, 0.6).setInteractive()
+    this.add.rectangle(W / 2, H / 2, W, H, 0x000000, 0.6).setDepth(3000).setInteractive()
       .on('pointerdown', function () { scene.scene.restart(); });
-    makeLabel(this, W / 2, H / 2 - 20, this.battle.over === 'victory' ? 'VICTORY' : 'DEFEAT', 72);
-    makeLabel(this, W / 2, H / 2 + 50, 'Tap to fight again', 28);
+    makeLabel(this, W / 2, H / 2 - 20, this.battle.over === 'victory' ? 'VICTORY' : 'DEFEAT', 72).setDepth(3001);
+    makeLabel(this, W / 2, H / 2 + 50, 'Tap to fight again', 28).setDepth(3001);
   },
 
   },
