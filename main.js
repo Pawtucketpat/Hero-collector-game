@@ -18,10 +18,27 @@ const PLACEHOLDER_COLORS = {
   goblin4: 0xbb6633,
 };
 
-const SPRITE_HEIGHT = 140;                  // bigger number = bigger characters
-const FEET_Y = [215, 305, 395, 485, 575];  // screen height of each slot's feet, top to bottom
-const FORMATION_X = [0, 50, 100, 50, 0];   // how far each slot sits toward the middle (the stagger)
-const SIDE_MARGIN = 300;                   // how far the back line sits from the screen edge
+const SPRITE_HEIGHT = 280;   // bigger number = bigger characters
+const SUMMON_SCALE = 0.6;    // summons are drawn at this fraction of normal size
+const HP_BAR_W = 110;        // width of the health bars
+
+// Where the 5 characters stand on the PLAYER side (the enemy side is a mirror image).
+// x = across the screen from the left edge, y = where the feet stand.
+// Slot order: 0 = top row, 1-2 = middle row (outer, inner), 3-4 = bottom row (outer, inner).
+const CHAR_SLOTS = [
+  { x: 210, y: 360 },  // slot 0: top row
+  { x: 150, y: 490 },  // slot 1: middle row, outer
+  { x: 325, y: 490 },  // slot 2: middle row, inner
+  { x: 90,  y: 620 },  // slot 3: bottom row, outer
+  { x: 240, y: 620 },  // slot 4: bottom row, inner
+];
+
+// Summon spots. Hidden until a summon stands in one. A unit uses one with: spot: 'summon', slot: 0 (or 1)
+const SUMMON_SLOTS = [
+  { x: 400, y: 360 },
+  { x: 480, y: 360 },
+];
+
 const FLIP_PLAYER = false; // set true if your druid faces the wrong way
 const FLIP_ENEMY = false;  // set true if your goblins face the wrong way
 
@@ -58,7 +75,7 @@ function compareInitiative(a, b) {
 function newBattle(emit) {
   const units = UNITS.map(function (u) {
     return Object.assign({}, u, {
-      maxHp: u.hp, ward: 0, effects: [], cd: {}, alive: true,
+      maxHp: u.hp, ward: 0, wardMax: 0, effects: [], cd: {}, alive: true,
       initiative: Math.floor(Math.random() * 20) + 1 + u.speed, // random roll + Speed modifier, fixed for the node
       tie: Math.random(),
     });
@@ -78,6 +95,7 @@ function killUnit(state, unit) {
   unit.hp = 0;
   unit.alive = false;
   unit.ward = 0;
+  unit.wardMax = 0;
   unit.effects = []; // Dead characters lose all buffs and debuffs
   state.emit('death', unit, 'defeated');
 }
@@ -146,7 +164,7 @@ function useSkill(state, user, key, target) {
     }
   } else if (sk.kind === 'ward') {
     // A new ward only replaces the current pool if it is larger. No duration.
-    if (sk.pool > target.ward) target.ward = sk.pool;
+    if (sk.pool > target.ward) { target.ward = sk.pool; target.wardMax = sk.pool; }
     state.emit('status', target, 'Ward ' + target.ward);
   }
   checkOver(state);
@@ -210,13 +228,15 @@ function makeLabel(scene, x, y, str, size) {
   return scene.add.text(x, y, str, { fontSize: size + 'px', color: '#ffffff', align: 'center' }).setOrigin(0.5);
 }
 
-function slotPosition(side, i, W) {
-  const x = side === 'player' ? SIDE_MARGIN + FORMATION_X[i] : W - SIDE_MARGIN - FORMATION_X[i];
-  return { x: x, y: FEET_Y[i] };
+// Position of a character slot (or a summon spot). The enemy side mirrors the player side.
+function slotPosition(side, i, W, spot) {
+  const p = (spot === 'summon' ? SUMMON_SLOTS : CHAR_SLOTS)[i];
+  return { x: side === 'player' ? p.x : W - p.x, y: p.y };
 }
 
-function makePad(scene, x, y, color) {
-  return scene.add.ellipse(x, y - 4, 80, 22, color, 0.35).setStrokeStyle(2, color);
+function makePad(scene, x, y, color, k) {
+  const s = k || 1;
+  return scene.add.ellipse(x, y - 4, 130 * s, 34 * s, color, 0.35).setStrokeStyle(2, color);
 }
 
 const battleScene = {
@@ -238,12 +258,12 @@ const battleScene = {
     this.W = W;
     this.H = H;
 
-    // Placeholders for any missing images
+    // Placeholder figures for any missing images
     for (const key in PLACEHOLDER_COLORS) {
       if (!this.textures.exists(key)) {
         const g = this.make.graphics({ x: 0, y: 0, add: false });
         g.fillStyle(PLACEHOLDER_COLORS[key], 1);
-        g.fillCircle(50, 50, 48);
+        g.fillRoundedRect(32, 2, 36, 96, 16);
         g.generateTexture(key, 100, 100);
         g.destroy();
       }
@@ -257,16 +277,12 @@ const battleScene = {
     makeLabel(this, W / 2 - 80, 30, 'Energy 0/0', 24);
     makeLabel(this, W / 2 + 120, 30, 'Gold 0', 24);
 
-    // 5 staggered positions per side (little ground pads)
-    this.playerSlots = [];
-    this.enemySlots = [];
-    for (let i = 0; i < 5; i++) {
+    // Ground pads for the 5 character positions (summon spots stay hidden until used)
+    for (let i = 0; i < CHAR_SLOTS.length; i++) {
       const p = slotPosition('player', i, W);
       const e = slotPosition('enemy', i, W);
       makePad(this, p.x, p.y, 0x3366cc);
       makePad(this, e.x, e.y, 0xcc3333);
-      this.playerSlots.push(p);
-      this.enemySlots.push(e);
     }
 
     // Battle state
@@ -277,23 +293,25 @@ const battleScene = {
     this.logLines = [];
 
     // Unit views
-    this.targetRing = this.add.ellipse(0, 0, 108, 30).setStrokeStyle(3, 0xff4444).setVisible(false);
+    this.targetRing = this.add.ellipse(0, 0, 170, 44).setStrokeStyle(3, 0xff4444).setVisible(false);
     this.views = {};
     this.battle.units.forEach(function (u) { scene.makeView(u); });
     this.target = this.battle.units.find(function (u) { return u.side === 'enemy' && u.alive; });
 
     // Info text
-    this.turnText = makeLabel(this, W / 2, 100, '', 24);
-    makeLabel(this, W / 2, 130, 'Order: ' + this.battle.order.map(function (u) { return u.name; }).join(' > '), 14);
-    this.logText = this.add.text(20, H - 120, '', { fontSize: '16px', color: '#dddddd', lineSpacing: 4 });
+    this.turnText = makeLabel(this, W / 2, 100, '', 24).setDepth(1500);
+    makeLabel(this, W / 2, 130, 'Order: ' + this.battle.order.map(function (u) { return u.name; }).join(' > '), 14).setDepth(1500);
+    this.logText = this.add.text(W / 2 - 160, H - 120, '', {
+      fontSize: '16px', color: '#dddddd', lineSpacing: 4, wordWrap: { width: 320 },
+    }).setDepth(1500);
 
     // Skill buttons (the druid's four skills, bottom right)
     this.buttons = [];
     this.hero.skills.forEach(function (key, i) {
       const x = W - 60 - (3 - i) * 100;
       const y = H - 50;
-      const box = scene.add.rectangle(x, y, 90, 60, 0x444444).setStrokeStyle(2, 0xffffff).setInteractive();
-      const label = makeLabel(scene, x, y, '', 16);
+      const box = scene.add.rectangle(x, y, 90, 60, 0x444444).setStrokeStyle(2, 0xffffff).setDepth(1500).setInteractive();
+      const label = makeLabel(scene, x, y, '', 16).setDepth(1501);
       box.on('pointerdown', function () { scene.playerUse(key); });
       scene.buttons.push({ key: key, box: box, label: label });
     });
@@ -306,25 +324,40 @@ const battleScene = {
 
   makeView: function (u) {
     const scene = this;
-    const slot = (u.side === 'player' ? this.playerSlots : this.enemySlots)[u.slot];
-    const ring = this.add.ellipse(slot.x, slot.y - 4, 108, 30).setStrokeStyle(3, 0xffff00).setVisible(false);
+    const isSummon = u.spot === 'summon';
+    const k = isSummon ? SUMMON_SCALE : 1;
+    const h = SPRITE_HEIGHT * k;
+    const bw = HP_BAR_W * k;
+    const slot = slotPosition(u.side, u.slot, this.W, u.spot);
+    let pad = null;
+    if (isSummon) pad = makePad(this, slot.x, slot.y, u.side === 'player' ? 0x3366cc : 0xcc3333, k);
+    const ring = this.add.ellipse(slot.x, slot.y - 4, 170 * k, 44 * k)
+      .setStrokeStyle(3, 0xffff00).setVisible(false).setDepth(slot.y + 1);
     const sprite = this.add.image(slot.x, slot.y, u.sprite).setOrigin(0.5, 1).setDepth(slot.y);
-    sprite.setScale(SPRITE_HEIGHT / sprite.height);
+    sprite.setScale(h / sprite.height);
     sprite.setFlipX(u.side === 'player' ? FLIP_PLAYER : FLIP_ENEMY);
     this.tweens.add({
-      targets: sprite, y: slot.y - 6, duration: 700 + Math.random() * 300,
+      targets: sprite, y: slot.y - 8, duration: 700 + Math.random() * 300,
       yoyo: true, repeat: -1, ease: 'Sine.easeInOut',
     });
-    const top = slot.y - SPRITE_HEIGHT - 10;
-    const hpBack = this.add.rectangle(slot.x - 35, top, 70, 9, 0x000000).setOrigin(0, 0.5).setDepth(1000);
-    const hpFill = this.add.rectangle(slot.x - 35, top, 70, 9, 0x44cc44).setOrigin(0, 0.5).setDepth(1000);
-    const status = this.add.text(slot.x, slot.y + 14, '', { fontSize: '14px', color: '#ffffff', align: 'center' })
-      .setOrigin(0.5, 0).setDepth(1000);
+    const top = slot.y - h - 10;
+    const hpBack = this.add.rectangle(slot.x - bw / 2, top, bw, 12, 0x000000).setOrigin(0, 0.5).setDepth(1000);
+    const hpFill = this.add.rectangle(slot.x - bw / 2, top, bw, 12, 0x44cc44).setOrigin(0, 0.5).setDepth(1000);
+    const wardBack = this.add.rectangle(slot.x - bw / 2, top + 11, bw, 8, 0x000000)
+      .setOrigin(0, 0.5).setDepth(1000).setVisible(false);
+    const wardFill = this.add.rectangle(slot.x - bw / 2, top + 11, bw, 8, 0x4aa8ff)
+      .setOrigin(0, 0.5).setDepth(1001).setVisible(false);
+    const status = this.add.text(slot.x, slot.y - 8, '', {
+      fontSize: '18px', color: '#ffffff', align: 'center', stroke: '#000000', strokeThickness: 3,
+    }).setOrigin(0.5, 1).setDepth(1000);
     if (u.side === 'enemy') {
       sprite.setInteractive();
       sprite.on('pointerdown', function () { scene.selectTarget(u); });
     }
-    this.views[u.id] = { slot: slot, ring: ring, sprite: sprite, hpBack: hpBack, hpFill: hpFill, status: status };
+    this.views[u.id] = {
+      slot: slot, ring: ring, sprite: sprite, hpBack: hpBack, hpFill: hpFill,
+      wardBack: wardBack, wardFill: wardFill, status: status, pad: pad, h: h, bw: bw,
+    };
   },
 
   selectTarget: function (u) {
@@ -339,11 +372,11 @@ const battleScene = {
     if (this.logLines.length > 5) this.logLines.shift();
     if (this.logText) this.logText.setText(this.logLines.join('\n'));
     if (type === 'info' || !view) return;
-    const t = this.add.text(view.slot.x + (Math.random() * 30 - 15), view.slot.y - SPRITE_HEIGHT / 2, text, {
-      fontSize: '24px', color: EVENT_COLORS[type] || '#ffffff', stroke: '#000000', strokeThickness: 4,
+    const t = this.add.text(view.slot.x + (Math.random() * 40 - 20), view.slot.y - view.h / 2, text, {
+      fontSize: '30px', color: EVENT_COLORS[type] || '#ffffff', stroke: '#000000', strokeThickness: 5,
     }).setOrigin(0.5).setDepth(2000);
     this.tweens.add({
-      targets: t, y: t.y - 50, alpha: 0, duration: 1000,
+      targets: t, y: t.y - 60, alpha: 0, duration: 1000,
       onComplete: function () { t.destroy(); },
     });
   },
@@ -355,8 +388,13 @@ const battleScene = {
     }
     this.battle.units.forEach(function (u) {
       const v = scene.views[u.id];
-      v.hpFill.width = Math.max(0, 70 * u.hp / u.maxHp);
+      v.hpFill.width = Math.max(0, v.bw * u.hp / u.maxHp);
+      const showWard = u.alive && u.ward > 0;
+      v.wardBack.setVisible(showWard);
+      v.wardFill.setVisible(showWard);
+      if (showWard) v.wardFill.width = v.bw * Math.min(1, u.ward / Math.max(u.wardMax, u.ward));
       v.sprite.setAlpha(u.alive ? 1 : 0.25);
+      if (v.pad) v.pad.setVisible(u.alive);
       const lines = [];
       const shield = u.effects.filter(function (e) { return e.type === 'shield'; })
         .reduce(function (n, e) { return n + e.charges; }, 0);
@@ -369,7 +407,7 @@ const battleScene = {
     });
     if (this.target) {
       const tv = this.views[this.target.id];
-      this.targetRing.setPosition(tv.slot.x, tv.slot.y - 4).setVisible(true);
+      this.targetRing.setPosition(tv.slot.x, tv.slot.y - 4).setDepth(tv.slot.y + 2).setVisible(true);
     } else {
       this.targetRing.setVisible(false);
     }
