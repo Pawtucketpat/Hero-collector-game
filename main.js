@@ -21,22 +21,23 @@ const PLACEHOLDER_COLORS = {
 const SPRITE_HEIGHT = 280;   // bigger number = bigger characters
 const SUMMON_SCALE = 0.6;    // summons are drawn at this fraction of normal size
 const HP_BAR_W = 110;        // width of the health bars
+const HIT_ALPHA = 20;        // how solid a pixel must be (0-255) to count as touching a character when tapping
 
 // Where the 5 characters stand on the PLAYER side (the enemy side is a mirror image).
 // x = across the screen from the left edge, y = where the feet stand.
 // Slot order: 0 = top row, 1-2 = middle row (outer, inner), 3-4 = bottom row (outer, inner).
 const CHAR_SLOTS = [
-  { x: 210, y: 360 },  // slot 0: top row
-  { x: 150, y: 490 },  // slot 1: middle row, outer
-  { x: 325, y: 490 },  // slot 2: middle row, inner
-  { x: 90,  y: 620 },  // slot 3: bottom row, outer
-  { x: 240, y: 620 },  // slot 4: bottom row, inner
+  { x: 310, y: 345 },  // slot 0: top row
+  { x: 190, y: 485 },  // slot 1: middle row, outer
+  { x: 430, y: 485 },  // slot 2: middle row, inner
+  { x: 90,  y: 625 },  // slot 3: bottom row, outer
+  { x: 320, y: 625 },  // slot 4: bottom row, inner
 ];
 
 // Summon spots. Hidden until a summon stands in one. A unit uses one with: spot: 'summon', slot: 0 (or 1)
 const SUMMON_SLOTS = [
-  { x: 400, y: 360 },
-  { x: 480, y: 360 },
+  { x: 510, y: 345 },
+  { x: 580, y: 345 },
 ];
 
 const FLIP_PLAYER = false; // set true if your druid faces the wrong way
@@ -239,6 +240,31 @@ function makePad(scene, x, y, color, k) {
   return scene.add.ellipse(x, y - 4, 130 * s, 34 * s, color, 0.35).setStrokeStyle(2, color);
 }
 
+// How far down (0 to 1) the top of the character's head is inside its picture, so health bars sit at the head
+const figureTopCache = {};
+function figureTop(scene, key) {
+  if (figureTopCache[key] !== undefined) return figureTopCache[key];
+  let result = 0;
+  try {
+    const src = scene.textures.get(key).getSourceImage();
+    const c = document.createElement('canvas');
+    c.width = src.width;
+    c.height = src.height;
+    const ctx = c.getContext('2d');
+    ctx.drawImage(src, 0, 0);
+    const d = ctx.getImageData(0, 0, c.width, c.height).data;
+    for (let y = 0; y < c.height && result === 0; y++) {
+      for (let x = 0; x < c.width; x++) {
+        if (d[(y * c.width + x) * 4 + 3] > 20) { result = y / c.height; break; }
+      }
+    }
+  } catch (e) {
+    result = 0;
+  }
+  figureTopCache[key] = result;
+  return result;
+}
+
 const battleScene = {
   key: 'Battle',
 
@@ -294,6 +320,8 @@ const battleScene = {
 
     // Unit views
     this.targetRing = this.add.ellipse(0, 0, 170, 44).setStrokeStyle(3, 0xff4444).setVisible(false);
+    this.targetMarker = this.add.triangle(0, 0, 0, 0, 30, 0, 15, 24, 0xff4444)
+      .setStrokeStyle(3, 0xffffff).setDepth(2000).setVisible(false);
     this.views = {};
     this.battle.units.forEach(function (u) { scene.makeView(u); });
     this.target = this.battle.units.find(function (u) { return u.side === 'enemy' && u.alive; });
@@ -340,7 +368,7 @@ const battleScene = {
       targets: sprite, y: slot.y - 8, duration: 700 + Math.random() * 300,
       yoyo: true, repeat: -1, ease: 'Sine.easeInOut',
     });
-    const top = slot.y - h - 10;
+    const top = Math.max(84, slot.y - h + figureTop(this, u.sprite) * h - 14); // just above the character's head
     const hpBack = this.add.rectangle(slot.x - bw / 2, top, bw, 12, 0x000000).setOrigin(0, 0.5).setDepth(1000);
     const hpFill = this.add.rectangle(slot.x - bw / 2, top, bw, 12, 0x44cc44).setOrigin(0, 0.5).setDepth(1000);
     const wardBack = this.add.rectangle(slot.x - bw / 2, top + 11, bw, 8, 0x000000)
@@ -351,12 +379,12 @@ const battleScene = {
       fontSize: '18px', color: '#ffffff', align: 'center', stroke: '#000000', strokeThickness: 3,
     }).setOrigin(0.5, 1).setDepth(1000);
     if (u.side === 'enemy') {
-      sprite.setInteractive();
+      sprite.setInteractive(this.input.makePixelPerfect(HIT_ALPHA));
       sprite.on('pointerdown', function () { scene.selectTarget(u); });
     }
     this.views[u.id] = {
       slot: slot, ring: ring, sprite: sprite, hpBack: hpBack, hpFill: hpFill,
-      wardBack: wardBack, wardFill: wardFill, status: status, pad: pad, h: h, bw: bw,
+      wardBack: wardBack, wardFill: wardFill, status: status, pad: pad, h: h, bw: bw, barY: top,
     };
   },
 
@@ -408,8 +436,10 @@ const battleScene = {
     if (this.target) {
       const tv = this.views[this.target.id];
       this.targetRing.setPosition(tv.slot.x, tv.slot.y - 4).setDepth(tv.slot.y + 2).setVisible(true);
+      this.targetMarker.setPosition(tv.slot.x, Math.max(68, tv.barY - 26)).setVisible(true);
     } else {
       this.targetRing.setVisible(false);
+      this.targetMarker.setVisible(false);
     }
     this.buttons.forEach(function (b) {
       const sk = SKILLS[b.key];
