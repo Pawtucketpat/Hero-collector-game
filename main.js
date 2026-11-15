@@ -438,7 +438,7 @@ const battleScene = {
         .reduce(function (n, e) { return n + e.charges; }, 0);
       if (shield > 0) lines.push('Shield x' + shield);
       if (u.ward > 0) lines.push('Ward ' + u.ward);
-      u.effects.filter(function (e) { return e.type === 'dot'; })
+      u.effects.filter(function (e) { return e.type === 'dot'; });
         .forEach(function (e) { lines.push('DoT ' + e.damage + ' x' + e.charges); });
       v.status.setText(u.alive ? lines.join('\n') : '');
       v.hpFill.setFillStyle(u.hp / u.maxHp > 0.3 ? 0x44cc44 : 0xcc4444);
