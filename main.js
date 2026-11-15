@@ -18,26 +18,41 @@ const PLACEHOLDER_COLORS = {
   goblin4: 0xbb6633,
 };
 
-const SPRITE_HEIGHT = 280;   // bigger number = bigger characters
+const SPRITE_HEIGHT = 300;   // character picture height when standing closest to the camera
 const SUMMON_SCALE = 0.6;    // summons are drawn at this fraction of normal size
-const HP_BAR_W = 110;        // width of the health bars
+const HP_BAR_W = 110;        // width of the health bars (they shrink a little with distance)
 const HIT_ALPHA = 20;        // how solid a pixel must be (0-255) to count as touching a character when tapping
 
-// Where the 5 characters stand on the PLAYER side (the enemy side is a mirror image).
-// x = across the screen from the left edge, y = where the feet stand.
-// Slot order: 0 = top row, 1-2 = middle row (outer, inner), 3-4 = bottom row (outer, inner).
-const CHAR_SLOTS = [
-  { x: 310, y: 345 },  // slot 0: top row
-  { x: 190, y: 485 },  // slot 1: middle row, outer
-  { x: 430, y: 485 },  // slot 2: middle row, inner
-  { x: 90,  y: 625 },  // slot 3: bottom row, outer
-  { x: 320, y: 625 },  // slot 4: bottom row, inner
+// Camera depth: the higher a character's feet are on screen, the further away they are and the smaller they are drawn.
+const FAR_Y = 250;           // feet at this height are the farthest away
+const NEAR_Y = 700;          // feet at this height are the closest to the camera
+const FAR_SCALE = 0.55;      // size at FAR_Y compared with size at NEAR_Y (1 = same size)
+
+// Where characters stand on the floor. x = across the screen, y = where the feet stand.
+// Each side: slot 0 = back row, slots 1-2 = middle row (outer, inner), slots 3-4 = front row (outer, inner).
+const PLAYER_SLOTS = [
+  { x: 470, y: 440 },  // slot 0: back row
+  { x: 300, y: 550 },  // slot 1: middle row, outer
+  { x: 560, y: 550 },  // slot 2: middle row, inner
+  { x: 180, y: 680 },  // slot 3: front row, outer
+  { x: 450, y: 685 },  // slot 4: front row, inner
+];
+const ENEMY_SLOTS = [
+  { x: 930,  y: 285 },  // slot 0: back row
+  { x: 810,  y: 335 },  // slot 1: middle row, outer
+  { x: 1050, y: 335 },  // slot 2: middle row, inner
+  { x: 740,  y: 395 },  // slot 3: front row, outer
+  { x: 960,  y: 400 },  // slot 4: front row, inner
 ];
 
-// Summon spots. Hidden until a summon stands in one. A unit uses one with: spot: 'summon', slot: 0 (or 1)
-const SUMMON_SLOTS = [
-  { x: 510, y: 345 },
-  { x: 580, y: 345 },
+// Summon spots (hidden until a summon stands in one). A unit uses one with: spot: 'summon', slot: 0 (or 1)
+const PLAYER_SUMMON_SLOTS = [
+  { x: 590, y: 440 },
+  { x: 660, y: 440 },
+];
+const ENEMY_SUMMON_SLOTS = [
+  { x: 830, y: 285 },
+  { x: 760, y: 285 },
 ];
 
 const FLIP_PLAYER = false; // set true if your druid faces the wrong way
@@ -229,10 +244,49 @@ function makeLabel(scene, x, y, str, size) {
   return scene.add.text(x, y, str, { fontSize: size + 'px', color: '#ffffff', align: 'center' }).setOrigin(0.5);
 }
 
-// Position of a character slot (or a summon spot). The enemy side mirrors the player side.
-function slotPosition(side, i, W, spot) {
-  const p = (spot === 'summon' ? SUMMON_SLOTS : CHAR_SLOTS)[i];
-  return { x: side === 'player' ? p.x : W - p.x, y: p.y };
+// Bigger when close to the camera (low on screen), smaller when far away (high on screen)
+function depthScale(y) {
+  const t = Math.max(0, Math.min(1, (y - FAR_Y) / (NEAR_Y - FAR_Y)));
+  return FAR_SCALE + (1 - FAR_SCALE) * t;
+}
+
+// Position of a character slot (or a summon spot) on the floor
+function slotPosition(side, i, spot) {
+  const list = spot === 'summon'
+    ? (side === 'player' ? PLAYER_SUMMON_SLOTS : ENEMY_SUMMON_SLOTS)
+    : (side === 'player' ? PLAYER_SLOTS : ENEMY_SLOTS);
+  return list[i];
+}
+
+// A simple room in perspective: back wall, floor with lines running to a vanishing point, and a floor ring
+function drawBackdrop(scene, W, H) {
+  const g = scene.add.graphics().setDepth(-10);
+  const wallTop = 0;
+  const wallBottom = 215;
+  const vanishY = 150;
+  g.fillStyle(0x1b2730, 1);
+  g.fillRect(0, wallTop, W, wallBottom - wallTop);
+  for (let x = 0; x < W; x += 90) {
+    g.fillStyle(0x24343f, 1);
+    g.fillRect(x + 8, wallTop + 14, 74, wallBottom - wallTop - 28);
+    g.fillStyle(0x2f4552, 1);
+    g.fillRect(x + 8, wallTop + 14, 74, 6);
+  }
+  g.fillStyle(0x2a323a, 1);
+  g.fillRect(0, wallBottom, W, H - wallBottom);
+  g.fillStyle(0x3a4a57, 0.25);
+  g.fillEllipse(W / 2, 480, 1100, 330);
+  g.lineStyle(2, 0x3c4953, 0.7);
+  for (let bx = -1400; bx <= 2700; bx += 160) {
+    const x0 = W / 2 + (bx - W / 2) * (wallBottom - vanishY) / (H - vanishY);
+    g.lineBetween(x0, wallBottom, bx, H);
+  }
+  for (let k = 1; k <= 7; k++) {
+    const y = wallBottom + (H - wallBottom) * Math.pow(k / 8, 1.8);
+    g.lineBetween(0, y, W, y);
+  }
+  g.lineStyle(3, 0x56707f, 0.5);
+  g.strokeEllipse(W / 2, 480, 1100, 330);
 }
 
 function makePad(scene, x, y, color, k) {
@@ -295,7 +349,7 @@ const battleScene = {
       }
     }
 
-    this.add.rectangle(W / 2, H / 2, W, H, 0x2b3a2b);
+    drawBackdrop(this, W, H);
 
     // Top bar
     this.add.rectangle(W / 2, 30, W, 60, 0x000000, 0.6);
@@ -304,11 +358,11 @@ const battleScene = {
     makeLabel(this, W / 2 + 120, 30, 'Gold 0', 24);
 
     // Ground pads for the 5 character positions (summon spots stay hidden until used)
-    for (let i = 0; i < CHAR_SLOTS.length; i++) {
-      const p = slotPosition('player', i, W);
-      const e = slotPosition('enemy', i, W);
-      makePad(this, p.x, p.y, 0x3366cc);
-      makePad(this, e.x, e.y, 0xcc3333);
+    for (let i = 0; i < PLAYER_SLOTS.length; i++) {
+      const p = slotPosition('player', i);
+      const e = slotPosition('enemy', i);
+      makePad(this, p.x, p.y, 0x3366cc, depthScale(p.y));
+      makePad(this, e.x, e.y, 0xcc3333, depthScale(e.y));
     }
 
     // Battle state
@@ -327,10 +381,10 @@ const battleScene = {
     this.target = this.battle.units.find(function (u) { return u.side === 'enemy' && u.alive; });
 
     // Info text
-    this.turnText = makeLabel(this, W / 2, 100, '', 24).setDepth(1500);
-    makeLabel(this, W / 2, 130, 'Order: ' + this.battle.order.map(function (u) { return u.name; }).join(' > '), 14).setDepth(1500);
-    this.logText = this.add.text(W / 2 - 160, H - 120, '', {
-      fontSize: '16px', color: '#dddddd', lineSpacing: 4, wordWrap: { width: 320 },
+    this.turnText = makeLabel(this, W / 2, 82, '', 24).setDepth(1500);
+    makeLabel(this, W / 2, 106, 'Order: ' + this.battle.order.map(function (u) { return u.name; }).join(' > '), 14).setDepth(1500);
+    this.logText = this.add.text(W / 2 - 60, H - 130, '', {
+      fontSize: '16px', color: '#dddddd', lineSpacing: 4, wordWrap: { width: 280 },
     }).setDepth(1500);
 
     // Skill buttons (the druid's four skills, bottom right)
@@ -353,10 +407,10 @@ const battleScene = {
   makeView: function (u) {
     const scene = this;
     const isSummon = u.spot === 'summon';
-    const k = isSummon ? SUMMON_SCALE : 1;
+    const slot = slotPosition(u.side, u.slot, u.spot);
+    const k = depthScale(slot.y) * (isSummon ? SUMMON_SCALE : 1);
     const h = SPRITE_HEIGHT * k;
-    const bw = HP_BAR_W * k;
-    const slot = slotPosition(u.side, u.slot, this.W, u.spot);
+    const bw = HP_BAR_W * (0.5 + 0.5 * k);
     let pad = null;
     if (isSummon) pad = makePad(this, slot.x, slot.y, u.side === 'player' ? 0x3366cc : 0xcc3333, k);
     const ring = this.add.ellipse(slot.x, slot.y - 4, 170 * k, 44 * k)
@@ -365,7 +419,7 @@ const battleScene = {
     sprite.setScale(h / sprite.height);
     sprite.setFlipX(u.side === 'player' ? FLIP_PLAYER : FLIP_ENEMY);
     this.tweens.add({
-      targets: sprite, y: slot.y - 8, duration: 700 + Math.random() * 300,
+      targets: sprite, y: slot.y - 8 * k, duration: 700 + Math.random() * 300,
       yoyo: true, repeat: -1, ease: 'Sine.easeInOut',
     });
     const top = Math.max(84, slot.y - h + figureTop(this, u.sprite) * h - 14); // just above the character's head
@@ -384,7 +438,7 @@ const battleScene = {
     }
     this.views[u.id] = {
       slot: slot, ring: ring, sprite: sprite, hpBack: hpBack, hpFill: hpFill,
-      wardBack: wardBack, wardFill: wardFill, status: status, pad: pad, h: h, bw: bw, barY: top,
+      wardBack: wardBack, wardFill: wardFill, status: status, pad: pad, h: h, bw: bw, barY: top, k: k,
     };
   },
 
@@ -435,7 +489,7 @@ const battleScene = {
     });
     if (this.target) {
       const tv = this.views[this.target.id];
-      this.targetRing.setPosition(tv.slot.x, tv.slot.y - 4).setDepth(tv.slot.y + 2).setVisible(true);
+      this.targetRing.setPosition(tv.slot.x, tv.slot.y - 4).setScale(tv.k).setDepth(tv.slot.y + 2).setVisible(true);
       this.targetMarker.setPosition(tv.slot.x, Math.max(68, tv.barY - 26)).setVisible(true);
     } else {
       this.targetRing.setVisible(false);
