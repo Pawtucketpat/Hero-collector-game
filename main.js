@@ -268,7 +268,7 @@ const battleScene = {
       makePad(this, e.x, e.y, 0xcc3333);
       this.playerSlots.push(p);
       this.enemySlots.push(e);
-    }
+    };
 
     // Battle state
     const scene = this;
