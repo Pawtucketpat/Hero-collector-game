@@ -1,4 +1,4 @@
-// ===== SETTINGS =====
+// ===== SETTINGS ====
 const ASSET_PATH = ''; // use 'assets/' if you move the images into a folder
 
 const SPRITE_FILES = {
