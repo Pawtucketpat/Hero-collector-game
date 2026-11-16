@@ -113,7 +113,7 @@ const SKILLS = {
   venom:     { name: 'Venom', kind: 'dot', target: 'enemy', hit: 10, dot: 12, charges: 3, cd: 2 },
   bulwark:   { name: 'Bulwark', kind: 'shield', target: 'self', charges: 2, cd: 4 },        // gives Weaken Soul a buff to steal
   roar:      { name: 'Roar', kind: 'taunt', target: 'allEnemies', charges: 2, cd: 4 },      // gives the Rogue's taunt-ignoring attack a job
-  ward:      { name: 'Ward', kind: 'wardAll', target: 'allAllies', pool: 30, cd: 2 },              // not used by anyone right now
+  ward:      { name: 'Ward', kind: 'ward', target: 'allAllies', pool: 30, cd: 2 },              // not used by anyone right now
 };
 
 const UNITS = [
