@@ -125,7 +125,7 @@ const UNITS = [
   { id: 'goblin1', name: 'Goblin 1', sprite: 'goblin1', side: 'enemy',  slot: 0, hp: 60,  armor: 3, speed: 4, dex: 5,  skills: ['stab'] },
   { id: 'goblin2', name: 'Goblin 2', sprite: 'goblin2', side: 'enemy',  slot: 1, hp: 120,  armor: 6, speed: 3, dex: 5,  skills: ['roar', 'bulwark', 'stab'] },
   { id: 'goblin3', name: 'Goblin 3', sprite: 'goblin3', side: 'enemy',  slot: 2, hp: 60,  armor: 2, speed: 5, dex: 5,  skills: ['stab'] },
-  { id: 'goblin4', name: 'Goblin 4', sprite: 'goblin4', side: 'enemy',  slot: 3, hp: 60,  armor: 2, speed: 2, dex: 5,  skills: ['venom', 'stab', 'ward'] },
+  { id: 'goblin4', name: 'Goblin 4', sprite: 'goblin4', side: 'enemy',  slot: 3, hp: 60,  armor: 2, speed: 2, dex: 5,  skills: ['venom', 'stab','ward'] },
 ];
 
 // ===== COMBAT RULES (no graphics in this part) =====
