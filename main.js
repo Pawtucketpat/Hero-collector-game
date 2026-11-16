@@ -110,7 +110,7 @@ const SKILLS = {
 
   // ----- Goblins (some extras exist only so your heroes' skills have something to work on) -----
   stab:      { name: 'Stab', kind: 'damage', target: 'enemy', damage: 15, cd: 0, basic: true },
-  venom:     { name: 'Venom', kind: 'dot', target: 'enemy', hit: 10, dot: 12, charges: 3, cd: 2 },
+  venom:     { name: 'Venom', kind: 'dot', target: 'enemy', hit: 10, dot: 12, charges: 3, cd: 3 },
   bulwark:   { name: 'Bulwark', kind: 'shield', target: 'self', charges: 2, cd: 4 },        // gives Weaken Soul a buff to steal
   roar:      { name: 'Roar', kind: 'taunt', target: 'allEnemies', charges: 2, cd: 4 },      // gives the Rogue's taunt-ignoring attack a job
   ward:      { name: 'Ward', kind: 'wardAll', target: 'allAllies', pool: 30, cd: 2 },              // not used by anyone right now
