@@ -39,30 +39,31 @@ const NEAR_Y = 700;          // feet at this height are the closest to the camer
 const FAR_SCALE = 0.55;      // size at FAR_Y compared with size at NEAR_Y (1 = same size)
 
 // Where characters stand on the floor. x = across the screen, y = where the feet stand.
-// Each side: slot 0 = back row, slots 1-2 = middle row (outer, inner), slots 3-4 = front row (outer, inner).
+// Each side: slot 0 = back row, slots 1-2 = middle row (left, right), slots 3-4 = front row (left, right).
+// Rows are 280 apart across and staggered, so each character has its own space. Spread them further by changing these numbers.
 const PLAYER_SLOTS = [
-  { x: 470, y: 440 },  // slot 0: back row
-  { x: 300, y: 550 },  // slot 1: middle row, outer
-  { x: 560, y: 550 },  // slot 2: middle row, inner
-  { x: 180, y: 680 },  // slot 3: front row, outer
-  { x: 450, y: 685 },  // slot 4: front row, inner
+  { x: 390, y: 430 },  // slot 0: back row
+  { x: 250, y: 555 },  // slot 1: middle row, left
+  { x: 530, y: 555 },  // slot 2: middle row, right
+  { x: 120, y: 690 },  // slot 3: front row, left
+  { x: 400, y: 690 },  // slot 4: front row, right
 ];
 const ENEMY_SLOTS = [
-  { x: 930,  y: 285 },  // slot 0: back row
-  { x: 810,  y: 335 },  // slot 1: middle row, outer
-  { x: 1050, y: 335 },  // slot 2: middle row, inner
-  { x: 740,  y: 395 },  // slot 3: front row, outer
-  { x: 960,  y: 400 },  // slot 4: front row, inner
+  { x: 975,  y: 275 },  // slot 0: back row
+  { x: 850,  y: 355 },  // slot 1: middle row, left
+  { x: 1110, y: 355 },  // slot 2: middle row, right
+  { x: 740,  y: 440 },  // slot 3: front row, left
+  { x: 1000, y: 440 },  // slot 4: front row, right
 ];
 
 // Summon spots (hidden until a summon stands in one). A unit uses one with: spot: 'summon', slot: 0 (or 1)
 const PLAYER_SUMMON_SLOTS = [
-  { x: 590, y: 440 },
-  { x: 660, y: 440 },
+  { x: 615, y: 395 },
+  { x: 680, y: 395 },
 ];
 const ENEMY_SUMMON_SLOTS = [
-  { x: 830, y: 285 },
-  { x: 760, y: 285 },
+  { x: 720, y: 300 },
+  { x: 790, y: 300 },
 ];
 
 const FLIP_PLAYER = false; // set true if your druid faces the wrong way
@@ -615,7 +616,7 @@ const battleScene = {
       if (!this.textures.exists(key)) {
         const g = this.make.graphics({ x: 0, y: 0, add: false });
         g.fillStyle(PLACEHOLDER_COLORS[key], 1);
-        g.fillRoundedRect(32, 2, 36, 96, 16);
+        g.fillRoundedRect(27, 2, 46, 96, 18);
         g.generateTexture(key, 100, 100);
         g.destroy();
       }
