@@ -29,9 +29,17 @@ const PLACEHOLDER_COLORS = {
 };
 
 const SPRITE_HEIGHT = 300;   // character picture height when standing closest to the camera
-const SUMMON_SCALE = 1;    // summons are drawn at this fraction of normal size
+const SUMMON_SCALE = 0.6;    // summons are drawn at this fraction of normal size
 const HP_BAR_W = 110;        // width of the health bars (they shrink a little with distance)
 const HIT_ALPHA = 20;        // how solid a pixel must be (0-255) to count as touching a character when tapping
+
+// Skill buttons: a 2 x 2 grid in the bottom right corner. Change these numbers to resize them.
+const BTN_W = 190;           // button width
+const BTN_H = 96;            // button height
+const BTN_GAP = 10;          // space between buttons
+const BTN_MARGIN = 15;       // space between the buttons and the screen edge
+const BTN_FONT_SIZE = 24;    // size of the skill name
+const BTN_FONT = 'Arial, Helvetica, sans-serif';
 
 // Camera depth: the higher a character's feet are on screen, the further away they are and the smaller they are drawn.
 const FAR_Y = 250;           // feet at this height are the farthest away
@@ -66,6 +74,57 @@ const ENEMY_SUMMON_SLOTS = [
   { x: 790, y: 300 },
 ];
 
+// ===== SPREADSHEET DATA (optional, not used by the battle yet) =====
+// In Google Sheets, open a tab and choose File > Download > Comma Separated Values (.csv).
+// Name the files as below and put them in a folder called "data" next to this file.
+// Files that are not there yet are skipped, and the battle keeps using the test values further down.
+const DATA_PATH = 'data/';
+const DATA_FILES = {
+  heroes: 'heroes.csv',
+  mobs: 'mobs.csv',
+  gear: 'gear.csv',
+  gearSets: 'gear_sets.csv',
+  skills: 'skills.csv',
+  effects: 'effects.csv',
+};
+const GAME_DATA = {}; // filled in at start: GAME_DATA.skills is a list of rows, each row keyed by its column headers
+
+// Turns CSV text into a list of rows, using the first line as the column names
+function parseCSV(text) {
+  const rows = [];
+  let row = [];
+  let cell = '';
+  let quoted = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (quoted) {
+      if (c === '"' && text[i + 1] === '"') { cell += '"'; i++; }
+      else if (c === '"') quoted = false;
+      else cell += c;
+    } else if (c === '"') {
+      quoted = true;
+    } else if (c === ',') {
+      row.push(cell); cell = '';
+    } else if (c === '\n' || c === '\r') {
+      if (c === '\r' && text[i + 1] === '\n') i++;
+      row.push(cell); cell = '';
+      rows.push(row); row = [];
+    } else {
+      cell += c;
+    }
+  }
+  if (cell !== '' || row.length) { row.push(cell); rows.push(row); }
+  if (!rows.length) return [];
+  const headers = rows[0].map(function (h) { return h.trim(); });
+  return rows.slice(1)
+    .filter(function (r) { return r.some(function (v) { return v.trim() !== ''; }); }) // skip empty lines
+    .map(function (r) {
+      const obj = {};
+      headers.forEach(function (h, i) { obj[h] = (r[i] === undefined ? '' : r[i]).trim(); });
+      return obj;
+    });
+}
+
 const FLIP_PLAYER = false; // set true if your druid faces the wrong way
 const FLIP_ENEMY = false;  // set true if your goblins face the wrong way
 
@@ -77,13 +136,13 @@ const CRIT_MULT = 1.5;   // damage multiplier on a critical hit
 // target: enemy, ally, self, allEnemies, allAllies.  basic = the unit's basic attack (a provoked unit must use it).
 const SKILLS = {
   // ----- Druid -----
-  attack:    { name: 'Attack', kind: 'damage', target: 'enemy', damage: 10, cd: 0, basic: true },
+  attack:    { name: 'Attack', kind: 'damage', target: 'enemy', damage: 20, cd: 0, basic: true },
   shield:    { name: 'Shield', kind: 'shield', target: 'self', charges: 3, cd: 3 },
   poison:    { name: 'Poison', kind: 'dot', target: 'enemy', hit: 6, dot: 8, charges: 3, cd: 2 },
   regrowth:  { name: 'Regrowth', kind: 'hot', target: 'ally', heal: 12, charges: 4, cd: 3 },
 
   // ----- Necromancer -----
-  necroAttack:  { name: 'Necrotic Attack', kind: 'damage', target: 'enemy', damage: 6, lifesteal: 0.5, damageType: 'necrotic', cd: 0, basic: true },
+  necroAttack:  { name: 'Necrotic Attack', kind: 'damage', target: 'enemy', damage: 18, lifesteal: 0.5, damageType: 'necrotic', cd: 0, basic: true },
   summonUndead: { name: 'Summon Undead', kind: 'summon', target: 'self', cd: 5,
                   summon: { name: 'Undead Warrior', sprite: 'necromancer_summon', hp: 20, duration: 3, skills: ['undeadSlash'], explosion: 10 } },
   drainLife:    { name: 'Drain Life', kind: 'drain', target: 'allEnemies', damage: 10, healPerHit: 5, damageType: 'necrotic', cd: 3 },
@@ -109,23 +168,23 @@ const SKILLS = {
   shadowSlip:  { name: 'Shadow Slip', kind: 'shadow', target: 'self', mult: 3, charges: 2, cd: 2 },
 
   // ----- Goblins (some extras exist only so your heroes' skills have something to work on) -----
-  stab:      { name: 'Stab', kind: 'damage', target: 'enemy', damage: 15, cd: 0, basic: true },
-  venom:     { name: 'Venom', kind: 'dot', target: 'enemy', hit: 10, dot: 12, charges: 3, cd: 3 },
+  stab:      { name: 'Stab', kind: 'damage', target: 'enemy', damage: 6, cd: 0, basic: true },
+  venom:     { name: 'Venom', kind: 'dot', target: 'enemy', hit: 4, dot: 6, charges: 3, cd: 2 },
   bulwark:   { name: 'Bulwark', kind: 'shield', target: 'self', charges: 2, cd: 4 },        // gives Weaken Soul a buff to steal
   roar:      { name: 'Roar', kind: 'taunt', target: 'allEnemies', charges: 2, cd: 4 },      // gives the Rogue's taunt-ignoring attack a job
-  ward:      { name: 'Ward', kind: 'wardAll', target: 'allAllies', pool: 30, cd: 2 },              // not used by anyone right now
+  ward:      { name: 'Ward', kind: 'ward', target: 'self', pool: 30, cd: 3 },              // not used by anyone right now
 };
 
 const UNITS = [
-  { id: 'druid',       name: 'Druid',       sprite: 'druid',       side: 'player', slot: 2, hp: 60, armor: 0, speed: 6, dex: 10, skills: ['attack', 'shield', 'poison', 'regrowth'] },
-  { id: 'necromancer', name: 'Necromancer', sprite: 'necromancer', side: 'player', slot: 0, hp: 60, armor: 0, speed: 5, dex: 8,  skills: ['necroAttack', 'summonUndead', 'drainLife', 'weakenSoul'] },
-  { id: 'shaman',      name: 'Shaman',      sprite: 'shaman',      side: 'player', slot: 1, hp: 70, armor: 0, speed: 6, dex: 8,  skills: ['shamanAttack', 'primalScream', 'greaterWard', 'massResurrection'] },
-  { id: 'barbarian',   name: 'Barbarian',   sprite: 'barbarian',   side: 'player', slot: 3, hp: 100, armor: 0, speed: 4, dex: 7,  skills: ['axeAttack', 'taunt', 'cleave', 'goadingAttack'] },
-  { id: 'rogue',       name: 'Rogue',       sprite: 'rogue',       side: 'player', slot: 4, hp: 50, armor: 0, speed: 8, dex: 12, skills: ['rogueAttack', 'execution', 'armorBreak', 'shadowSlip'] },
-  { id: 'goblin1', name: 'Goblin 1', sprite: 'goblin1', side: 'enemy',  slot: 0, hp: 60,  armor: 3, speed: 4, dex: 5,  skills: ['stab'] },
-  { id: 'goblin2', name: 'Goblin 2', sprite: 'goblin2', side: 'enemy',  slot: 1, hp: 120,  armor: 6, speed: 3, dex: 5,  skills: ['roar', 'bulwark', 'stab'] },
-  { id: 'goblin3', name: 'Goblin 3', sprite: 'goblin3', side: 'enemy',  slot: 2, hp: 60,  armor: 2, speed: 5, dex: 5,  skills: ['stab'] },
-  { id: 'goblin4', name: 'Goblin 4', sprite: 'goblin4', side: 'enemy',  slot: 3, hp: 60,  armor: 2, speed: 2, dex: 5,  skills: ['venom', 'stab','ward'] },
+  { id: 'druid',       name: 'Druid',       sprite: 'druid',       side: 'player', slot: 2, hp: 200, armor: 0, speed: 6, dex: 10, skills: ['attack', 'shield', 'poison', 'regrowth'] },
+  { id: 'necromancer', name: 'Necromancer', sprite: 'necromancer', side: 'player', slot: 0, hp: 160, armor: 0, speed: 5, dex: 8,  skills: ['necroAttack', 'summonUndead', 'drainLife', 'weakenSoul'] },
+  { id: 'shaman',      name: 'Shaman',      sprite: 'shaman',      side: 'player', slot: 1, hp: 170, armor: 0, speed: 6, dex: 8,  skills: ['shamanAttack', 'primalScream', 'greaterWard', 'massResurrection'] },
+  { id: 'barbarian',   name: 'Barbarian',   sprite: 'barbarian',   side: 'player', slot: 3, hp: 260, armor: 0, speed: 4, dex: 7,  skills: ['axeAttack', 'taunt', 'cleave', 'goadingAttack'] },
+  { id: 'rogue',       name: 'Rogue',       sprite: 'rogue',       side: 'player', slot: 4, hp: 150, armor: 0, speed: 8, dex: 12, skills: ['rogueAttack', 'execution', 'armorBreak', 'shadowSlip'] },
+  { id: 'goblin1', name: 'Goblin 1', sprite: 'goblin1', side: 'enemy',  slot: 0, hp: 40,  armor: 3, speed: 4, dex: 5,  skills: ['stab'] },
+  { id: 'goblin2', name: 'Goblin 2', sprite: 'goblin2', side: 'enemy',  slot: 1, hp: 40,  armor: 6, speed: 3, dex: 5,  skills: ['roar', 'bulwark', 'stab'] },
+  { id: 'goblin3', name: 'Goblin 3', sprite: 'goblin3', side: 'enemy',  slot: 2, hp: 40,  armor: 2, speed: 5, dex: 5,  skills: ['stab'] },
+  { id: 'goblin4', name: 'Goblin 4', sprite: 'goblin4', side: 'enemy',  slot: 3, hp: 40,  armor: 2, speed: 2, dex: 5,  skills: ['venom', 'stab'] },
 ];
 
 // ===== COMBAT RULES (no graphics in this part) =====
@@ -597,11 +656,15 @@ const battleScene = {
 
   preload: function () {
     this.load.on('loaderror', function (file) {
-      console.log('missing image: ' + file.key);
+      console.log('missing file: ' + file.key);
     });
     this.load.setPath(ASSET_PATH);
     for (const key in SPRITE_FILES) {
       this.load.image(key, SPRITE_FILES[key]);
+    }
+    this.load.setPath('');
+    for (const name in DATA_FILES) {
+      this.load.text('data_' + name, DATA_PATH + DATA_FILES[name]);
     }
   },
 
@@ -610,6 +673,15 @@ const battleScene = {
     const H = this.scale.height;
     this.W = W;
     this.H = H;
+
+    // Read any spreadsheet files that were found (not used by the battle yet)
+    for (const name in DATA_FILES) {
+      const raw = this.cache.text.get('data_' + name);
+      if (raw) {
+        GAME_DATA[name] = parseCSV(raw);
+        console.log('data loaded: ' + name + ' (' + GAME_DATA[name].length + ' rows)');
+      }
+    }
 
     // Placeholder figures for any missing images
     for (const key in PLACEHOLDER_COLORS) {
@@ -663,15 +735,25 @@ const battleScene = {
       fontSize: '16px', color: '#dddddd', lineSpacing: 4, wordWrap: { width: 280 },
     }).setDepth(1500);
 
-    // Four skill buttons, bottom right. They show the skills of whichever hero is acting.
+    // Four skill buttons in a 2 x 2 grid, bottom right. They show the skills of whichever hero is acting.
+    // Order: skill 1 top left, skill 2 top right, skill 3 bottom left, skill 4 bottom right.
     this.buttons = [];
     for (let i = 0; i < 4; i++) {
-      const x = W - 60 - (3 - i) * 100;
-      const y = H - 50;
-      const box = scene.add.rectangle(x, y, 90, 60, 0x444444).setStrokeStyle(2, 0xffffff).setDepth(1500).setInteractive();
-      const label = makeLabel(scene, x, y, '', 14).setDepth(1501);
+      const col = i % 2;
+      const row = Math.floor(i / 2);
+      const x = W - BTN_MARGIN - BTN_W / 2 - (1 - col) * (BTN_W + BTN_GAP);
+      const y = H - BTN_MARGIN - BTN_H / 2 - (1 - row) * (BTN_H + BTN_GAP);
+      const box = scene.add.rectangle(x, y, BTN_W, BTN_H, 0x444444).setStrokeStyle(3, 0xffffff).setDepth(1500).setInteractive();
+      const label = scene.add.text(x, y, '', {
+        fontFamily: BTN_FONT, fontSize: BTN_FONT_SIZE + 'px', fontStyle: 'bold', color: '#ffffff', align: 'center',
+        stroke: '#000000', strokeThickness: 4, wordWrap: { width: BTN_W - 20 },
+      }).setOrigin(0.5).setDepth(1501);
+      const cdLabel = scene.add.text(x, y + BTN_H / 2 - 20, '', {
+        fontFamily: BTN_FONT, fontSize: '20px', fontStyle: 'bold', color: '#ffcc66', align: 'center',
+        stroke: '#000000', strokeThickness: 3,
+      }).setOrigin(0.5).setDepth(1501);
       box.on('pointerdown', function () { scene.playerUse(i); });
-      scene.buttons.push({ box: box, label: label });
+      scene.buttons.push({ box: box, label: label, cdLabel: cdLabel, y: y });
     }
 
     this.refresh();
@@ -796,12 +878,16 @@ const battleScene = {
       const sk = key ? SKILLS[key] : null;
       b.box.setVisible(!!sk);
       b.label.setVisible(!!sk);
+      b.cdLabel.setVisible(false);
       if (!sk) return;
       const cd = scene.active.cd[key] || 0;
       const ready = scene.awaitingPlayer && cd === 0;
-      b.box.setFillStyle(ready ? 0x446644 : 0x222222);
-      b.label.setText((sk.label || sk.name).replace(' ', '\n') + (cd > 0 ? '\ncd ' + cd : ''));
-      b.label.setColor(ready ? '#ffffff' : '#777777');
+      b.box.setFillStyle(ready ? 0x2f7a3f : 0x2a2a2a);
+      b.box.setStrokeStyle(3, ready ? 0xffffff : 0x666666);
+      b.label.setText(sk.label || sk.name);
+      b.label.setColor(ready ? '#ffffff' : '#9a9a9a');
+      b.label.setY(cd > 0 ? b.y - 14 : b.y); // nudge the name up to make room for the cooldown line
+      b.cdLabel.setText('Cooldown ' + cd).setVisible(cd > 0);
     });
   },
 
