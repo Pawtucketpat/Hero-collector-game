@@ -176,11 +176,11 @@ const SKILLS = {
 };
 
 const UNITS = [
-  { id: 'druid',       name: 'Druid',       sprite: 'druid',       side: 'player', slot: 2, hp: 100, armor: 0, speed: 6, dex: 10, skills: ['attack', 'shield', 'poison', 'regrowth'] },
-  { id: 'necromancer', name: 'Necromancer', sprite: 'necromancer', side: 'player', slot: 0, hp: 120, armor: 0, speed: 5, dex: 8,  skills: ['necroAttack', 'summonUndead', 'drainLife', 'weakenSoul'] },
-  { id: 'shaman',      name: 'Shaman',      sprite: 'shaman',      side: 'player', slot: 1, hp: 160, armor: 0, speed: 6, dex: 8,  skills: ['shamanAttack', 'primalScream', 'greaterWard', 'massResurrection'] },
-  { id: 'barbarian',   name: 'Barbarian',   sprite: 'barbarian',   side: 'player', slot: 3, hp: 200, armor: 0, speed: 4, dex: 7,  skills: ['axeAttack', 'taunt', 'cleave', 'goadingAttack'] },
-  { id: 'rogue',       name: 'Rogue',       sprite: 'rogue',       side: 'player', slot: 4, hp: 100, armor: 0, speed: 8, dex: 12, skills: ['rogueAttack', 'execution', 'armorBreak', 'shadowSlip'] },
+  { id: 'druid',       name: 'Druid',       sprite: 'druid',       side: 'player', slot: 2, hp: 90, armor: 0, speed: 6, dex: 10, skills: ['attack', 'shield', 'poison', 'regrowth'] },
+  { id: 'necromancer', name: 'Necromancer', sprite: 'necromancer', side: 'player', slot: 0, hp: 80, armor: 0, speed: 5, dex: 8,  skills: ['necroAttack', 'summonUndead', 'drainLife', 'weakenSoul'] },
+  { id: 'shaman',      name: 'Shaman',      sprite: 'shaman',      side: 'player', slot: 1, hp: 90, armor: 0, speed: 6, dex: 8,  skills: ['shamanAttack', 'primalScream', 'greaterWard', 'massResurrection'] },
+  { id: 'barbarian',   name: 'Barbarian',   sprite: 'barbarian',   side: 'player', slot: 3, hp: 100, armor: 0, speed: 4, dex: 7,  skills: ['axeAttack', 'taunt', 'cleave', 'goadingAttack'] },
+  { id: 'rogue',       name: 'Rogue',       sprite: 'rogue',       side: 'player', slot: 4, hp: 70, armor: 0, speed: 8, dex: 12, skills: ['rogueAttack', 'execution', 'armorBreak', 'shadowSlip'] },
   { id: 'goblin1', name: 'Goblin 1', sprite: 'goblin1', side: 'enemy',  slot: 0, hp: 70,  armor: 3, speed: 4, dex: 5,  skills: ['stab'] },
   { id: 'goblin2', name: 'Goblin 2', sprite: 'goblin2', side: 'enemy',  slot: 1, hp: 100,  armor: 6, speed: 3, dex: 5,  skills: ['roar', 'bulwark', 'stab'] },
   { id: 'goblin3', name: 'Goblin 3', sprite: 'goblin3', side: 'enemy',  slot: 2, hp: 70,  armor: 2, speed: 5, dex: 5,  skills: ['stab'] },
