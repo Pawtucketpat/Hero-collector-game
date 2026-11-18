@@ -158,7 +158,7 @@ const SKILLS = {
   // ----- Shaman -----
   shamanAttack:     { name: 'Nature Attack', kind: 'damage', target: 'enemy', damage: 16, damageType: 'nature', critBuff: { chance: 0.5, charges: 1 }, cd: 0, basic: true },
   primalScream:     { name: 'Primal Scream', kind: 'dmgUpAll', target: 'allAllies', percent: 0.25, charges: 2, cd: 3 },
-  greaterWard:      { name: 'Greater Ward', kind: 'wardAll', target: 'allAllies', pool: 60, cd: 0 },
+  greaterWard:      { name: 'Greater Ward', kind: 'wardAll', target: 'allAllies', pool: 60, cd: 4 },
   massResurrection: { name: 'Mass Resurrection', label: 'Mass Revive', kind: 'massRes', target: 'allAllies', hpPercent: 0.25, cd: 0 },
 
   // ----- Rogue -----
