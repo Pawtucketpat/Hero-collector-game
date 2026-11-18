@@ -137,7 +137,7 @@ const CRIT_MULT = 1.5;   // damage multiplier on a critical hit
 const SKILLS = {
   // ----- Druid -----
   attack:    { name: 'Attack', kind: 'damage', target: 'enemy', damage: 20, cd: 0, basic: true },
-  shield:    { name: 'Shield', kind: 'shield', target: 'self', charges: 3, cd: 3 },
+  shield:    { name: 'Shield', kind: 'shield', target: 'self', charges: 2, cd: 3 },
   poison:    { name: 'Poison', kind: 'dot', target: 'enemy', hit: 6, dot: 8, charges: 3, cd: 2 },
   regrowth:  { name: 'Regrowth', kind: 'hot', target: 'ally', heal: 12, charges: 4, cd: 3 },
 
@@ -168,8 +168,8 @@ const SKILLS = {
   shadowSlip:  { name: 'Shadow Slip', kind: 'shadow', target: 'self', mult: 3, charges: 2, cd: 2 },
 
   // ----- Goblins (some extras exist only so your heroes' skills have something to work on) -----
-  stab:      { name: 'Stab', kind: 'damage', target: 'enemy', damage: 6, cd: 0, basic: true },
-  venom:     { name: 'Venom', kind: 'dot', target: 'enemy', hit: 4, dot: 6, charges: 3, cd: 2 },
+  stab:      { name: 'Stab', kind: 'damage', target: 'enemy', damage: 15, cd: 0, basic: true },
+  venom:     { name: 'Venom', kind: 'dot', target: 'allEnemy', hit: 10, dot: 6, charges: 3, cd: 2 },
   bulwark:   { name: 'Bulwark', kind: 'shield', target: 'self', charges: 2, cd: 4 },        // gives Weaken Soul a buff to steal
   roar:      { name: 'Roar', kind: 'taunt', target: 'allEnemies', charges: 2, cd: 4 },      // gives the Rogue's taunt-ignoring attack a job
   ward:      { name: 'Ward', kind: 'ward', target: 'self', pool: 30, cd: 3 },              // not used by anyone right now
