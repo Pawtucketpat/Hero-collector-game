@@ -168,7 +168,7 @@ const SKILLS = {
   shadowSlip:  { name: 'Shadow Slip', kind: 'shadow', target: 'self', mult: 3, charges: 2, cd: 2 },
 
   // ----- Goblins (some extras exist only so your heroes' skills have something to work on) -----
-  stab:      { name: 'Stab', kind: 'damage', target: 'enemy', damage: 40, cd: 0, basic: true },
+  stab:      { name: 'Stab', kind: 'damage', target: 'enemy', damage: 50, cd: 0, basic: true },
   venom:     { name: 'Venom', kind: 'aoe', target: 'allEnemies', hit: 60, cd: 0 },
   bulwark:   { name: 'Bulwark', kind: 'shield', target: 'self', charges: 9, cd: 4},        // gives Weaken Soul a buff to steal
   roar:      { name: 'Roar', kind: 'taunt', target: 'allEnemies', damage: 40,  charges: 2, cd: 4 },      // gives the Rogue's taunt-ignoring attack a job
