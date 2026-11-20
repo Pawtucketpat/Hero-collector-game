@@ -985,7 +985,8 @@ const battleScene = {
   },
 };
 
-new Phaser.Game({
+loadGameData().then(() => {
+  new Phaser.Game({
   type: Phaser.CANVAS,
   width: 1280,
   height: 720,
