@@ -1,6 +1,12 @@
+// main.js: the battle scene.
+// Needs these files loaded first, in this order (see index.html):
+//   Phaser, dataLoader.js, nodeBattle.js, then this file.
+
 // ===== SETTINGS =====
 const ASSET_PATH = ''; // use 'assets/' if you move the images into a folder
 
+// Short names for image files. A sprite name from your sheets that matches a name here uses the file listed.
+// Any other sprite name is used as the file name itself (".png" is added if it has no ending).
 const SPRITE_FILES = {
   druid: 'elf_druid.png',
   goblin1: 'goblin_warrior.png',
@@ -13,20 +19,7 @@ const SPRITE_FILES = {
   shaman: 'shaman.png',
   necromancer_summon: 'necromancer_summon.png', // loaded and ready for the necromancer's summon
 };
-
-// Colored circles used if an image is missing
-const PLACEHOLDER_COLORS = {
-  druid: 0x44aa55,
-  goblin1: 0x88bb33,
-  goblin2: 0xaa9933,
-  goblin3: 0x669944,
-  goblin4: 0xbb6633,
-  necromancer: 0x6a4c93,
-  rogue: 0x55558a,
-  barbarian: 0xb5533a,
-  shaman: 0x3b8fb0,
-  necromancer_summon: 0x9a9aa8,
-};
+const ALWAYS_LOAD = ['necromancer_summon']; // images the game needs even when no sheet row names them
 
 const SPRITE_HEIGHT = 300;   // character picture height when standing closest to the camera
 const SUMMON_SCALE = 0.6;    // summons are drawn at this fraction of normal size
@@ -73,57 +66,6 @@ const ENEMY_SUMMON_SLOTS = [
   { x: 720, y: 300 },
   { x: 790, y: 300 },
 ];
-
-// ===== SPREADSHEET DATA (optional, not used by the battle yet) =====
-// In Google Sheets, open a tab and choose File > Download > Comma Separated Values (.csv).
-// Name the files as below and put them in a folder called "data" next to this file.
-// Files that are not there yet are skipped, and the battle keeps using the test values further down.
-const DATA_PATH = 'data/';
-const DATA_FILES = {
-  heroes: 'heroes.csv',
-  mobs: 'mobs.csv',
-  gear: 'gear.csv',
-  gearSets: 'gear_sets.csv',
-  skills: 'skills.csv',
-  effects: 'effects.csv',
-};
-const GAME_DATA = {}; // filled in at start: GAME_DATA.skills is a list of rows, each row keyed by its column headers
-
-// Turns CSV text into a list of rows, using the first line as the column names
-function parseCSV(text) {
-  const rows = [];
-  let row = [];
-  let cell = '';
-  let quoted = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (quoted) {
-      if (c === '"' && text[i + 1] === '"') { cell += '"'; i++; }
-      else if (c === '"') quoted = false;
-      else cell += c;
-    } else if (c === '"') {
-      quoted = true;
-    } else if (c === ',') {
-      row.push(cell); cell = '';
-    } else if (c === '\n' || c === '\r') {
-      if (c === '\r' && text[i + 1] === '\n') i++;
-      row.push(cell); cell = '';
-      rows.push(row); row = [];
-    } else {
-      cell += c;
-    }
-  }
-  if (cell !== '' || row.length) { row.push(cell); rows.push(row); }
-  if (!rows.length) return [];
-  const headers = rows[0].map(function (h) { return h.trim(); });
-  return rows.slice(1)
-    .filter(function (r) { return r.some(function (v) { return v.trim() !== ''; }); }) // skip empty lines
-    .map(function (r) {
-      const obj = {};
-      headers.forEach(function (h, i) { obj[h] = (r[i] === undefined ? '' : r[i]).trim(); });
-      return obj;
-    });
-}
 
 const FLIP_PLAYER = false; // set true if your druid faces the wrong way
 const FLIP_ENEMY = false;  // set true if your goblins face the wrong way
@@ -175,17 +117,94 @@ const SKILLS = {
   ward:      { name: 'Ward', kind: 'ward', target: 'self', pool: 30, cd: 3 },              // not used by anyone right now
 };
 
-const UNITS = [
-  { id: 'druid',       name: 'Druid',       sprite: 'druid',       side: 'player', slot: 2, hp: 90, armor: 0, speed: 6, dex: 10, skills: ['attack', 'shield', 'poison', 'regrowth'] },
-  { id: 'necromancer', name: 'Necromancer', sprite: 'necromancer', side: 'player', slot: 0, hp: 80, armor: 0, speed: 5, dex: 8,  skills: ['necroAttack', 'summonUndead', 'drainLife', 'weakenSoul'] },
-  { id: 'shaman',      name: 'Shaman',      sprite: 'shaman',      side: 'player', slot: 1, hp: 90, armor: 0, speed: 6, dex: 8,  skills: ['shamanAttack', 'primalScream', 'greaterWard', 'massResurrection'] },
-  { id: 'barbarian',   name: 'Barbarian',   sprite: 'barbarian',   side: 'player', slot: 3, hp: 100, armor: 0, speed: 4, dex: 7,  skills: ['axeAttack', 'taunt', 'cleave', 'goadingAttack'] },
-  { id: 'rogue',       name: 'Rogue',       sprite: 'rogue',       side: 'player', slot: 4, hp: 70, armor: 0, speed: 8, dex: 12, skills: ['rogueAttack', 'execution', 'armorBreak', 'shadowSlip'] },
-  { id: 'goblin1', name: 'Goblin 1', sprite: 'goblin1', side: 'enemy',  slot: 0, hp: 70,  armor: 3, speed: 4, dex: 5,  skills: ['stab'] },
-  { id: 'goblin2', name: 'Goblin 2', sprite: 'goblin2', side: 'enemy',  slot: 1, hp: 100,  armor: 6, speed: 3, dex: 5,  skills: ['roar', 'bulwark', 'stab'] },
-  { id: 'goblin3', name: 'Goblin 3', sprite: 'goblin3', side: 'enemy',  slot: 2, hp: 70,  armor: 2, speed: 5, dex: 5,  skills: ['stab'] },
-  { id: 'goblin4', name: 'Goblin 4', sprite: 'goblin4', side: 'enemy',  slot: 3, hp: 70,  armor: 2, speed: 2, dex: 5,  skills: ['venom', 'ward'] },
-];
+// ===== BUILDING UNITS FROM YOUR SHEETS =====
+// Heroes come from the Hero sheet (five random ones) and enemies from the node's waves.
+// Health, Armor, Speed and Dexterity are read from the sheet when it has a column for them.
+// Skills still come from the code above: a unit uses the stats and skills listed here (found by its sprite name or its Name)
+// whenever the sheet has no matching column.
+const DRUID_STATS = { hp: 90, armor: 0, speed: 6, dex: 10, skills: ['attack', 'shield', 'poison', 'regrowth'] };
+const KNOWN_UNITS = {
+  elf_druid: DRUID_STATS,
+  druid: DRUID_STATS,
+  necromancer: { hp: 80, armor: 0, speed: 5, dex: 8,  skills: ['necroAttack', 'summonUndead', 'drainLife', 'weakenSoul'] },
+  shaman: { hp: 90, armor: 0, speed: 6, dex: 8,  skills: ['shamanAttack', 'primalScream', 'greaterWard', 'massResurrection'] },
+  barbarian: { hp: 100, armor: 0, speed: 4, dex: 7,  skills: ['axeAttack', 'taunt', 'cleave', 'goadingAttack'] },
+  rogue: { hp: 70, armor: 0, speed: 8, dex: 12, skills: ['rogueAttack', 'execution', 'armorBreak', 'shadowSlip'] },
+  goblin_warrior: { hp: 70,  armor: 3, speed: 4, dex: 5, skills: ['stab'] },
+  orc_brute:      { hp: 100, armor: 6, speed: 3, dex: 5, skills: ['roar', 'bulwark', 'stab'] },
+  goblin_archer:  { hp: 70,  armor: 2, speed: 5, dex: 5, skills: ['stab'] },
+  goblin_shaman:  { hp: 70,  armor: 2, speed: 2, dex: 5, skills: ['venom', 'ward'] },
+};
+const GENERIC_HERO = { hp: 80, armor: 0, speed: 5, dex: 8, skills: ['attack'] };
+const GENERIC_MOB = { hp: 70, armor: 2, speed: 4, dex: 5, skills: ['stab'] };
+
+// Lowercase and drop spaces and punctuation, so "Max HP" and "maxhp" match
+function normKey(s) {
+  return String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+// Finds a value in a sheet row by trying several possible column names. Empty cells count as missing.
+function field(row, names, fallback) {
+  const wanted = names.map(normKey);
+  for (const header in row) {
+    if (wanted.indexOf(normKey(header)) !== -1 && row[header] !== '') return row[header];
+  }
+  return fallback;
+}
+
+function statOf(row, names, fallback) {
+  const n = Number(field(row, names, fallback));
+  return isNaN(n) ? fallback : n;
+}
+
+// The sprite name a hero or mob row asks for ('' if it has none)
+function spriteValueOf(row, isHero) {
+  return String(field(row, isHero ? ['Hero Sprite', 'Sprite'] : ['Mob Sprite', 'Sprite'], ''));
+}
+
+// The image file for a sprite or background name
+function imageFile(value) {
+  if (SPRITE_FILES[value]) return SPRITE_FILES[value];
+  if (/\.[a-z0-9]+$/i.test(value)) return value;
+  return value + '.png';
+}
+
+// A steady color for a missing image, so each missing character looks different
+function placeholderColor(key) {
+  let h = 7;
+  for (let i = 0; i < key.length; i++) h = (h * 31 + key.charCodeAt(i)) & 0xffffff;
+  return h | 0x404040;
+}
+
+// Test stats for a unit, found by sprite name first and then by its Name
+function knownStats(sprite, name, isHero) {
+  const stem = String(sprite).split('/').pop().replace(/\.[a-z0-9]+$/i, '').toLowerCase();
+  const nm = String(name).toLowerCase().replace(/[^a-z0-9]+/g, '_');
+  return KNOWN_UNITS[stem] || KNOWN_UNITS[nm] || (isHero ? GENERIC_HERO : GENERIC_MOB);
+}
+
+// Skills: a "Skills" column in the sheet (code names separated by commas) wins; otherwise the test skills are used
+function skillsFor(row, base) {
+  const raw = String(field(row, ['Skills', 'Skill List'], ''));
+  const keys = raw.split(/[,;|]/).map(function (s) { return s.trim(); }).filter(function (s) { return SKILLS[s]; });
+  return keys.length ? keys : base.skills.slice();
+}
+
+// Turns one sheet row into a unit for the battle
+function unitFromRow(row, kind, side, slot, id) {
+  const isHero = kind === 'hero';
+  const sprite = spriteValueOf(row, isHero);
+  const name = String(field(row, ['Name', isHero ? 'Hero Name' : 'Mob Name'], id));
+  const base = knownStats(sprite, name, isHero);
+  return {
+    id: id, name: name, sprite: sprite || 'placeholder_' + id, side: side, slot: slot,
+    hp: statOf(row, ['HP', 'Health', 'Max HP', 'Max Health', 'Hit Points'], base.hp),
+    armor: statOf(row, ['Armor', 'Armour'], base.armor),
+    speed: statOf(row, ['Speed'], base.speed),
+    dex: statOf(row, ['Dex', 'Dexterity'], base.dex),
+    skills: skillsFor(row, base),
+  };
+}
 
 // ===== COMBAT RULES (no graphics in this part) =====
 // Follows your Notion pages: Section 10 (turns) and Section 11 (damage, shields, wards, DoTs).
@@ -199,18 +218,50 @@ function compareInitiative(a, b) {
   return a.tie - b.tie;                                                  // random
 }
 
-function newBattle(emit) {
-  const units = UNITS.map(function (u) {
-    return Object.assign({}, u, {
-      maxHp: u.hp, ward: 0, wardMax: 0, effects: [], cd: {}, alive: true,
-      initiative: Math.floor(Math.random() * 20) + 1 + u.speed, // random roll + Speed modifier, fixed for the node
-      tie: Math.random(),
-    });
+// Adds the battle values every unit needs to a unit built from a sheet row
+function makeUnit(def) {
+  return Object.assign({}, def, {
+    maxHp: def.hp, ward: 0, wardMax: 0, effects: [], cd: {}, alive: true,
+    initiative: Math.floor(Math.random() * 20) + 1 + def.speed, // random roll + Speed modifier, fixed for the node
+    tie: Math.random(),
   });
-  return {
-    units: units, order: units.slice().sort(compareInitiative), turn: -1, serial: 0, over: null, emit: emit,
+}
+
+// Puts one wave of enemies on the field and rebuilds the turn order. Returns the new enemy units.
+function spawnWave(state, waveIndex) {
+  const added = [];
+  state.waves[waveIndex].forEach(function (mob, slot) {
+    if (!mob) return; // empty slot
+    state.mobCount += 1;
+    const unit = makeUnit(unitFromRow(mob, 'mob', 'enemy', slot, 'mob' + state.mobCount));
+    state.units.push(unit);
+    added.push(unit);
+  });
+  state.order = state.units.filter(function (u) { return !u.isSummon; }).sort(compareInitiative);
+  state.turn = -1;     // each wave starts at the top of the turn order
+  state.pending = [];
+  return added;
+}
+
+// The current wave is cleared: its enemies leave and the next wave comes in. Returns the new enemy units.
+function advanceWave(state) {
+  state.units = state.units.filter(function (u) { return u.side !== 'enemy'; });
+  state.waveIndex += 1;
+  state.waveCleared = false;
+  return spawnWave(state, state.waveIndex);
+}
+
+function newBattle(emit, heroRows, nodeData) {
+  const state = {
+    units: [], order: [], turn: -1, serial: 0, over: null, emit: emit,
     pending: [], current: null, summonCount: 0, // summons waiting to act right after their summoner
+    waves: nodeData.waves, waveIndex: 0, waveCleared: false, mobCount: 0,
   };
+  heroRows.forEach(function (row, i) {
+    state.units.push(makeUnit(unitFromRow(row, 'hero', 'player', i, 'hero' + (i + 1))));
+  });
+  spawnWave(state, 0);
+  return state;
 }
 
 function opponents(state, unit) {
@@ -513,12 +564,15 @@ function endTurn(state, unit) {
   checkOver(state);
 }
 
+// Victory only comes when the last wave is cleared. Clearing an earlier wave sets waveCleared so the next wave comes in.
 function checkOver(state) {
   if (state.over) return;
   const playersAlive = state.units.some(function (u) { return u.side === 'player' && u.alive && !u.isSummon; });
   const enemiesAlive = state.units.some(function (u) { return u.side === 'enemy' && u.alive && !u.isSummon; });
-  if (!enemiesAlive) state.over = 'victory';
-  else if (!playersAlive) state.over = 'defeat';
+  if (!enemiesAlive) {
+    if (state.waveIndex < state.waves.length - 1) state.waveCleared = true;
+    else state.over = 'victory';
+  } else if (!playersAlive) state.over = 'defeat';
 }
 
 // The next few living characters to act after the current one (for the "Next:" line)
@@ -654,18 +708,57 @@ function figureTop(scene, key) {
 const battleScene = {
   key: 'Battle',
 
+  // Runs every time the battle starts or restarts: picks the node and the five heroes
+  init: function () {
+    const scene = this;
+    this.problem = '';
+    this.heroRows = [];
+    this.nodeData = null;
+    this.spriteKeys = [];
+
+    if (typeof startRandomNodeBattle !== 'function' || typeof pickRandomHeroes !== 'function') {
+      this.problem = 'nodeBattle.js is missing or out of date.\nIt needs the pickRandomHeroes function (Part 3 of the loader doc).';
+      return;
+    }
+    this.heroRows = pickRandomHeroes(5);
+    this.nodeData = startRandomNodeBattle();
+    if (!this.nodeData) {
+      this.problem = 'No nodes found.\nCheck data/nodes.csv and that its ID column is headed Node ID.';
+      return;
+    }
+    if (!this.heroRows.length) {
+      this.problem = 'No heroes found.\nCheck data/heroes.csv.';
+      return;
+    }
+    let mobCount = 0;
+    this.nodeData.waves.forEach(function (wave) { wave.forEach(function (m) { if (m) mobCount += 1; }); });
+    if (!mobCount) {
+      this.problem = 'Node ' + this.nodeData.nodeId + ' has no enemies.\nCheck its Wave columns and mob IDs in data/nodes.csv.';
+      return;
+    }
+
+    // Every image this battle needs, so preload can fetch them
+    const keys = {};
+    ALWAYS_LOAD.forEach(function (k) { keys[k] = true; });
+    this.heroRows.forEach(function (row) { const s = spriteValueOf(row, true); if (s) keys[s] = true; });
+    this.nodeData.waves.forEach(function (wave) {
+      wave.forEach(function (mob) { if (mob) { const s = spriteValueOf(mob, false); if (s) keys[s] = true; } });
+    });
+    this.spriteKeys = Object.keys(keys);
+  },
+
   preload: function () {
+    const scene = this;
+    if (this.problem) return;
     this.load.on('loaderror', function (file) {
       console.log('missing file: ' + file.key);
     });
     this.load.setPath(ASSET_PATH);
-    for (const key in SPRITE_FILES) {
-      this.load.image(key, SPRITE_FILES[key]);
+    this.spriteKeys.forEach(function (key) { scene.load.image(key, imageFile(key)); });
+    if (this.nodeData.background) {
+      this.load.image('bg_' + this.nodeData.background, imageFile(this.nodeData.background));
     }
     this.load.setPath('');
-    for (const name in DATA_FILES) {
-      this.load.text('data_' + name, DATA_PATH + DATA_FILES[name]);
-    }
   },
 
   create: function () {
@@ -674,33 +767,29 @@ const battleScene = {
     this.W = W;
     this.H = H;
 
-    // Read any spreadsheet files that were found (not used by the battle yet)
-    for (const name in DATA_FILES) {
-      const raw = this.cache.text.get('data_' + name);
-      if (raw) {
-        GAME_DATA[name] = parseCSV(raw);
-        console.log('data loaded: ' + name + ' (' + GAME_DATA[name].length + ' rows)');
-      }
+    // If the data could not be used, say why on the screen (the console is hard to reach on an iPad)
+    if (this.problem) {
+      this.add.text(W / 2, H / 2, this.problem, {
+        fontSize: '32px', color: '#ffcc66', align: 'center', wordWrap: { width: W - 160 },
+      }).setOrigin(0.5);
+      return;
     }
 
-    // Placeholder figures for any missing images
-    for (const key in PLACEHOLDER_COLORS) {
-      if (!this.textures.exists(key)) {
-        const g = this.make.graphics({ x: 0, y: 0, add: false });
-        g.fillStyle(PLACEHOLDER_COLORS[key], 1);
-        g.fillRoundedRect(27, 2, 46, 96, 18);
-        g.generateTexture(key, 100, 100);
-        g.destroy();
-      }
+    // Background: the node's background image if it exists, otherwise the plain room
+    const bgKey = this.nodeData.background ? 'bg_' + this.nodeData.background : '';
+    if (bgKey && this.textures.exists(bgKey)) {
+      this.add.image(W / 2, H / 2, bgKey).setDisplaySize(W, H).setDepth(-10);
+    } else {
+      drawBackdrop(this, W, H);
     }
-
-    drawBackdrop(this, W, H);
 
     // Top bar
     this.add.rectangle(W / 2, 30, W, 60, 0x000000, 0.6);
     makeLabel(this, 60, 30, 'HOME', 24);
+    this.nodeText = makeLabel(this, 330, 30, String(this.nodeData.name), 22);
     makeLabel(this, W / 2 - 80, 30, 'Energy 0/0', 24);
     makeLabel(this, W / 2 + 120, 30, 'Gold 0', 24);
+    this.waveText = makeLabel(this, W - 100, 30, '', 24);
 
     // Ground pads for the 5 character positions (summon spots stay hidden until used)
     for (let i = 0; i < PLAYER_SLOTS.length; i++) {
@@ -712,7 +801,7 @@ const battleScene = {
 
     // Battle state
     const scene = this;
-    this.battle = newBattle(function (type, unit, text) { scene.onEvent(type, unit, text); });
+    this.battle = newBattle(function (type, unit, text) { scene.onEvent(type, unit, text); }, this.heroRows, this.nodeData);
     this.active = null;       // the hero whose turn it is (or was last)
     this.allyTarget = null;   // who a single-target ally skill will hit
     this.awaitingPlayer = false;
@@ -727,6 +816,7 @@ const battleScene = {
     this.views = {};
     this.battle.units.forEach(function (u) { scene.makeView(u); });
     this.target = this.battle.units.find(function (u) { return u.side === 'enemy' && u.alive; });
+    this.updateWaveText();
 
     // Info text
     this.turnText = makeLabel(this, W / 2, 82, '', 24).setDepth(1500);
@@ -757,13 +847,24 @@ const battleScene = {
     }
 
     this.refresh();
-    this.time.delayedCall(600, function () { scene.nextTurn(); });
+    this.time.delayedCall(600, function () { scene.continueBattle(); });
   },
 
   extend: {
 
+  // Makes a plain colored figure if an image is missing
+  ensureTexture: function (key) {
+    if (this.textures.exists(key)) return;
+    const g = this.make.graphics({ x: 0, y: 0, add: false });
+    g.fillStyle(placeholderColor(key), 1);
+    g.fillRoundedRect(27, 2, 46, 96, 18);
+    g.generateTexture(key, 100, 100);
+    g.destroy();
+  },
+
   makeView: function (u) {
     const scene = this;
+    this.ensureTexture(u.sprite);
     const isSummon = u.spot === 'summon';
     const slot = slotPosition(u.side, u.slot, u.spot);
     const k = depthScale(slot.y) * (isSummon ? SUMMON_SCALE : 1);
@@ -801,6 +902,21 @@ const battleScene = {
     };
   },
 
+  // Removes a character's picture, bars and text from the screen
+  destroyView: function (id) {
+    const v = this.views[id];
+    if (!v) return;
+    this.tweens.killTweensOf(v.sprite);
+    [v.sprite, v.hpBack, v.hpFill, v.wardBack, v.wardFill, v.status, v.ring, v.pad].forEach(function (o) {
+      if (o) o.destroy();
+    });
+    delete this.views[id];
+  },
+
+  updateWaveText: function () {
+    this.waveText.setText('Wave ' + (this.battle.waveIndex + 1) + '/' + this.battle.waves.length);
+  },
+
   selectTarget: function (u) {
     if (!u.alive) return;
     this.target = u;
@@ -836,6 +952,7 @@ const battleScene = {
     }
     this.battle.units.forEach(function (u) {
       const v = scene.views[u.id];
+      if (!v) return;
       if (u.isSummon && !u.alive) { // a summon that expired or was defeated leaves the field
         [v.sprite, v.hpBack, v.hpFill, v.wardBack, v.wardFill, v.status, v.ring].forEach(function (o) { o.setVisible(false); });
         if (v.pad) v.pad.setVisible(false);
@@ -855,7 +972,7 @@ const battleScene = {
       v.status.setText(u.alive ? lines.join('\n') : '');
       v.hpFill.setFillStyle(u.hp / u.maxHp > 0.3 ? 0x44cc44 : 0xcc4444);
     });
-    if (this.target) {
+    if (this.target && this.views[this.target.id]) {
       const tv = this.views[this.target.id];
       this.targetRing.setPosition(tv.slot.x, tv.slot.y - 4).setScale(tv.k).setDepth(tv.slot.y + 2).setVisible(true);
       this.targetMarker.setPosition(tv.slot.x, Math.max(68, tv.barY - 26)).setVisible(true);
@@ -889,6 +1006,35 @@ const battleScene = {
       b.label.setY(cd > 0 ? b.y - 14 : b.y); // nudge the name up to make room for the cooldown line
       b.cdLabel.setText('Cooldown ' + cd).setVisible(cd > 0);
     });
+  },
+
+  // Decides what happens next: the result screen, the next wave, or the next turn
+  continueBattle: function () {
+    checkOver(this.battle);
+    if (this.battle.over) this.showResult();
+    else if (this.battle.waveCleared) this.startNextWave();
+    else this.nextTurn();
+  },
+
+  // The wave is cleared: its defeated enemies leave and the next wave walks in
+  startNextWave: function () {
+    const scene = this;
+    const battle = this.battle;
+    battle.units.filter(function (u) { return u.side === 'enemy'; })
+      .forEach(function (u) { scene.destroyView(u.id); });
+    const fresh = advanceWave(battle);
+    fresh.forEach(function (u) { scene.makeView(u); });
+    this.target = fresh.find(function (u) { return u.alive; });
+    this.updateWaveText();
+    this.active = null;
+    this.awaitingPlayer = false;
+    this.refresh();
+    const banner = makeLabel(this, this.W / 2, this.H / 2 - 60, 'WAVE ' + (battle.waveIndex + 1), 64).setDepth(3000);
+    this.tweens.add({
+      targets: banner, alpha: 0, duration: 800, delay: 600,
+      onComplete: function () { banner.destroy(); },
+    });
+    this.time.delayedCall(1200, function () { scene.continueBattle(); });
   },
 
   nextTurn: function () {
@@ -965,6 +1111,8 @@ const battleScene = {
     this.refresh();
     if (this.battle.over) {
       this.time.delayedCall(600, function () { scene.showResult(); });
+    } else if (this.battle.waveCleared) {
+      this.time.delayedCall(600, function () { scene.startNextWave(); });
     } else {
       this.time.delayedCall(400, function () { scene.nextTurn(); });
     }
@@ -977,7 +1125,7 @@ const battleScene = {
     const W = this.W;
     const H = this.H;
     this.add.rectangle(W / 2, H / 2, W, H, 0x000000, 0.6).setDepth(3000).setInteractive()
-      .on('pointerdown', function () { scene.scene.restart(); });
+      .on('pointerdown', function () { scene.scene.restart(); }); // a new random node and five new heroes
     makeLabel(this, W / 2, H / 2 - 20, this.battle.over === 'victory' ? 'VICTORY' : 'DEFEAT', 72).setDepth(3001);
     makeLabel(this, W / 2, H / 2 + 50, 'Tap to fight again', 28).setDepth(3001);
   },
@@ -985,12 +1133,14 @@ const battleScene = {
   },
 };
 
-loadGameData().then(() => {
+// Load the sheets first, then start the game
+loadGameData().then(function () {
   new Phaser.Game({
-  type: Phaser.CANVAS,
-  width: 1280,
-  height: 720,
-  backgroundColor: '#000000',
-  scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
-  scene: [battleScene],
+    type: Phaser.CANVAS,
+    width: 1280,
+    height: 720,
+    backgroundColor: '#000000',
+    scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
+    scene: [battleScene],
+  });
 });
