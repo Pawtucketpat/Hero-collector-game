@@ -187,6 +187,13 @@ function statOf(row, names, fallback) {
   return isNaN(n) ? fallback : n;
 }
 
+// A percent cell as a fraction: 10 and "10%" both give 0.1. Blank or text gives 0.
+function pctStat(row, names) {
+  const raw = String(field(row, names, '')).replace('%', '').trim();
+  const n = Number(raw);
+  return (raw === '' || isNaN(n)) ? 0 : n / 100;
+}
+
 // The sprite name a hero or mob row asks for ('' if it has none)
 function spriteValueOf(row, isHero) {
   return String(field(row, isHero ? ['Hero Sprite', 'Sprite'] : ['Mob Sprite', 'Sprite'], ''));
@@ -226,7 +233,12 @@ function skillsFor(row, base) {
   });
   const ult = String(field(row, ['Ultimate'], '')).trim();
   if (ult) sheetWarn(String(field(row, ['Hero Name', 'Mob Name', 'Name'], '?')) + ' has an Ultimate (' + ult + '). Ultimates have no button yet, so it is not used', 'note');
-  if (keys.length) return keys;
+  if (keys.length) {
+    if (!keys.some(function (k) { return SKILLS[k].basic; })) {
+      sheetWarn(String(field(row, ['Hero Name', 'Mob Name', 'Name'], '?')) + ' has no Basic Attack. Set one skill\'s Cooldown to "Basic Attack"');
+    }
+    return keys;
+  }
   const raw = String(field(row, ['Skills', 'Skill List'], ''));
   const named = raw.split(/[,;|]/).map(function (s) { return s.trim(); }).filter(function (s) { return SKILLS[s]; });
   return named.length ? named : base.skills.slice();
@@ -278,6 +290,10 @@ function unitFromRow(row, kind, side, slot, id) {
     speed: statOf(row, ['Speed'], base.speed),
     dex: dex,
     accuracy: statOf(row, ['Accuracy'], 0),
+    // Critical columns of the Hero and Mob tabs: chance and resistance are percents (10 = 10%, "10%" works too), the bonus is a flat number
+    baseCrit: pctStat(row, ['Critical Chance', 'Crit Chance']),
+    baseCritBonus: statOf(row, ['Critical Bonus', 'Crit Bonus'], 0),
+    baseCritResist: pctStat(row, ['Critical Resistance', 'Crit Resistance']),
     attrs: {
       strength: statOf(row, ['Strength', 'Str'], 0),
       dexterity: dex,
@@ -297,8 +313,9 @@ function unitFromRow(row, kind, side, slot, id) {
 // What each Skills column means:
 //   Scaling Attribute + Scale per point   the attribute that boosts the skill, and the PERCENT per point (2 = 2% per point; blank = 2%)
 //   Duration                              "Instant" or "N turn(s)": how long the buffs and debuffs it applies last
-//   Cooldown                              "None" or "N turns". A skill with no cooldown is the unit's basic attack.
+//   Cooldown                              "Basic Attack" (the unit's basic attack: no cooldown, not changed by cooldown effects, what a provoked unit must use), "None" or "N turns"
 //   A to E groups                         ID (Effects tab), Target, SubType (damage type, attribute...), X, Y, Cond, CondVal
+//                                         A Damage group's SubType can split the hit across types: "Fire 1, Cold 1" (type + weight, any number of types)
 //   Can Be Dispelled / Can Be Stolen      protect the buffs this skill gives from Dispel and Steal Buff
 
 // Things the sheet gets wrong or asks for that is not built yet. 'error' ones are shown on screen, 'note' ones only in the console.
@@ -332,7 +349,7 @@ const SHEET_EFFECTS = {
   EF010: { run: 'reflection' },
   EF011: pctEffect('accuracyBoost'),
   EF012: pctEffect('crit', 'chance'),
-  EF013: pctEffect('critBonus', 'points'),
+  EF013: { run: 'effect', type: 'critBonus', field: 'points' },                 // X = flat damage added to a critical hit
   EF014: pctEffect('dmgUp'),
   EF015: { run: 'shieldBreak' },
   EF016: pctEffect('armorBoost'),
@@ -351,7 +368,7 @@ const SHEET_EFFECTS = {
   EF029: { run: 'cdIncrease', foe: true },
   EF030: pctEffect('accuracyReduce', 'percent', true),
   EF031: pctEffect('critChanceReduce', 'chance', true),
-  EF032: pctEffect('critBonusReduce', 'points', true),
+  EF032: { run: 'effect', type: 'critBonusReduce', field: 'points', foe: true }, // X = flat damage taken off the Critical Bonus
   EF033: pctEffect('dmgOutReduce', 'percent', true),
   EF034: pctEffect('armorReduce', 'percent', true),
   EF035: pctEffect('vulnerable', 'percent', true),
@@ -405,7 +422,8 @@ function targetToken(raw) {
 
 // The Cond / CondVal pair of a group. Supported so far:
 //   "target below 30% health"   the group only affects targets under that health (the number in the text wins over CondVal)
-//   "If elemental damage"       a Reflection only reflects that damage group (CondVal is the percent when X is 0)
+//   "If elemental damage"       a Reflection only reflects that damage type or group (CondVal is the percent when X is 0).
+//                               Several are fine: "If fire, cold damage", "If fire or cold damage", "If fire and arcane damage". No Cond = every type.
 //   "Summon Mob001"             the mob a Summon calls
 function parseCond(text, val) {
   const raw = String(text === undefined || text === null ? '' : text).trim();
@@ -414,8 +432,17 @@ function parseCond(text, val) {
   let m = t.match(/below\s*(\d+(?:\.\d+)?)\s*%/);
   if (m) return { kind: 'targetBelow', pct: Number(m[1]), val: numberOrNull(val), text: raw };
   if (/below/.test(t) && /health/.test(t) && numberOrNull(val) !== null) return { kind: 'targetBelow', pct: numberOrNull(val), val: null, text: raw };
-  m = t.match(/^if\s+([a-z]+)\s+damage$/);
-  if (m && (DAMAGE_TYPES[m[1]] || PARENT_OF[m[1]])) return { kind: 'damageGroup', group: m[1], val: numberOrNull(val), text: raw };
+  m = t.match(/^if\s+(.+?)\s+damage$/);
+  if (m) {
+    const seen = {}, groups = [];
+    m[1].split(/\s*(?:,|;|\/|&|\+|\band\b|\bor\b)\s*/).forEach(function (k) {
+      k = k.replace(/[^a-z]/g, '');
+      if (k && !seen[k]) { seen[k] = true; groups.push(k); }
+    });
+    if (groups.length && groups.every(function (k) { return DAMAGE_TYPES[k] || PARENT_OF[k]; })) {
+      return { kind: 'damageGroup', group: groups[0], groups: groups, val: numberOrNull(val), text: raw };
+    }
+  }
   m = raw.match(/^summon\s+(\S+)/i);
   if (m) return { kind: 'summon', mob: m[1], text: raw };
   return { kind: 'unknown', text: raw };
@@ -435,6 +462,32 @@ function mobRowFor(id) {
   return found ? found.row : null;
 }
 
+// The damage types of one Damage group, from its SubType cell.
+//   "Fire"            one type (the usual case)
+//   "Fire 1, Cold 1"  a split hit: each part has a type and a weight. The game works out the shares: 1 and 1 is 50% and 50%,
+//                     "Fire 2, Cold 1, Primal 1" is 50%, 25%, 25%. Adding another type needs no math.
+// Returns [{ type, share, known }] with the shares adding up to 1 (empty if the cell is blank).
+function parseDamageParts(raw, where) {
+  const text = String(raw === undefined || raw === null ? '' : raw).trim();
+  if (!text) return [];
+  const order = [], weight = {};
+  text.split(/[,;|+&\n]+/).forEach(function (tok) {
+    const t = tok.trim();
+    if (!t) return;
+    const m = t.match(/^([A-Za-z][A-Za-z ]*?)\s*[:=*]?\s*(\d+(?:\.\d+)?)?\s*%?$/);
+    if (!m) { sheetWarn(where + ': could not read "' + t + '" in the damage types. Write it like Fire 1, Cold 1'); return; }
+    const type = m[1].trim().toLowerCase();
+    const w = m[2] === undefined ? 1 : Number(m[2]);
+    if (!(w > 0)) { sheetWarn(where + ': "' + t + '" has a weight of 0, so that part is skipped'); return; }
+    if (weight[type] === undefined) { weight[type] = 0; order.push(type); }
+    weight[type] += w;
+  });
+  const total = order.reduce(function (a, t) { return a + weight[t]; }, 0);
+  return order.map(function (t) {
+    return { type: t, share: weight[t] / total, known: !!(DAMAGE_TYPES[t] || PARENT_OF[t]) };
+  });
+}
+
 // Builds the skill for one Skills-tab row
 function buildSheetSkill(id, row) {
   const name = String(field(row, ['Skill Name', 'Name'], id));
@@ -448,9 +501,11 @@ function buildSheetSkill(id, row) {
     if (scaleRaw > 0 && scaleRaw < 1) sheetWarn(id + ' ' + name + ': Scale per point ' + scaleRaw + ' means ' + scaleRaw + '% per point (2 = 2%)', 'note');
   }
   const duration = turnsFrom(field(row, ['Duration'], ''));
-  const cd = turnsFrom(field(row, ['Cooldown'], ''));
+  const cdRaw = String(field(row, ['Cooldown'], '')).trim();
+  const basic = /basic/i.test(cdRaw); // Cooldown = "Basic Attack": no cooldown, not changed by cooldown effects, what a provoked unit must use
+  const cd = basic ? 0 : turnsFrom(cdRaw);
   const sk = {
-    id: id, name: name, kind: 'sheet', cd: cd, duration: duration, basic: cd === 0, attr: attr, scale: scale,
+    id: id, name: name, kind: 'sheet', cd: cd, duration: duration, basic: basic, attr: attr, scale: scale,
     canBeDispelled: flagFrom(field(row, ['Can Be Dispelled'], true)),
     canBeStolen: flagFrom(field(row, ['Can Be Stolen'], true)),
     ignoresTaunt: false, groups: [], target: 'self',
@@ -485,6 +540,20 @@ function buildSheetSkill(id, row) {
     const y = numberOrNull(field(row, [L + '_Y'], ''));
     const cond = parseCond(field(row, [L + '_Cond'], ''), field(row, [L + '_CondVal'], ''));
     const g = { letter: L, id: gid, def: def, token: token, type: sub, x: x, y: y, cond: cond, mobId: '' };
+    if (def.run === 'damage') {
+      const parts = parseDamageParts(subRaw, where);
+      if (parts.length) g.type = parts[0].type;
+      if (parts.length > 1) { // a split hit: one hit, one crit roll, the damage shared out by weight
+        g.parts = parts.map(function (p) { return { type: p.type, share: p.share }; });
+        parts.forEach(function (p) { if (!p.known) sheetWarn(where + ': damage type "' + p.type + '" is not a type from the lists tab'); });
+      } else if (parts.length === 1 && !parts[0].known) {
+        sheetWarn(where + ': damage type "' + subRaw + '" is not a type from the lists tab', 'note');
+      }
+    } else if (def.sub === 'damageType' && /[,;|+&]/.test(subRaw)) { // only plain Damage can be split
+      const first = parseDamageParts(subRaw, where)[0];
+      g.type = first ? first.type : '';
+      sheetWarn(where + ': only Damage (EF001) can split damage across types, so only ' + (g.type || 'the first type') + ' is used');
+    }
 
     if (def.run === 'damage' && x === null && y !== null) {
       sheetWarn(where + ': the damage number is in Y, not X. Y was used'); g.x = x = y;
@@ -496,7 +565,6 @@ function buildSheetSkill(id, row) {
     if ((def.run === 'cdReduce' || def.run === 'cdIncrease') && x === null) g.x = 1;
     if (def.sub === 'attr' && SKILL_ATTRS.indexOf(sub) === -1) { sheetWarn(where + ': ' + gid + ' needs an attribute in SubType'); return; }
     if (def.sub === 'damageType' && gid !== 'EF005' && gid !== 'EF022' && !sub) { sheetWarn(where + ': ' + gid + ' needs a damage type or group in SubType'); return; }
-    if (sub && def.run === 'damage' && !DAMAGE_TYPES[sub] && !PARENT_OF[sub]) sheetWarn(where + ': damage type "' + subRaw + '" is not a type from the lists tab', 'note');
 
     if (cond) {
       if (cond.kind === 'unknown') { sheetWarn(where + ': condition "' + cond.text + '" is not built yet, so the group is skipped'); return; }
@@ -582,7 +650,8 @@ function compareInitiative(a, b) {
 
 // ----- effect catalog -----
 // buff: true for buffs, false for debuffs (Dispel and Steal Buff only touch buffs, Cleanse only touches debuffs).
-// strength: the field compared when the same effect is applied twice. Only the strongest applies, except Damage and Healing Over Time.
+// strength: the field compared when the same effect is applied twice WITH THE SAME NAME (the skill that gave it). Only the strongest applies,
+//   and on equal strength the one with more turns left. Effects of the same type with different names STACK. Damage and Healing Over Time always stack.
 // key: effects of the same type but a different key (damage type, attribute) do not compete.
 // turnless: does not run out with turns (a Death Ward only runs out of charges).
 const EFFECT_INFO = {
@@ -630,10 +699,13 @@ function infoOf(e) { return EFFECT_INFO[e.type] || {}; }
 function shieldHits(e) { return e.hits !== undefined ? e.hits : e.charges; }
 
 // Does a damage type belong to a type or parent group? (no group set = every type)
+// "only" is one type or group, or a list of them (a Reflection can be limited to Fire, or to Fire and Cold)
 function typeMatches(type, only) {
   if (!only) return true;
   const t = normType(type);
-  return t === only || PARENT_OF[t] === only;
+  const list = [].concat(only);
+  if (!list.length) return true;
+  return list.some(function (o) { return t === o || PARENT_OF[t] === o; });
 }
 function isBuff(e) { return !!infoOf(e).buff; }
 
@@ -646,15 +718,20 @@ function effectKey(e) {
   return k ? normType(e[k]) : '';
 }
 
+// The name of an effect = the skill that gave it. Effects with no name (older tests) all share the empty name.
+function nameOf(e) {
+  return e.name === undefined || e.name === null ? '' : String(e.name);
+}
+
 function strengthOf(e) {
   const f = infoOf(e).strength;
   return f ? (Number(e[f]) || 0) : 0;
 }
 
-// The value of one field of an effect on a unit (0 if the unit does not have it)
+// The value of one field of an effect on a unit (0 if the unit does not have it).
+// Effects of the same type from different skills stack, so this adds them all up.
 function bestOf(unit, type, field) {
-  const e = unit.effects.find(function (x) { return x.type === type; });
-  return e ? (Number(e[field]) || 0) : 0;
+  return unit.effects.reduce(function (n, x) { return x.type === type ? n + (Number(x[field]) || 0) : n; }, 0);
 }
 
 // ----- attributes and health -----
@@ -803,12 +880,13 @@ function addEffect(state, unit, e, user) {
   if (user && unit === user && state.current === user && !info.turnless) e.fresh = true;
   if (info.stack !== 'all') {
     const key = effectKey(e);
-    const old = unit.effects.find(function (x) { return x.type === e.type && effectKey(x) === key; });
+    const nm = nameOf(e);
+    const old = unit.effects.find(function (x) { return x.type === e.type && effectKey(x) === key && nameOf(x) === nm; });
     if (old) {
       const s = strengthOf(e);
       const so = strengthOf(old);
       const better = s > so || (s === so && (e.charges || 0) > (old.charges || 0));
-      if (!better) return false; // a weaker or equal copy is ignored
+      if (!better) return false; // a weaker or equal copy with the same name is ignored
       unit.effects = unit.effects.filter(function (x) { return x !== old; });
     }
   }
@@ -881,7 +959,7 @@ function effectLabel(e) {
   const x = e.charges === undefined ? '' : ' x' + e.charges;
   switch (e.type) {
     case 'shield': return 'Shield' + (e.hits !== undefined ? ' x' + e.hits : x);
-    case 'dot': return 'DoT ' + e.damage + x;
+    case 'dot': return 'DoT ' + Math.round(e.damage * 10) / 10 + x;
     case 'hot': return 'HoT ' + e.heal + x;
     case 'taunt': return 'Taunt' + x;
     case 'provoke': return 'Provoked' + x;
@@ -893,8 +971,8 @@ function effectLabel(e) {
     case 'dmgReduceIn': return 'Takes -' + pct(e.percent) + x;
     case 'crit': return 'Crit ' + pct(e.chance) + x;
     case 'critChanceReduce': return 'Crit -' + pct(e.chance) + x;
-    case 'critBonus': return 'Crit dmg +' + pct(e.points) + x;
-    case 'critBonusReduce': return 'Crit dmg -' + pct(e.points) + x;
+    case 'critBonus': return 'Crit bonus +' + show(e.points) + x;
+    case 'critBonusReduce': return 'Crit bonus -' + show(e.points) + x;
     case 'critResist': return 'Crit resist +' + pct(e.percent) + x;
     case 'critResistWeaken': return 'Crit resist -' + pct(e.percent) + x;
     case 'accuracyBoost': return 'Accuracy +' + pct(e.percent) + x;
@@ -902,7 +980,7 @@ function effectLabel(e) {
     case 'shieldBreak': return 'Shield Break +' + pct(e.percent) + x;
     case 'shadow': return 'Shadow x' + e.mult + ' (' + e.charges + ')';
     case 'deathWard': return 'Death Ward x' + e.uses;
-    case 'reflection': return 'Reflect ' + pct(e.percent) + (e.only ? ' ' + e.only : '') + x;
+    case 'reflection': return 'Reflect ' + pct(e.percent) + (e.only && [].concat(e.only).length ? ' ' + [].concat(e.only).join('/') : '') + x;
     case 'thorns': return 'Thorns ' + e.damage + x;
     case 'reactiveHeal': return 'Reactive heal ' + e.heal + x;
     case 'resistance': return e.damageType + ' resist +' + e.delta + x;
@@ -933,19 +1011,47 @@ function tauntersFor(state, unit, sk) {
 
 // ----- damage calculation -----
 
+// The critical numbers of an attacker. The Critical Multiplier and the Critical Bonus are separate numbers.
+//   Multiplier: 2.0 for everyone. Bonus: flat damage added after the multiplier. Critical Bonus Boost adds to it, Reduction takes from it (never below 0).
+function critNumbers(user) {
+  return {
+    chance: Math.max(0, Math.min(1, (user.baseCrit || 0) + bestOf(user, 'crit', 'chance') - bestOf(user, 'critChanceReduce', 'chance'))),
+    mult: CRIT_MULT,
+    bonus: Math.max(0, CRIT_BONUS + (user.baseCritBonus || 0) + bestOf(user, 'critBonus', 'points') - bestOf(user, 'critBonusReduce', 'points')),
+  };
+}
+
+// A critical hit: everything the crit adds (the multiplier's extra damage and the flat Critical Bonus) is cut by the target's Critical Resistance
+function critDamage(target, amount, c) {
+  const resist = Math.max(0, Math.min(1, (target.baseCritResist || 0) + bestOf(target, 'critResist', 'percent') - bestOf(target, 'critResistWeaken', 'percent')));
+  return amount + (amount * (c.mult - 1) + c.bonus) * (1 - resist);
+}
+
+// A Damage Over Time can crit, but the roll is made ONCE when it is applied, never on each tick.
+// A crit raises the damage of every tick of that Damage Over Time.
+function rollDotCrit(state, user, target, tick) {
+  const c = critNumbers(user);
+  if (c.chance > 0 && Math.random() < c.chance) {
+    state.emit('crit', target, 'CRIT!');
+    return critDamage(target, tick, c);
+  }
+  return tick;
+}
+
 // Once per skill use: the Shadow Slip multiplier, percent damage modifiers and the critical numbers of the attacker
 function prepareDamage(user) {
   let shadow = 1;
   const s = user.effects.find(function (e) { return e.type === 'shadow'; });
   if (s) { shadow = s.mult; user.effects = user.effects.filter(function (e) { return e !== s; }); }
+  const crit = critNumbers(user);
   return {
     shadow: shadow,
     percent: bestOf(user, 'dmgUp', 'percent') - bestOf(user, 'dmgOutReduce', 'percent'), // share of base damage
     shieldBreak: bestOf(user, 'shieldBreak', 'percent'),
     flat: 0,                                                                              // flat Damage Modifiers
-    critChance: Math.max(0, Math.min(1, bestOf(user, 'crit', 'chance') - bestOf(user, 'critChanceReduce', 'chance'))),
-    critMult: Math.max(1, CRIT_MULT + bestOf(user, 'critBonus', 'points') - bestOf(user, 'critBonusReduce', 'points')),
-    critBonus: CRIT_BONUS,
+    critChance: crit.chance,
+    critMult: crit.mult,
+    critBonus: crit.bonus,
   };
 }
 
@@ -962,11 +1068,10 @@ function dealHit(state, user, sk, target, mods, base) {
   const attrBonus = sk.attr ? base * attrOf(user, sk.attr) * (sk.scale !== undefined ? sk.scale : ATTR_SCALING) : 0;
   let amt = Math.max(0, (base + attrBonus + base * pct + mods.flat) * mods.shadow);
   if (mods.critChance > 0 && Math.random() < mods.critChance) {
-    const resist = Math.max(0, Math.min(1, bestOf(target, 'critResist', 'percent') - bestOf(target, 'critResistWeaken', 'percent')));
-    amt = amt * (1 + (mods.critMult - 1) * (1 - resist)) + mods.critBonus;
+    amt = critDamage(target, amt, { mult: mods.critMult, bonus: mods.critBonus });
     state.emit('crit', target, 'CRIT!');
   }
-  return takeHit(state, target, amt, { attacker: user, type: sk.damageType });
+  return takeHit(state, target, amt, { attacker: user, type: sk.damageType, parts: sk.damageParts });
 }
 
 // ----- damage resolution -----
@@ -986,10 +1091,15 @@ function armorOf(unit, attacker) {
 }
 
 // Sends damage back at the attacker. It goes through the attacker's defenses but cannot trigger reactive effects again.
-function strikeBack(state, from, attacker, amount, type, text) {
+function strikeBack(state, from, attacker, amount, type, text, parts) {
   if (!attacker || !attacker.alive || amount <= 0) return;
   state.emit('status', from, text);
-  takeHit(state, attacker, amount, { reflected: true, type: type });
+  takeHit(state, attacker, amount, { reflected: true, type: type, parts: parts });
+}
+
+// The damage types of a hit: one type, or a split (opts.parts = [{type, share}], the shares add up to 1)
+function hitParts(opts) {
+  return opts.parts && opts.parts.length ? opts.parts : [{ type: opts.type, share: 1 }];
 }
 
 // Damage Resolution. amount = the damage as calculated (before any defense).
@@ -1002,15 +1112,25 @@ function takeHit(state, unit, amount, opts) {
   const react = !!attacker && !opts.dotTick && !opts.reflected; // only a real attack sets off reactive effects
   let dmg = amount;
 
-  // 1. Resistance (and Damage Reduction / Vulnerability): an Immune hit stops here
-  const rs = resistanceState(unit, opts.type);
-  dmg *= RESIST_MULT[rs];
+  // 1. Resistance (and Damage Reduction / Vulnerability): an Immune hit stops here.
+  // A split hit checks every part against its own damage type: an Immune part drops out, the other parts still land.
+  const parts = hitParts(opts);
+  const partDmg = parts.map(function (p) { return amount * p.share * RESIST_MULT[resistanceState(unit, p.type)]; });
+  dmg = partDmg.reduce(function (a, b) { return a + b; }, 0);
   dmg *= Math.max(0, 1 + bestOf(unit, 'vulnerable', 'percent') - bestOf(unit, 'dmgReduceIn', 'percent'));
   if (dmg <= 0) {
     result.nullified = true;
-    state.emit('block', unit, rs === RESIST_STATES.length - 1 ? 'IMMUNE' : 'NO DAMAGE');
+    const allImmune = parts.every(function (p) { return resistanceState(unit, p.type) === RESIST_STATES.length - 1; });
+    state.emit('block', unit, allImmune ? 'IMMUNE' : 'NO DAMAGE');
     return result;
   }
+  // The part of the hit (after Resistance) that is a damage type or group, for a Reflection that only reflects some types
+  const shareOf = function (only) {
+    if (!only) return 1;
+    let total = 0, match = 0;
+    parts.forEach(function (p, i) { total += partDmg[i]; if (typeMatches(p.type, only)) match += partDmg[i]; });
+    return total > 0 ? match / total : 0;
+  };
 
   // 2. Shield: one charge fully nullifies one hit. DoT ticks bypass Shields.
   if (!opts.dotTick) {
@@ -1021,7 +1141,7 @@ function takeHit(state, unit, amount, opts) {
       result.nullified = true;
       state.emit('block', unit, 'BLOCKED');
       // Only Reflection and Thorns that came with the skill that gave this Shield go off here (full damage as calculated)
-      if (react && shield.reflect) strikeBack(state, unit, attacker, amount * shield.reflect, opts.type, 'Reflect');
+      if (react && shield.reflect) strikeBack(state, unit, attacker, amount * shield.reflect, opts.type, 'Reflect', opts.parts);
       if (react && shield.thorns) strikeBack(state, unit, attacker, shield.thorns, shield.thornsType || 'piercing', 'Thorns');
       return result;
     }
@@ -1031,18 +1151,26 @@ function takeHit(state, unit, amount, opts) {
   dmg = Math.max(0, dmg - armorOf(unit, attacker));
   // All other Reflection and Thorns go off here (Reflection uses the damage left after Armor)
   if (react) {
-    const refl = unit.effects.find(function (e) {
-      return e.type === 'reflection' && (e.uses === undefined || e.uses > 0) && typeMatches(opts.type, e.only);
-    });
-    if (refl) {
+    // Every Reflection and every Thorns on the unit goes off (effects with different names stack)
+    unit.effects.filter(function (e) {
+      return e.type === 'reflection' && (e.uses === undefined || e.uses > 0) && shareOf(e.only) > 0;
+    }).forEach(function (refl) {
       useCharge(unit, refl);
-      strikeBack(state, unit, attacker, dmg * refl.percent, opts.type, 'Reflect');
-    }
-    const th = unit.effects.find(function (e) { return e.type === 'thorns' && (e.uses === undefined || e.uses > 0); });
-    if (th) {
+      // A split hit is one hit: each Reflection goes off once. With a type filter, only the matching parts are sent back.
+      let sendParts, sendType = opts.type;
+      if (parts.length > 1) {
+        const keep = parts.map(function (p, i) { return { type: p.type, w: partDmg[i] }; })
+          .filter(function (p) { return p.w > 0 && (!refl.only || typeMatches(p.type, refl.only)); });
+        const sum = keep.reduce(function (a, p) { return a + p.w; }, 0);
+        sendParts = keep.map(function (p) { return { type: p.type, share: p.w / sum }; });
+        sendType = sendParts[0].type;
+      }
+      strikeBack(state, unit, attacker, dmg * refl.percent * shareOf(refl.only), sendType, 'Reflect', sendParts);
+    });
+    unit.effects.filter(function (e) { return e.type === 'thorns' && (e.uses === undefined || e.uses > 0); }).forEach(function (th) {
       useCharge(unit, th);
       strikeBack(state, unit, attacker, th.damage, th.damageType || 'piercing', 'Thorns');
-    }
+    });
   }
 
   // 4. Ward: absorbs up to its current pool
@@ -1124,6 +1252,7 @@ function useSkill(state, user, key, target) {
   state.emit('info', user, 'uses ' + sk.name + (target !== user ? ' on ' + target.name : ''));
   // Every effect a skill applies remembers whether Dispel and Steal Buff may touch it (a stolen buff keeps its own flags)
   const add = function (unit, e) {
+    if (e.name === undefined) e.name = sk.name; // the effect's name is the skill that gave it (a stolen buff keeps its own)
     if (e.canDispel === undefined && sk.canBeDispelled === false) e.canDispel = false;
     if (e.canSteal === undefined && sk.canBeStolen === false) e.canSteal = false;
     return addEffect(state, unit, e, user);
@@ -1157,7 +1286,7 @@ function useSkill(state, user, key, target) {
     // The initial hit is subject to Shields. If a Shield nullifies it, the DoT is not applied.
     const r = dealHit(state, user, sk, target, prepareDamage(user), sk.hit);
     if (!r.nullified && target.alive && !target.isSummon) { // summons cannot receive debuffs
-      add(target, { type: 'dot', damage: sk.dot, charges: sk.charges, damageType: sk.damageType });
+      add(target, { type: 'dot', damage: rollDotCrit(state, user, target, sk.dot), charges: sk.charges, damageType: sk.damageType });
     }
   } else if (sk.kind === 'hot') {
     // Heal over time: X every turn for Y turns, at the start of the target's turns. Several can run together.
@@ -1449,7 +1578,8 @@ function effectWouldApply(unit, e) {
   const info = infoOf(e);
   if (info.stack === 'all' || unit.isSummon && (info.buff || e.type === 'dot')) return !unit.isSummon;
   const key = effectKey(e);
-  const old = unit.effects.find(function (x) { return x.type === e.type && effectKey(x) === key; });
+  const nm = nameOf(e);
+  const old = unit.effects.find(function (x) { return x.type === e.type && effectKey(x) === key && nameOf(x) === nm; });
   if (!old) return true;
   const s = strengthOf(e), so = strengthOf(old);
   return s > so || (s === so && (e.charges || 0) > (old.charges || 0));
@@ -1483,7 +1613,7 @@ function useSheetSkill(state, user, sk, target, add) {
     if (g.def.run !== 'damage') return;
     targetsOf(g).forEach(function (t) {
       if (!t.alive) return;
-      const r = dealHit(state, user, { attr: sk.attr, scale: sk.scale, damageType: g.type }, t, mods, g.x);
+      const r = dealHit(state, user, { attr: sk.attr, scale: sk.scale, damageType: g.type, damageParts: g.parts }, t, mods, g.x);
       ctx.dealt += r.dealt;
       if (r.nullified && ctx.blocked.indexOf(t) === -1) ctx.blocked.push(t);
     });
@@ -1571,12 +1701,18 @@ function useSheetSkill(state, user, sk, target, add) {
           break;
         }
         case 'reflection':
-          add(t, { type: 'reflection', percent: reflectPercent(g), charges: turns, only: g.cond && g.cond.kind === 'damageGroup' ? g.cond.group : undefined });
+          add(t, { type: 'reflection', percent: reflectPercent(g), charges: turns, only: g.cond && g.cond.kind === 'damageGroup' ? (g.cond.groups.length > 1 ? g.cond.groups : g.cond.groups[0]) : undefined });
           break;
         case 'shieldBreak': // aimed at yourself: a lasting buff
           add(t, { type: 'shieldBreak', percent: (g.x || 0) / 100, charges: turns });
           break;
-        case 'effect': add(t, buildGroupEffect(user, sk, g, turns)); break;
+        case 'effect': {
+          const e = buildGroupEffect(user, sk, g, turns);
+          // a Damage Over Time rolls its crit once, now (only if it will actually be applied)
+          if (e.type === 'dot' && effectWouldApply(t, e)) e.damage = rollDotCrit(state, user, t, e.damage);
+          add(t, e);
+          break;
+        }
       }
     });
   });
