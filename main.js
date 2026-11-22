@@ -1984,3 +1984,364 @@ const battleScene = {
       .on('pointerdown', () => { this.scene.start('Town'); });
     this.nodeText = makeLabel(this, 330, 30, String(this.nodeData.name), 22);
     makeLabel(this, W / 2 - 80, 30, 'Energy 0/0',
+    makeLabel(this, W / 2 + 120, 30, 'Gold 0', 24);
+    this.waveText = makeLabel(this, W - 100, 30, '', 24);
+
+    // Ground pads for the 5 character positions (summon spots stay hidden until used)
+    for (let i = 0; i < PLAYER_SLOTS.length; i++) {
+      const p = slotPosition('player', i);
+      const e = slotPosition('enemy', i);
+      makePad(this, p.x, p.y, 0x3366cc, depthScale(p.y));
+      makePad(this, e.x, e.y, 0xcc3333, depthScale(e.y));
+    }
+
+    // Battle state
+    const scene = this;
+    this.battle = newBattle(function (type, unit, text) { scene.onEvent(type, unit, text); }, this.heroRows, this.nodeData);
+    this.active = null;       // the hero whose turn it is (or was last)
+    this.allyTarget = null;   // who a single-target ally skill will hit
+    this.awaitingPlayer = false;
+    this.logLines = [];
+
+    // Unit views
+    this.targetRing = this.add.ellipse(0, 0, 170, 44).setStrokeStyle(3, 0xff4444).setVisible(false);
+    this.targetMarker = this.add.triangle(0, 0, 0, 0, 30, 0, 15, 24, 0xff4444)
+      .setStrokeStyle(3, 0xffffff).setDepth(2000).setVisible(false);
+    this.allyMarker = this.add.triangle(0, 0, 0, 0, 30, 0, 15, 24, 0x44dd66)
+      .setStrokeStyle(3, 0xffffff).setDepth(2000).setVisible(false);
+    this.views = {};
+    this.battle.units.forEach(function (u) { scene.makeView(u); });
+    this.target = this.battle.units.find(function (u) { return u.side === 'enemy' && u.alive; });
+    this.updateWaveText();
+
+    // Info text
+    this.turnText = makeLabel(this, W / 2, 82, '', 24).setDepth(1500);
+    this.orderText = makeLabel(this, W / 2, 106, '', 14).setDepth(1500);
+    this.logText = this.add.text(W / 2 - 60, H - 130, '', {
+      fontSize: '16px', color: '#dddddd', lineSpacing: 4, wordWrap: { width: 280 },
+    }).setDepth(1500);
+
+    // Four skill buttons in a 2 x 2 grid, bottom right. They show the skills of whichever hero is acting.
+    // Order: skill 1 top left, skill 2 top right, skill 3 bottom left, skill 4 bottom right.
+    this.buttons = [];
+    for (let i = 0; i < 4; i++) {
+      const col = i % 2;
+      const row = Math.floor(i / 2);
+      const x = W - BTN_MARGIN - BTN_W / 2 - (1 - col) * (BTN_W + BTN_GAP);
+      const y = H - BTN_MARGIN - BTN_H / 2 - (1 - row) * (BTN_H + BTN_GAP);
+      const box = scene.add.rectangle(x, y, BTN_W, BTN_H, 0x444444).setStrokeStyle(3, 0xffffff).setDepth(1500).setInteractive();
+      const label = scene.add.text(x, y, '', {
+        fontFamily: BTN_FONT, fontSize: BTN_FONT_SIZE + 'px', fontStyle: 'bold', color: '#ffffff', align: 'center',
+        stroke: '#000000', strokeThickness: 4, wordWrap: { width: BTN_W - 20 },
+      }).setOrigin(0.5).setDepth(1501);
+      const cdLabel = scene.add.text(x, y + BTN_H / 2 - 20, '', {
+        fontFamily: BTN_FONT, fontSize: '20px', fontStyle: 'bold', color: '#ffcc66', align: 'center',
+        stroke: '#000000', strokeThickness: 3,
+      }).setOrigin(0.5).setDepth(1501);
+      box.on('pointerdown', function () { scene.playerUse(i); });
+      scene.buttons.push({ box: box, label: label, cdLabel: cdLabel, y: y });
+    }
+
+    // Problems found while reading the Skills tab (a wrong target, a missing number...) show in small yellow text, top left
+    const problems = SHEET_WARNINGS.filter(function (w) { return w.level === 'error'; }).map(function (w) { return w.text; });
+    if (SHOW_SHEET_WARNINGS && problems.length) {
+      const shown = problems.slice(0, 4);
+      if (problems.length > 4) shown.push('(+' + (problems.length - 4) + ' more in the console)');
+      this.add.text(10, 70, 'Sheet problems:\n' + shown.join('\n'), {
+        fontSize: '13px', color: '#ffe066', backgroundColor: '#000000aa', lineSpacing: 2, wordWrap: { width: 430 },
+      }).setDepth(2500);
+    }
+
+    this.refresh();
+    this.time.delayedCall(600, function () { scene.continueBattle(); });
+  },
+
+  extend: {
+
+  // Makes a plain colored figure if an image is missing
+  ensureTexture: function (key) {
+    if (this.textures.exists(key)) return;
+    const g = this.make.graphics({ x: 0, y: 0, add: false });
+    g.fillStyle(placeholderColor(key), 1);
+    g.fillRoundedRect(27, 2, 46, 96, 18);
+    g.generateTexture(key, 100, 100);
+    g.destroy();
+  },
+
+  makeView: function (u) {
+    const scene = this;
+    this.ensureTexture(u.sprite);
+    const isSummon = u.spot === 'summon';
+    const slot = slotPosition(u.side, u.slot, u.spot);
+    const k = depthScale(slot.y) * (isSummon ? SUMMON_SCALE : 1);
+    const h = SPRITE_HEIGHT * k;
+    const bw = HP_BAR_W * (0.5 + 0.5 * k);
+    let pad = null;
+    if (isSummon) pad = makePad(this, slot.x, slot.y, u.side === 'player' ? 0x3366cc : 0xcc3333, k);
+    const ring = this.add.ellipse(slot.x, slot.y - 4, 170 * k, 44 * k)
+      .setStrokeStyle(3, 0xffff00).setVisible(false).setDepth(slot.y + 1);
+    const sprite = this.add.image(slot.x, slot.y, u.sprite).setOrigin(0.5, 1).setDepth(slot.y);
+    sprite.setScale(h / sprite.height);
+    sprite.setFlipX(u.side === 'player' ? FLIP_PLAYER : FLIP_ENEMY);
+    this.tweens.add({
+      targets: sprite, y: slot.y - 8 * k, duration: 700 + Math.random() * 300,
+      yoyo: true, repeat: -1, ease: 'Sine.easeInOut',
+    });
+    const top = Math.max(84, slot.y - h + figureTop(this, u.sprite) * h - 14); // just above the character's head
+    const hpBack = this.add.rectangle(slot.x - bw / 2, top, bw, 12, 0x000000).setOrigin(0, 0.5).setDepth(1000);
+    const hpFill = this.add.rectangle(slot.x - bw / 2, top, bw, 12, 0x44cc44).setOrigin(0, 0.5).setDepth(1000);
+    const wardBack = this.add.rectangle(slot.x - bw / 2, top + 11, bw, 8, 0x000000)
+      .setOrigin(0, 0.5).setDepth(1000).setVisible(false);
+    const wardFill = this.add.rectangle(slot.x - bw / 2, top + 11, bw, 8, 0x4aa8ff)
+      .setOrigin(0, 0.5).setDepth(1001).setVisible(false);
+    const status = this.add.text(slot.x, slot.y - 8, '', {
+      fontSize: '18px', color: '#ffffff', align: 'center', stroke: '#000000', strokeThickness: 3,
+    }).setOrigin(0.5, 1).setDepth(1000);
+    sprite.setInteractive(this.input.makePixelPerfect(HIT_ALPHA));
+    sprite.on('pointerdown', function () {
+      if (u.side === 'enemy') scene.selectTarget(u);
+      else scene.selectAlly(u);
+    });
+    this.views[u.id] = {
+      slot: slot, ring: ring, sprite: sprite, hpBack: hpBack, hpFill: hpFill,
+      wardBack: wardBack, wardFill: wardFill, status: status, pad: pad, h: h, bw: bw, barY: top, k: k,
+    };
+  },
+
+  // Removes a character's picture, bars and text from the screen
+  destroyView: function (id) {
+    const v = this.views[id];
+    if (!v) return;
+    this.tweens.killTweensOf(v.sprite);
+    [v.sprite, v.hpBack, v.hpFill, v.wardBack, v.wardFill, v.status, v.ring, v.pad].forEach(function (o) {
+      if (o) o.destroy();
+    });
+    delete this.views[id];
+  },
+
+  updateWaveText: function () {
+    this.waveText.setText('Wave ' + (this.battle.waveIndex + 1) + '/' + this.battle.waves.length);
+  },
+
+  selectTarget: function (u) {
+    if (!u.alive) return;
+    this.target = u;
+    this.refresh();
+  },
+
+  selectAlly: function (u) {
+    if (!u.alive || u.isSummon) return; // summons cannot be healed or buffed
+    this.allyTarget = u;
+    this.refresh();
+  },
+
+  onEvent: function (type, unit, text) {
+    if (type === 'summon' && !this.views[unit.id]) this.makeView(unit); // a new summon appears on the field
+    const view = this.views[unit.id];
+    this.logLines.push(unit.name + ' ' + (type === 'info' ? text : '[' + text + ']'));
+    if (this.logLines.length > 5) this.logLines.shift();
+    if (this.logText) this.logText.setText(this.logLines.join('\n'));
+    if (type === 'info' || !view) return;
+    const t = this.add.text(view.slot.x + (Math.random() * 40 - 20), view.slot.y - view.h / 2, text, {
+      fontSize: '30px', color: EVENT_COLORS[type] || '#ffffff', stroke: '#000000', strokeThickness: 5,
+    }).setOrigin(0.5).setDepth(2000);
+    this.tweens.add({
+      targets: t, y: t.y - 60, alpha: 0, duration: 1000,
+      onComplete: function () { t.destroy(); },
+    });
+  },
+
+  refresh: function () {
+    const scene = this;
+    if (this.target && !this.target.alive) {
+      this.target = this.battle.units.find(function (u) { return u.side === 'enemy' && u.alive; });
+    }
+    this.battle.units.forEach(function (u) {
+      const v = scene.views[u.id];
+      if (!v) return;
+      if (u.isSummon && !u.alive) { // a summon that expired or was defeated leaves the field
+        [v.sprite, v.hpBack, v.hpFill, v.wardBack, v.wardFill, v.status, v.ring].forEach(function (o) { o.setVisible(false); });
+        if (v.pad) v.pad.setVisible(false);
+        return;
+      }
+      v.hpFill.width = Math.max(0, v.bw * u.hp / u.maxHp);
+      const showWard = u.alive && u.ward > 0;
+      v.wardBack.setVisible(showWard);
+      v.wardFill.setVisible(showWard);
+      if (showWard) v.wardFill.width = v.bw * Math.min(1, u.ward / Math.max(u.wardMax, u.ward));
+      v.sprite.setAlpha(u.alive ? 1 : 0.25);
+      if (v.pad) v.pad.setVisible(u.alive);
+      const lines = [];
+      if (u.isSummon) lines.push(u.duration + ' turns left');
+      if (u.ward > 0) lines.push('Ward ' + u.ward);
+      u.effects.forEach(function (e) { lines.push(effectLabel(e)); });
+      v.status.setText(u.alive ? lines.join('\n') : '');
+      v.hpFill.setFillStyle(u.hp / u.maxHp > 0.3 ? 0x44cc44 : 0xcc4444);
+    });
+    if (this.target && this.views[this.target.id]) {
+      const tv = this.views[this.target.id];
+      this.targetRing.setPosition(tv.slot.x, tv.slot.y - 4).setScale(tv.k).setDepth(tv.slot.y + 2).setVisible(true);
+      this.targetMarker.setPosition(tv.slot.x, Math.max(68, tv.barY - 26)).setVisible(true);
+    } else {
+      this.targetRing.setVisible(false);
+      this.targetMarker.setVisible(false);
+    }
+    // Green arrow over the ally a single-target ally skill (like Regrowth) will hit
+    const wantsAlly = this.awaitingPlayer && this.active &&
+      this.active.skills.some(function (k) { return SKILLS[k].target === 'ally'; });
+    if (this.allyTarget && !this.allyTarget.alive) this.allyTarget = this.active;
+    if (wantsAlly && this.allyTarget) {
+      const av = this.views[this.allyTarget.id];
+      this.allyMarker.setPosition(av.slot.x, Math.max(68, av.barY - 26)).setVisible(true);
+    } else {
+      this.allyMarker.setVisible(false);
+    }
+    this.buttons.forEach(function (b, i) {
+      const key = scene.active ? scene.active.skills[i] : undefined;
+      const sk = key ? SKILLS[key] : null;
+      b.box.setVisible(!!sk);
+      b.label.setVisible(!!sk);
+      b.cdLabel.setVisible(false);
+      if (!sk) return;
+      const cd = scene.active.cd[key] || 0;
+      const ready = scene.awaitingPlayer && cd === 0;
+      b.box.setFillStyle(ready ? 0x2f7a3f : 0x2a2a2a);
+      b.box.setStrokeStyle(3, ready ? 0xffffff : 0x666666);
+      b.label.setText(sk.label || sk.name);
+      b.label.setColor(ready ? '#ffffff' : '#9a9a9a');
+      b.label.setY(cd > 0 ? b.y - 14 : b.y); // nudge the name up to make room for the cooldown line
+      b.cdLabel.setText('Cooldown ' + cd).setVisible(cd > 0);
+    });
+  },
+
+  // Decides what happens next: the result screen, the next wave, or the next turn
+  continueBattle: function () {
+    checkOver(this.battle);
+    if (this.battle.over) this.showResult();
+    else if (this.battle.waveCleared) this.startNextWave();
+    else this.nextTurn();
+  },
+
+  // The wave is cleared: its defeated enemies leave and the next wave walks in
+  startNextWave: function () {
+    const scene = this;
+    const battle = this.battle;
+    battle.units.filter(function (u) { return u.side === 'enemy'; })
+      .forEach(function (u) { scene.destroyView(u.id); });
+    const fresh = advanceWave(battle);
+    fresh.forEach(function (u) { scene.makeView(u); });
+    this.target = fresh.find(function (u) { return u.alive; });
+    this.updateWaveText();
+    this.active = null;
+    this.awaitingPlayer = false;
+    this.refresh();
+    const banner = makeLabel(this, this.W / 2, this.H / 2 - 60, 'WAVE ' + (battle.waveIndex + 1), 64).setDepth(3000);
+    this.tweens.add({
+      targets: banner, alpha: 0, duration: 800, delay: 600,
+      onComplete: function () { banner.destroy(); },
+    });
+    this.time.delayedCall(1200, function () { scene.continueBattle(); });
+  },
+
+  nextTurn: function () {
+    const scene = this;
+    const u = nextActor(this.battle);
+    if (!u) { this.showResult(); return; }
+    this.current = u;
+    for (const id in this.views) this.views[id].ring.setVisible(false);
+    this.views[u.id].ring.setVisible(true);
+    this.turnText.setText(u.name + "'s turn");
+    this.orderText.setText('Next: ' + upcoming(this.battle, 3).map(function (x) { return x.name; }).join(' > '));
+    startTurn(this.battle, u); // heal-over-time effects resolve at the start of the turn
+
+    if (u.side === 'player' && !u.isSummon) {
+      this.active = u;
+      // If an enemy has Taunt, single-target attacks must hit one of the taunters (you can still pick between them)
+      const taunters = tauntersFor(this.battle, u, { target: 'enemy' });
+      if (taunters && taunters.indexOf(this.target) === -1) this.target = taunters[0];
+      this.allyTarget = u;
+      this.awaitingPlayer = true;
+      this.refresh();
+    } else {
+      this.awaitingPlayer = false;
+      this.refresh();
+      this.time.delayedCall(700, function () {
+        const act = chooseAction(scene.battle, u);
+        if (act) useSkill(scene.battle, u, act.key, act.target);
+        scene.refresh();
+        scene.time.delayedCall(700, function () { scene.finishTurn(u); });
+      });
+    }
+  },
+
+  playerUse: function (index) {
+    const scene = this;
+    if (!this.awaitingPlayer || this.battle.over || !this.active) return;
+    const hero = this.active;
+    const key = hero.skills[index];
+    if (!key || !skillReady(hero, key)) return;
+    const sk = SKILLS[key];
+    let target = hero;
+    if (sk.target === 'enemy') {
+      target = this.target;
+      const taunters = tauntersFor(this.battle, hero, sk); // must hit an enemy with Taunt, unless the skill ignores Taunt
+      if (taunters && taunters.indexOf(target) === -1) {
+        target = taunters[0];
+        this.target = target;
+        this.onEvent('info', hero, 'must attack an enemy with Taunt');
+      }
+      if (!target || !target.alive) return;
+    } else if (sk.target === 'ally') {
+      target = (this.allyTarget && this.allyTarget.alive) ? this.allyTarget : hero;
+    }
+    // Skills that cannot be used right now do not cost the turn
+    const why = cannotUse(this.battle, hero, sk, target);
+    if (why) {
+      this.onEvent('info', hero, why);
+      return;
+    }
+    this.awaitingPlayer = false;
+    useSkill(this.battle, hero, key, target);
+    this.refresh();
+    this.time.delayedCall(700, function () { scene.finishTurn(hero); });
+  },
+
+  finishTurn: function (u) {
+    const scene = this;
+    endTurn(this.battle, u);
+    this.refresh();
+    if (this.battle.over) {
+      this.time.delayedCall(600, function () { scene.showResult(); });
+    } else if (this.battle.waveCleared) {
+      this.time.delayedCall(600, function () { scene.startNextWave(); });
+    } else {
+      this.time.delayedCall(400, function () { scene.nextTurn(); });
+    }
+  },
+
+  showResult: function () {
+    const scene = this;
+    this.awaitingPlayer = false;
+    this.refresh();
+    const W = this.W;
+    const H = this.H;
+    this.add.rectangle(W / 2, H / 2, W, H, 0x000000, 0.6).setDepth(3000).setInteractive()
+      .on('pointerdown', function () { scene.scene.restart(); }); // a new random node and five new heroes
+    makeLabel(this, W / 2, H / 2 - 20, this.battle.over === 'victory' ? 'VICTORY' : 'DEFEAT', 72).setDepth(3001);
+    makeLabel(this, W / 2, H / 2 + 50, 'Tap to fight again', 28).setDepth(3001);
+  },
+
+  },
+};
+
+// Load the sheets first, then start the game
+loadGameData().then(function () {
+  new Phaser.Game({
+    type: Phaser.CANVAS,
+    width: 1280,
+    height: 720,
+    backgroundColor: '#000000',
+    scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
+    scene: [townScene, battleScene], // the first scene opens first: the town, whose Campaign Gate starts the battle
+  });
+});
