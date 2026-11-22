@@ -1983,7 +1983,7 @@ const battleScene = {
     makeLabel(this, 60, 30, 'HOME', 24).setPadding(18, 14, 18, 14).setDepth(3002).setInteractive({ useHandCursor: true })
       .on('pointerdown', () => { this.scene.start('Town'); });
     this.nodeText = makeLabel(this, 330, 30, String(this.nodeData.name), 22);
-    makeLabel(this, W / 2 - 80, 30, 'Energy 0/0',
+    makeLabel(this, W / 2 - 80, 30, 'Energy 0/0', 24);
     makeLabel(this, W / 2 + 120, 30, 'Gold 0', 24);
     this.waveText = makeLabel(this, W - 100, 30, '', 24);
 
