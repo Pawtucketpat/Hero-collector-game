@@ -10,6 +10,12 @@ function pickRandomNodeId() {
   localStorage.setItem('lastNodeId', picked);
   return picked;
 }
+// A wave slot's mob ID. Accepts the entry form's headers (W1slot1) and the long form (Wave 1 Slot 1).
+function nodeSlot(node, w, s) {
+  const names = ['Wave ' + w + ' Slot ' + s, 'W' + w + 'slot' + s, 'W' + w + 'Slot' + s];
+  for (const name of names) { if (node[name]) return node[name]; }
+  return '';
+}
 function buildNodeBattle(nodeId) {
   const node = GAME_DATA.nodes[nodeId];
   if (!node) { console.error('Node not found: ' + nodeId); return null; }
@@ -17,19 +23,20 @@ function buildNodeBattle(nodeId) {
   for (let w = 1; w <= WAVE_COUNT; w++) {
     const wave = [];
     for (let s = 1; s <= SLOTS_PER_WAVE; s++) {
-      const mobId = node['Wave ' + w + ' Slot ' + s];
+      const mobId = nodeSlot(node, w, s);
       if (!mobId) { wave.push(null); }
       else if (GAME_DATA.mobs[mobId]) { wave.push(Object.assign({}, GAME_DATA.mobs[mobId])); }
       else { console.warn('Mob ID not found: ' + mobId + ' (node ' + nodeId + ')'); wave.push(null); }
     }
     waves.push(wave);
   }
-  return { nodeId: nodeId, name: node['Name'] || nodeId, background: node['Background'] || '', waves: waves };
+  return { nodeId: nodeId, name: node['Name'] || nodeId, background: node['Background'] || node['W1Background'] || '', waves: waves };
 }
 function startRandomNodeBattle() {
   const id = pickRandomNodeId();
   if (!id) return null;
   const battle = buildNodeBattle(id);
+  if (!battle) return null;
   console.log('Node ' + id + ' loaded: ' + battle.waves.length + ' waves');
   return battle;
 }
