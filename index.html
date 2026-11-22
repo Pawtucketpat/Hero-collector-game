@@ -1,22 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-  <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-      <title>Hero Collector</title>
-        <style>
-            html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
-              </style>
-              </head>
-              <body>
-                <script>
-                    window.onerror = function (m, s, l) {
-                          document.body.insertAdjacentHTML('beforeend', '<div style="color:#f88;font:20px sans-serif">ERROR: ' + m + ' (line ' + l + ')</div>');
-                              };
-                                </script>
-                                  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.js"></script>
-                                    <script src="dataLoader.js"></script>
-                                    <script src="nodeBattle.js"></script>
-                                    <script src="main.js"></script>
-                                    </body>
-                                    </html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero Collector</title>
+<style>body{margin:0;background:#000}</style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.80.1/phaser.min.js"></script>
+<script src="dataLoader.js?v=2"></script>
+<script src="nodeBattle.js?v=2"></script>
+<script src="town.js?v=3"></script>
+<script src="main.js?v=3"></script>
+</body>
+</html>
