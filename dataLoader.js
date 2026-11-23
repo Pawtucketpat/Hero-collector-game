@@ -15,13 +15,13 @@ const GAME_DATA = {
 // "files" lists the file names to try in order (the first one that exists is used).
 // "idColumn" lists the ID column headers to accept (the first one found is used).
 const DATA_FILES = [
-  { key: 'effects',  files: ['data/effects.csv'],                      idColumn: ['ID'] },
-  { key: 'skills',   files: ['data/skills.csv'],                       idColumn: ['ID'] },
-  { key: 'gear',     files: ['data/gear.csv'],                         idColumn: ['ID'] },
-  { key: 'gearSets', files: ['data/gear_sets.csv', 'data/gear_set.csv'], idColumn: ['ID'] },
-  { key: 'nodes',    files: ['data/nodes.csv'],                        idColumn: ['Node ID', 'ID'] },
-  { key: 'mobs',     files: ['data/mobs.csv'],                         idColumn: ['ID'] },
-  { key: 'heroes',   files: ['data/heroes.csv', 'data/heros.csv'],     idColumn: ['ID'] }
+  { key: 'effects',  files: ['data/effects.csv', 'data/Effects.csv'], idColumn: ['ID'] },
+  { key: 'skills',   files: ['data/skills.csv', 'data/Skills.csv'], idColumn: ['ID'] },
+  { key: 'gear',     files: ['data/gear.csv', 'data/Gear.csv'], idColumn: ['ID'] },
+  { key: 'gearSets', files: ['data/gear_sets.csv', 'data/gear_set.csv', 'data/Gear_Sets.csv'], idColumn: ['ID'] },
+  { key: 'nodes',    files: ['data/nodes.csv', 'data/Nodes.csv'], idColumn: ['Node ID', 'ID'] },
+  { key: 'mobs',     files: ['data/mobs.csv', 'data/Mobs.csv'], idColumn: ['ID'] },
+  { key: 'heroes',   files: ['data/heroes.csv', 'data/heros.csv', 'data/Hero.csv', 'data/Heroes.csv'], idColumn: ['ID'] }
 ];
 
 // Splits CSV text into rows, handling quoted cells that contain commas.
