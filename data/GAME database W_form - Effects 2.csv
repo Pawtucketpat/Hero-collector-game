@@ -1,0 +1,48 @@
+ID,Name,Category,Subcategory,Type,Subtype,Description
+EF001,Damage,Damage,,,,"Deals X damage. SubType can split the hit across damage types: Fire 1, Cold 1 (a type and a weight for each part)"
+EF002,Healing,Healing,,,,Heals X health
+EF003,Healing Over Time,Buff,Heal Over Time,,,Heals X health every turn for Y turns
+EF004,Lifesteal,Healing,Lifesteal,,,Heals X health based on Y% of damage dealt
+EF005,Damage Over Time,Debuff,Damage Over Time,,,Deals X damage every turn for Y turns
+EF006,Cleanse,Buff,Protection,Cleanse,,Removes all debuffs from target
+EF007,Death Ward,Buff,Protection,Death Ward,,Revives target with X% health when they reach 0 health. Each death uses one of Y charges
+EF008,Shield,Buff,Protection,Shield,,Absorbs X attacks or Y turns
+EF009,Ward,Buff,Ward,,,Applies X ward. A damage absorption pool shown under the health bar that cannot be dispelled
+EF010,Reflection,Buff,Protection,Reflection,,"Reflects X% of incoming damage for Y turns or Z charges. Goes off at the Armor step (after Armor), or at the Shield step with the full damage if it came with a Shield skill. Cond picks the damage it reflects: blank = every type, 'If fire damage' = one type or group, 'If fire, cold damage' = a combination"
+EF011,Accuracy Boost,Buff,Offensive,Accuracy,,Increases accuracy by X%. Accuracy cuts the target's effective armor
+EF012,Critical Chance Boost,Buff,Offensive,Critical Chance,,Increases critical chance by X%
+EF013,Critical Bonus Boost,Buff,Offensive,Critical Bonus,,"Adds X flat damage to the Critical Bonus of a critical hit (after the 2.0 multiplier). X is a plain number, not a percent"
+EF014,Damage Boost,Buff,Offensive,Damage Increase,,Increases damage by X% of base damage. Stacks with the same effect from a skill with a different name; the same skill name keeps only the strongest
+EF015,Shield Break,Buff,Offensive,Shield Break,,Deals X% bonus damage to enemies with wards active
+EF016,Armor Boost,Buff,Defensive,Armor,,Increases armor effectiveness by X%
+EF017,Incoming Damage Reduction,Buff,Defensive,Damage Reduction,,Reduces incoming damage by X%
+EF018,Critical Resistance,Buff,Defensive,Critical Resistance,,Reduces the extra damage of incoming critical hits (the multiplier's extra and the flat Critical Bonus) by X%
+EF019,Resistance,Buff,Defensive,Resistance,,Moves the target up X resistance states for the specified damage type or group
+EF020,Health Boost,Buff,Defensive,Health,,Increases maximum health by X%. Current health rises by the same amount
+EF021,Reactive Healing,Buff,Defensive,Reactive Healing,,"Heals target for X health each time an attack does health damage to them, for Y turns or Z charges. Goes off before the death check, so it can save them. Damage over time does not trigger it"
+EF022,Thorns,Buff,Defensive,Reactive Damage,,"Deals X damage to attackers when hit for Y turns or Z charges. Goes off on every hit (each hit of a multi-hit skill), but not on damage over time. Goes off at the Armor step, or at the Shield step if it came with a Shield skill"
+EF023,Healing Received Boost,Buff,Defensive,Healing Received,,Increases healing received by X%
+EF024,Healing Outgoing Boost,Buff,Defensive,Healing Outgoing,,Increases healing done by X%
+EF025,Attribute Boost,Buff,Attribute,Attribute,,Increases the specified attribute by X%
+EF026,Taunt,Buff,Control,Taunt,,Buff on the user. Forces enemy single-target attacks to target this character. Area attacks and skills that ignore taunt are not affected
+EF027,Provoke,Debuff,Control,Provoke,,Forces target to use basic attacks against the caster
+EF028,Cooldown Reduction,Buff,Control,Cooldown Manipulation,,Reduces cooldowns by X
+EF029,Cooldown Increase,Debuff,Control,Cooldown Manipulation,,"Increases cooldowns by X, including skills that are ready. Basic attacks are exempt"
+EF030,Accuracy Reduction,Debuff,Offensive,Accuracy,,Decreases accuracy by X%
+EF031,Critical Chance Reduction,Debuff,Offensive,Critical Chance,,Decreases critical chance by X%
+EF032,Critical Bonus Reduction,Debuff,Offensive,Critical Bonus,,"Takes X flat damage off the Critical Bonus (minimum 0). X is a plain number, not a percent"
+EF033,Damage Output Reduction,Debuff,Offensive,Damage Reduction,,Decreases base skill damage by X%
+EF034,Armor Reduction,Debuff,Defensive,Armor,,Decreases armor by X%
+EF035,Damage Vulnerability,Debuff,Defensive,Damage Reduction,,Increases damage received by X%
+EF036,Weaken Critical Resistance,Debuff,Defensive,Critical Resistance,,Decreases critical resistance by X%
+EF037,Weaken Resistance,Debuff,Defensive,Resistance,,Moves the target down X resistance states for the specified damage type or group
+EF038,Reduce Maximum Health,Debuff,Defensive,Health,,Decreases maximum health by X%. Current health drops by the same amount (never below 1) and does not return when it ends
+EF039,Healing Received Reduction,Debuff,Defensive,Healing Received,,Reduces healing received by X%
+EF040,Healing Outgoing Reduction,Debuff,Defensive,Healing Outgoing,,Reduces healing done by X%
+EF041,Attribute Reduction,Debuff,Attribute,Attribute,,Decreases the specified attribute by X%
+EF042,Dispel,Debuff,Removal,Dispel,,Removes X buffs from target. Wards cannot be dispelled
+EF043,Steal Buff,Debuff,Removal,Buff Steal,,Removes a buff from target and transfers it to caster
+EF044,Ally Assist,Action,Assist,,,Causes a living ally to use their basic attack against target
+EF045,Ignore Taunt,Action,Offensive,,,Allows the caster to use this skill against any target even if an enemy has taunt.
+EF046,Resurrection,Healing,,,,Resurrects an ally with x% health
+EF047,Summon,Action,Divine,Necrotic,,"Summons X,  a being to help the party for Y turns"
