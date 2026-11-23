@@ -1,6 +1,6 @@
 ID,Mob Name,Mob Sprite,Mob Icon,Skill 1,Skill 2,Skill 3,Ultimate,Species,Affiliation,Strength,Dexterity,Intelligence,Wisdom,Vitality,Armor,Speed,Accuracy,Critical Chance,Critical Bonus,Critical Resistance,Physical Resistance,Elemental Resistance,Nature Resistance,Noxious Resistance,Divine Resistance,Arcane Resistance,Slashing Resistance,Crushing Resistance,Piercing Resistance,Earth Resistance,Water Resistance,Wind Resistance,Fire Resistance,Cold Resistance,Lightning Resistance,Thunder Resistance,Primal Resistance,Astral Resistance,Spiritual Resistance,Poison Resistance,Disease Resistance,Acid Resistance,Radiant Resistance,Dark Resistance,Necrotic Resistance,Chaos Resistance,Force Resistance,Psychic Resistance,Gravity Resistance,Temporal Resistance
-HGOB001,Goblin Warrior,assets/Mob/goblin_warrior.png,,SK0039,SK0047,,,,,8,8,2,2,20,20,10,3,0.5,50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-HGOB002,Goblin Archer,/assets/Mob/goblin_archer.png,,SK0044,SK0047,,,goblin,,8,8,2,2,20,15,12,10,0.5,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-HGOB003,Goblin Shaman,/assets/Mob/goblin_shaman.png,,SK0045,SK0041,SK0046,,Goblin,,5,8,6,8,20,10,5,10,0.5,50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-HORC001,Orc_brute,/assets/Mob/orc_brute.png,,SK0040,SK0043,SK0042,,Orc,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-USKE001,Skeleton,/assets/Summon/necromancer_summon.png,,SK0000,SK0047,,,,,8,7,1,1,5,20,20,10,1.5,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+HGOB001,Goblin Warrior,assets/Mob/goblin_warrior.png,,SK0039,SK0047,,,,,8,8,2,2,2,2,10,3,0.5,50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+HGOB002,Goblin Archer,/assets/Mob/goblin_archer.png,,SK0044,SK0047,,,goblin,,8,8,2,2,10,15,12,10,0.5,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+HGOB003,Goblin Shaman,/assets/Mob/goblin_shaman.png,,SK0045,SK0041,SK0046,,Goblin,,5,8,6,8,2,10,5,10,0.5,50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+HORC001,Orc_brute,/assets/Mob/orc_brute.png,,SK0040,SK0043,SK0042,,Orc,,8,2,3,3,2,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+USKE001,Skeleton,/assets/Summon/necromancer_summon.png,,SK0000,SK0047,,,,,8,7,1,1,5,10,10,10,1.5,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
