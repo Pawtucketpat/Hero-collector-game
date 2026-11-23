@@ -5,7 +5,7 @@ SK0002,Primal Yell,,,Strength,2,"Gain the Taunt buff, forcing all Enemies to att
 SK0003,Headbut,,,Strength,2,Headbutt the enemy place a provoke on the target forcing the target to attack this character with its basic attack.,1 turn,3 turns,EF027,AllEnemies,Crushing,,,,,EF001,OneEnemy,Crushing,10,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
 SK0004,Kidney Shot,,,Dexterity,2,Stabs an enemy. ignores taunt.,Instant,Basic Attack,EF001,OneEnemy,Piercing,10,,,,EF045,Self,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
 SK0005,Vulerability,,,Dexterity,2,Lessens the effectiveness of armor of the target,Instant,4 turns,EF034,OneEnemy,,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
-SK0006,Execute,,,Dexterity,2,Deals massive damage plus bonus damage if the enemy is below 30%,Instant,4 turns,EF001,OneEnemy,Piercing,20,,,,EF001,OneEnemy,Piercing,10,,target below 30% health,40,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0006,Execute,,,Dexterity,2,Deals massive damage plus bonus damage if the enemy is below 30%,Instant,4 turns,EF001,OneEnemy,Piercing,20,,,,EF001,OneEnemy,Piercing,20,,target below 30% health,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
 SK0007,One With Shadows,,,,,"The assassin ducks into the shadows making them harder to hit, before leaping out and striking the enemy with percision",1 turn,3 turns,EF014,Self,,25,,,,EF017,,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
 SK0008,Harmonious Strike,,,Intelligence,2,"The bard lashes forth, slashing the enemy",Instant,Basic Attack,EF001,OneEnemy,Slashing,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
 SK0009,Discordant Note,,,Intelligence,2,The bard plays an unnerving note making the enemies hesitate with their attacks,3 turn,4 turns,EF033,AllEnemies,,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
