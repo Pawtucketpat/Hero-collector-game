@@ -45,7 +45,7 @@ SK0041,Rally,,,Strength,,Calls all allies to attack,Instant,4 turns,EF044,AllAll
 SK0042,Yell,,,,,Taunt,Instant,3 turns,EF026,Self,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
 SK0043,Acid Splash,,,Intelligence,,Throws acid at the enemies,3 turn,3 turns,EF001,AllEnemies,Acid,15,,,,EF005,AllEnemies,Acid,15,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
 SK0044,Release Arrow,,,Dexterity,2,Shoots an arrow at a target,Instant,Basic Attack,EF001,OneEnemy,Piercing,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
-SK0045,Dagger,,,Dexterity,2,stabby stabby,Instant,Basic Attack,EF001,OneEnemy,Piercing,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0045,Dagger,,,Dexterity,2,stabby stabby,Instant,Basic Attack,EF001,OneEnemy,Piercing,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
 SK0046,Healing word,,,Wisdom,2,Heals all allies,Instant,4 turns,EF002,AllAllies,Primal,50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
 SK0047,Shield Bash,,,Strength,2,Bashes an enemy,Instant,2 turns,EF001,OneEnemy,Crushing,40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
