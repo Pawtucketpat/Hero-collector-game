@@ -1,25 +1,9 @@
-// main.js: the battle scene, plus the game start-up (the game opens on the town, see town.js). 
-// // Needs these files loaded first, in this order (see index.html):
+// main.js: the battle scene, plus the game start-up (the game opens on the town, see town.js).
+// Needs these files loaded first, in this order (see index.html):
 //   Phaser, dataLoader.js, nodeBattle.js, town.js, then this file.
 
 // ===== SETTINGS =====
 const ASSET_PATH = ''; // use 'assets/' if you move the images into a folder
-
-// Short names for image files. A sprite name from your sheets that matches a name here uses the file listed.
-// Any other sprite name is used as the file name itself (".png" is added if it has no ending).
-const SPRITE_FILES = {
-  druid: 'elf_druid.png',
-  goblin1: 'goblin_warrior.png',
-  goblin2: 'orc_brute.png',
-  goblin3: 'goblin_archer.png',
-  goblin4: 'goblin_shaman.png',
-  necromancer: 'necromancer.png',
-  rogue: 'rogue.png',
-  barbarian: 'barbarian.png',
-  shaman: 'shaman.png',
-  necromancer_summon: 'necromancer_summon.png', // loaded and ready for the necromancer's summon
-};
-const ALWAYS_LOAD = ['necromancer_summon']; // images the game needs even when no sheet row names them
 
 const SPRITE_HEIGHT = 300;   // character picture height when standing closest to the camera
 const SUMMON_SCALE = 0.6;    // summons are drawn at this fraction of normal size
@@ -69,8 +53,8 @@ const ENEMY_SUMMON_SLOTS = [
 
 const SHOW_SHEET_WARNINGS = true; // show problems found in the Skills tab on the battle screen (set false to hide them)
 
-const FLIP_PLAYER = false; // set true if your druid faces the wrong way
-const FLIP_ENEMY = false;  // set true if your goblins face the wrong way
+const FLIP_PLAYER = false; // set true if your heroes face the wrong way
+const FLIP_ENEMY = false;  // set true if your enemies face the wrong way
 
 // ===== TEST VALUES (placeholders for testing, not approved design numbers) =====
 const MAX_SUMMONS = 2;   // total active summons per side (your Notion page 14.2)
@@ -96,77 +80,20 @@ Object.keys(DAMAGE_TYPES).forEach(function (parent) {
 const RESIST_STATES = ['Vulnerable', 'Normal', 'Resistant', 'Immune'];
 const RESIST_MULT = [1.5, 1, 0.5, 0]; // share of damage taken in each state
 
-// Skill kinds: damage, aoe, dot, hot, shield, ward, drain, steal, summon, taunt, dmgUpAll, wardAll, massRes, armorReduce, shadow,
-//   effect, cleanse, dispel, cdReduce, cdIncrease, assist
-// target: enemy, ally, self, allEnemies, allAllies.  basic = the unit's basic attack (a provoked unit must use it).
-// attr = the attribute that boosts the damage (2% of base damage per point). damageType = a child damage type like 'fire'.
-// kind 'effect' applies any effect from the Effects tab, for example:
-//   { name: 'Mirror', kind: 'effect', target: 'self', effect: { type: 'reflection', percent: 0.5, charges: 3, uses: 2 }, cd: 3 }
-// Effect types: shield, hot, dot, deathWard, reflection, thorns, reactiveHeal, accuracyBoost, accuracyReduce, crit, critChanceReduce,
+// A skill's target (set from the Skills tab) is one of: enemy, ally, self, allEnemies, allAllies. basic = the unit's basic attack (a provoked unit must use it).
+// The effect types the battle engine knows:
+//   shield, hot, dot, deathWard, reflection, thorns, reactiveHeal, accuracyBoost, accuracyReduce, crit, critChanceReduce,
 //   critBonus, critBonusReduce, dmgUp, shieldBreak, armorBoost, armorReduce, dmgReduceIn, vulnerable, dmgOutReduce, critResist,
 //   critResistWeaken, resistance, weakenResistance, healthBoost, healthReduce, healReceivedBoost, healReceivedReduce, healOutBoost,
 //   healOutReduce, attributeBoost, attributeReduce, taunt, provoke, shadow
-const SKILLS = {
-  // ----- Druid -----
-  attack:    { name: 'Attack', kind: 'damage', target: 'enemy', damage: 20, attr: 'wisdom', damageType: 'primal', cd: 0, basic: true },
-  shield:    { name: 'Shield', kind: 'shield', target: 'self', charges: 2, cd: 3 },
-  poison:    { name: 'Poison', kind: 'dot', target: 'enemy', hit: 6, dot: 8, charges: 3, attr: 'wisdom', damageType: 'poison', cd: 2 },
-  regrowth:  { name: 'Regrowth', kind: 'hot', target: 'ally', heal: 12, charges: 4, cd: 3 },
-
-  // ----- Necromancer -----
-  necroAttack:  { name: 'Necrotic Attack', kind: 'damage', target: 'enemy', damage: 18, lifesteal: 0.5, attr: 'intelligence', damageType: 'necrotic', cd: 0, basic: true },
-  summonUndead: { name: 'Summon Undead', kind: 'summon', target: 'self', cd: 5,
-                  summon: { name: 'Undead Warrior', sprite: 'necromancer_summon', hp: 20, duration: 3, skills: ['undeadSlash'], explosion: 10 } },
-  drainLife:    { name: 'Drain Life', kind: 'drain', target: 'allEnemies', damage: 10, healPerHit: 5, attr: 'intelligence', damageType: 'necrotic', cd: 3 },
-  weakenSoul:   { name: 'Weaken Soul', kind: 'steal', target: 'enemy', cd: 3 },
-  undeadSlash:  { name: 'Slash', kind: 'damage', target: 'enemy', damage: 12, damageType: 'slashing', cd: 0, basic: true }, // the undead warrior's attack
-
-  // ----- Barbarian -----
-  axeAttack:     { name: 'Axe Attack', kind: 'damage', target: 'enemy', damage: 16, missingHealthBonus: 0.1, attr: 'strength', damageType: 'slashing', cd: 0, basic: true }, // +10% per 10% health missing
-  taunt:         { name: 'Taunt', kind: 'taunt', target: 'self', charges: 2, cd: 3 }, // a buff on the Barbarian: enemies must attack him
-  cleave:        { name: 'Cleave', kind: 'aoe', target: 'allEnemies', damage: 10, attr: 'strength', damageType: 'slashing', cd: 0 },
-  goadingAttack: { name: 'Goading Attack', kind: 'damage', target: 'enemy', damage: 14, provoke: 1, attr: 'strength', damageType: 'crushing', cd: 2 },
-
-  // ----- Shaman -----
-  shamanAttack:     { name: 'Nature Attack', kind: 'damage', target: 'enemy', damage: 16, attr: 'wisdom', damageType: 'lightning', critBuff: { chance: 0.5, charges: 1 }, cd: 0, basic: true },
-  primalScream:     { name: 'Primal Scream', kind: 'dmgUpAll', target: 'allAllies', percent: 0.25, charges: 2, cd: 3 },
-  greaterWard:      { name: 'Greater Ward', kind: 'wardAll', target: 'allAllies', pool: 60, cd: 4 },
-  massResurrection: { name: 'Mass Resurrection', label: 'Mass Revive', kind: 'massRes', target: 'allAllies', hpPercent: 0.25, cd: 0 },
-
-  // ----- Rogue -----
-  rogueAttack: { name: 'Rogue Attack', kind: 'damage', target: 'enemy', damage: 15, ignoresTaunt: true, attr: 'dexterity', damageType: 'piercing', cd: 0, basic: true },
-  execution:   { name: 'Execution', kind: 'damage', target: 'enemy', damage: 32, executeBelow: 0.3, executeBonus: 0.5, attr: 'dexterity', damageType: 'piercing', cd: 0 },
-  armorBreak:  { name: 'Armor Break', kind: 'armorReduce', target: 'enemy', percent: 0.3, charges: 3, cd: 0 }, // lowers armor by 30% (test value)
-  shadowSlip:  { name: 'Shadow Slip', kind: 'shadow', target: 'self', mult: 3, charges: 2, cd: 2 },
-
-  // ----- Goblins (some extras exist only so your heroes' skills have something to work on) -----
-  stab:      { name: 'Stab', kind: 'damage', target: 'enemy', damage: 50, attr: 'strength', damageType: 'piercing', cd: 0, basic: true },
-  venom:     { name: 'Venom', kind: 'aoe', target: 'allEnemies', damage: 60, damageType: 'poison', cd: 0 }, // was written with "hit", which did nothing
-  bulwark:   { name: 'Bulwark', kind: 'shield', target: 'self', charges: 9, cd: 4},        // gives Weaken Soul a buff to steal
-  roar:      { name: 'Roar', kind: 'taunt', target: 'self', damage: 40,  charges: 2, cd: 4 },      // gives the Rogue's taunt-ignoring attack a job
-  ward:      { name: 'Ward', kind: 'ward', target: 'self', pool: 30, cd: 3 },              // not used by anyone right now
-};
+// Every skill the battle can run, by key. It starts empty: a skill is built from the Skills tab the first time a hero or mob asks for it.
+const SKILLS = {};
 
 // ===== BUILDING UNITS FROM YOUR SHEETS =====
 // Heroes come from the Hero sheet (five random ones) and enemies from the node's waves.
-// Health, Armor, Speed and Dexterity are read from the sheet when it has a column for them.
-// Skills still come from the code above: a unit uses the stats and skills listed here (found by its sprite name or its Name)
-// whenever the sheet has no matching column.
-const DRUID_STATS = { hp: 90, armor: 0, speed: 6, dex: 10, skills: ['attack', 'shield', 'poison', 'regrowth'] };
-const KNOWN_UNITS = {
-  elf_druid: DRUID_STATS,
-  druid: DRUID_STATS,
-  necromancer: { hp: 80, armor: 0, speed: 5, dex: 8,  skills: ['necroAttack', 'summonUndead', 'drainLife', 'weakenSoul'] },
-  shaman: { hp: 90, armor: 0, speed: 6, dex: 8,  skills: ['shamanAttack', 'primalScream', 'greaterWard', 'massResurrection'] },
-  barbarian: { hp: 100, armor: 0, speed: 4, dex: 7,  skills: ['axeAttack', 'taunt', 'cleave', 'goadingAttack'] },
-  rogue: { hp: 70, armor: 0, speed: 8, dex: 12, skills: ['rogueAttack', 'execution', 'armorBreak', 'shadowSlip'] },
-  goblin_warrior: { hp: 70,  armor: 3, speed: 4, dex: 5, skills: ['stab'] },
-  orc_brute:      { hp: 100, armor: 6, speed: 3, dex: 5, skills: ['roar', 'bulwark', 'stab'] },
-  goblin_archer:  { hp: 70,  armor: 2, speed: 5, dex: 5, skills: ['stab'] },
-  goblin_shaman:  { hp: 70,  armor: 2, speed: 2, dex: 5, skills: ['venom', 'ward'] },
-};
-const GENERIC_HERO = { hp: 80, armor: 0, speed: 5, dex: 8, skills: ['attack'] };
-const GENERIC_MOB = { hp: 70, armor: 2, speed: 4, dex: 5, skills: ['stab'] };
+// Health, Armor, Speed and Dexterity are read from the sheet. If a row leaves one blank, the unit uses the test value below
+// and a warning is shown on the battle screen, so a gap in the sheet is never hidden.
+const TEST_STATS = { hp: 100, armor: 0, speed: 5, dex: 5 };
 
 // Lowercase and drop spaces and punctuation, so "Max HP" and "maxhp" match
 function normKey(s) {
@@ -201,7 +128,6 @@ function spriteValueOf(row, isHero) {
 
 // The image file for a sprite or background name
 function imageFile(value) {
-  if (SPRITE_FILES[value]) return SPRITE_FILES[value];
   const v = String(value).replace(/^\/+/, ''); // "/assets/Hero/rogue.png" -> "assets/Hero/rogue.png" so it works on GitHub Pages
   if (/\.[a-z0-9]+$/i.test(v)) return v;
   return v + '.png';
@@ -214,34 +140,22 @@ function placeholderColor(key) {
   return h | 0x404040;
 }
 
-// Test stats for a unit, found by sprite name first and then by its Name
-function knownStats(sprite, name, isHero) {
-  const stem = String(sprite).split('/').pop().replace(/\.[a-z0-9]+$/i, '').toLowerCase();
-  const nm = String(name).toLowerCase().replace(/[^a-z0-9]+/g, '_');
-  return KNOWN_UNITS[stem] || KNOWN_UNITS[nm] || (isHero ? GENERIC_HERO : GENERIC_MOB);
-}
-
-// Skills, in this order of preference:
-//   1. The Skill 1 to Skill 4 columns (skill IDs from the Skills tab, built by part1b.js)
-//   2. A "Skills" column with the code names from SKILLS above (separated by commas)
-//   3. The test skills for that sprite or name
-function skillsFor(row, base) {
+// Skills come from the Skill 1 to Skill 4 columns (skill IDs from the Skills tab).
+function skillsFor(row) {
   const keys = [];
   skillIdsOf(row).forEach(function (sid) {
     const key = sheetSkillKey(sid);
     if (key) keys.push(key);
   });
+  const who = String(field(row, ['Hero Name', 'Mob Name', 'Name'], '?'));
   const ult = String(field(row, ['Ultimate'], '')).trim();
-  if (ult) sheetWarn(String(field(row, ['Hero Name', 'Mob Name', 'Name'], '?')) + ' has an Ultimate (' + ult + '). Ultimates have no button yet, so it is not used', 'note');
-  if (keys.length) {
-    if (!keys.some(function (k) { return SKILLS[k].basic; })) {
-      sheetWarn(String(field(row, ['Hero Name', 'Mob Name', 'Name'], '?')) + ' has no Basic Attack. Set one skill\'s Cooldown to "Basic Attack"');
-    }
-    return keys;
+  if (ult) sheetWarn(who + ' has an Ultimate (' + ult + '). Ultimates have no button yet, so it is not used', 'note');
+  if (!keys.length) {
+    sheetWarn(who + ' has no skills. Fill in its Skill 1 to Skill 4 columns');
+  } else if (!keys.some(function (k) { return SKILLS[k].basic; })) {
+    sheetWarn(who + ' has no Basic Attack. Set one skill\'s Cooldown to "Basic Attack"');
   }
-  const raw = String(field(row, ['Skills', 'Skill List'], ''));
-  const named = raw.split(/[,;|]/).map(function (s) { return s.trim(); }).filter(function (s) { return SKILLS[s]; });
-  return named.length ? named : base.skills.slice();
+  return keys;
 }
 
 // A resistance cell from the Hero or Mob tab: TRUE = Resistant, FALSE or empty = Normal, vulnerable = Vulnerable, immune = Immune
@@ -276,18 +190,24 @@ function unitFromRow(row, kind, side, slot, id) {
   const isHero = kind === 'hero';
   const sprite = spriteValueOf(row, isHero);
   const name = String(field(row, ['Name', isHero ? 'Hero Name' : 'Mob Name'], id));
-  const base = knownStats(sprite, name, isHero);
   const vitRaw = field(row, ['Vitality', 'Vit'], '');
   const vitality = (vitRaw !== '' && !isNaN(Number(vitRaw))) ? Number(vitRaw) : null;
   const hpRaw = field(row, ['HP', 'Health', 'Max HP', 'Max Health', 'Hit Points'], '');
   const hpColumn = (hpRaw !== '' && !isNaN(Number(hpRaw))) ? Number(hpRaw) : null;
-  const hp = (hpColumn !== null ? hpColumn : (vitality !== null ? 0 : base.hp)) + (vitality !== null ? vitality * VITALITY_HEALTH : 0);
-  const dex = statOf(row, ['Dexterity', 'Dex'], base.dex);
+  const hp = (hpColumn !== null ? hpColumn : (vitality !== null ? 0 : TEST_STATS.hp)) + (vitality !== null ? vitality * VITALITY_HEALTH : 0);
+  const dex = statOf(row, ['Dexterity', 'Dex'], TEST_STATS.dex);
+  const blank = function (names) { const v = field(row, names, ''); return v === '' || isNaN(Number(v)); };
+  const missing = [];
+  if (hpColumn === null && vitality === null) missing.push('Vitality');
+  if (blank(['Dexterity', 'Dex'])) missing.push('Dexterity');
+  if (blank(['Armor', 'Armour'])) missing.push('Armor');
+  if (blank(['Speed'])) missing.push('Speed');
+  if (missing.length) sheetWarn(name + ' has blank ' + missing.join(', ') + ' in its sheet row. Using test values for now');
   return {
     id: id, name: name, sprite: sprite || 'placeholder_' + id, side: side, slot: slot,
     hp: hp,
-    armor: statOf(row, ['Armor', 'Armour'], base.armor),
-    speed: statOf(row, ['Speed'], base.speed),
+    armor: statOf(row, ['Armor', 'Armour'], TEST_STATS.armor),
+    speed: statOf(row, ['Speed'], TEST_STATS.speed),
     dex: dex,
     accuracy: statOf(row, ['Accuracy'], 0),
     // Critical columns of the Hero and Mob tabs: chance and resistance are percents (10 = 10%, "10%" works too), the bonus is a flat number
@@ -302,7 +222,7 @@ function unitFromRow(row, kind, side, slot, id) {
       vitality: vitality !== null ? vitality : hp / VITALITY_HEALTH,
     },
     resist: { base: resistBaseFromRow(row) }, // base Resistance states, like { fire: 'Immune', elemental: 'Resistant' }
-    skills: skillsFor(row, base),
+    skills: skillsFor(row),
   };
 }
 
@@ -395,9 +315,6 @@ const ENEMY_FOR_ALLY = {
   oneally: 'oneenemy', randomally: 'randomenemy', allallies: 'allenemies', allalliesminustarget: 'allenemiesminustarget',
   allalliesminusself: 'allenemies', adjacentallies: 'adjacentenemies',
 };
-
-// The Undead Warrior the Necromancer summoned before summons came from the Mobs tab. It is used when a summon's mob ID is not found.
-const UNDEAD_FALLBACK = { name: 'Undead Warrior', sprite: 'necromancer_summon', hp: 20, skills: ['undeadSlash'], explosion: 10 };
 
 function numberOrNull(v) {
   if (v === '' || v === undefined || v === null || typeof v === 'boolean') return null;
@@ -629,7 +546,8 @@ function summonSpritesOf(row) {
     SKILLS[key].groups.forEach(function (g) {
       if (g.def.run !== 'summon') return;
       const m = mobRowFor(g.mobId);
-      const s = m ? spriteValueOf(m, false) : UNDEAD_FALLBACK.sprite;
+      if (!m) { sheetWarn('Summon ID ' + (g.mobId || '(blank)') + ' is not in the Mobs tab, so ' + SKILLS[key].name + ' summons nothing'); return; }
+      const s = spriteValueOf(m, false);
       if (s && out.indexOf(s) === -1) out.push(s);
     });
   });
@@ -1059,11 +977,6 @@ function prepareDamage(user) {
 // Percent modifiers count as a percent of base damage. Then the hit goes to Damage Resolution.
 function dealHit(state, user, sk, target, mods, base) {
   let pct = mods.percent;
-  if (sk.missingHealthBonus) { // Barbarian: more damage for each 10% of health missing
-    const tens = Math.floor((user.maxHp - user.hp) * 10 / user.maxHp + 1e-9);
-    pct += sk.missingHealthBonus * tens;
-  }
-  if (sk.executeBelow && target.hp < target.maxHp * sk.executeBelow) pct += sk.executeBonus; // Execution
   if (mods.shieldBreak && target.ward > 0) pct += mods.shieldBreak;                           // Shield Break
   const attrBonus = sk.attr ? base * attrOf(user, sk.attr) * (sk.scale !== undefined ? sk.scale : ATTR_SCALING) : 0;
   let amt = Math.max(0, (base + attrBonus + base * pct + mods.flat) * mods.shadow);
@@ -1237,15 +1150,6 @@ function healUnit(state, unit, amount, source) {
   return healed;
 }
 
-// The targets a skill hits, for the skills that do not handle their own targets
-function eachTarget(state, user, sk, target) {
-  if (sk.target === 'allEnemies') return opponents(state, user);
-  if (sk.target === 'allAllies') {
-    return state.units.filter(function (u) { return u.side === user.side && u.alive && !u.isSummon; });
-  }
-  return [target];
-}
-
 function useSkill(state, user, key, target) {
   const sk = SKILLS[key];
   user.cd[key] = sk.cd;
@@ -1257,114 +1161,7 @@ function useSkill(state, user, key, target) {
     if (e.canSteal === undefined && sk.canBeStolen === false) e.canSteal = false;
     return addEffect(state, unit, e, user);
   };
-  const livingAllies = function () {
-    return state.units.filter(function (u) { return u.side === user.side && u.alive && !u.isSummon; });
-  };
-
-  if (sk.kind === 'sheet') {
-    useSheetSkill(state, user, sk, target, add);
-  } else if (sk.kind === 'damage') {
-    const r = dealHit(state, user, sk, target, prepareDamage(user), sk.damage);
-    // Lifesteal: a share of the damage that reached health comes back as healing, fractions rounded down
-    if (sk.lifesteal && r.dealt > 0) healUnit(state, user, Math.floor(r.dealt * sk.lifesteal), user);
-    // Provoke rides on the hit: if a Shield nullifies the hit, the Provoke is not applied
-    if (sk.provoke && target.alive && !r.nullified) add(target, { type: 'provoke', charges: sk.provoke, source: user });
-    // Nature Attack: a random ally gets a crit chance buff
-    if (sk.critBuff) {
-      const others = livingAllies().filter(function (u) { return u !== user; });
-      const who = others.length ? randomOf(others) : user;
-      add(who, { type: 'crit', chance: sk.critBuff.chance, charges: sk.critBuff.charges });
-    }
-  } else if (sk.kind === 'aoe') {
-    const mods = prepareDamage(user);
-    const base = sk.damage !== undefined ? sk.damage : sk.hit;
-    opponents(state, user).forEach(function (e) { dealHit(state, user, sk, e, mods, base); });
-  } else if (sk.kind === 'shield') {
-    // reflect / thorns on a Shield skill go off at the Shield step
-    add(target, { type: 'shield', charges: sk.charges, reflect: sk.reflect, thorns: sk.thorns, thornsType: sk.thornsType });
-  } else if (sk.kind === 'dot') {
-    // The initial hit is subject to Shields. If a Shield nullifies it, the DoT is not applied.
-    const r = dealHit(state, user, sk, target, prepareDamage(user), sk.hit);
-    if (!r.nullified && target.alive && !target.isSummon) { // summons cannot receive debuffs
-      add(target, { type: 'dot', damage: rollDotCrit(state, user, target, sk.dot), charges: sk.charges, damageType: sk.damageType });
-    }
-  } else if (sk.kind === 'hot') {
-    // Heal over time: X every turn for Y turns, at the start of the target's turns. Several can run together.
-    add(target, { type: 'hot', heal: sk.heal, charges: sk.charges, source: user });
-  } else if (sk.kind === 'ward') {
-    // A new ward only replaces the current pool if it is larger. No duration.
-    if (sk.pool > target.ward) { target.ward = sk.pool; target.wardMax = sk.pool; }
-    state.emit('status', target, 'Ward ' + target.ward);
-  } else if (sk.kind === 'wardAll') {
-    livingAllies().forEach(function (a) {
-      if (sk.pool > a.ward) { a.ward = sk.pool; a.wardMax = sk.pool; }
-      state.emit('status', a, 'Ward ' + a.ward);
-    });
-  } else if (sk.kind === 'dmgUpAll') {
-    livingAllies().forEach(function (a) { add(a, { type: 'dmgUp', percent: sk.percent, charges: sk.charges }); });
-  } else if (sk.kind === 'taunt') {
-    // Taunt is a buff on the character using the skill: enemies' single-target attacks must hit a taunter
-    add(user, { type: 'taunt', charges: sk.charges });
-  } else if (sk.kind === 'armorReduce') {
-    add(target, { type: 'armorReduce', percent: sk.percent, charges: sk.charges });
-  } else if (sk.kind === 'shadow') {
-    add(user, { type: 'shadow', mult: sk.mult, charges: sk.charges });
-  } else if (sk.kind === 'massRes') {
-    // Revives every fallen ally (never summons). Each keeps its place in the turn order and gets no extra turn.
-    state.units.filter(function (u) { return u.side === user.side && !u.alive && !u.isSummon; })
-      .forEach(function (u) { reviveUnit(state, u, sk.hpPercent); });
-  } else if (sk.kind === 'summon') {
-    const def = sk.summon;
-    spawnSummon(state, user, {
-      name: def.name, sprite: def.sprite, hp: def.hp, armor: 0, speed: 0, dex: 0, accuracy: 0,
-      attrs: { strength: 0, dexterity: 0, wisdom: 0, intelligence: 0, vitality: def.hp / VITALITY_HEALTH },
-      resist: { base: {} }, skills: def.skills,
-    }, def.duration, def.explosion);
-  } else if (sk.kind === 'drain') {
-    // Damages every enemy, then heals every ally for healPerHit for each enemy that was hit
-    const mods = prepareDamage(user);
-    let hits = 0;
-    opponents(state, user).forEach(function (e) {
-      const r = dealHit(state, user, sk, e, mods, sk.damage);
-      if (!r.nullified) hits += 1;
-    });
-    const amount = hits * sk.healPerHit;
-    if (amount > 0) livingAllies().forEach(function (u) { healUnit(state, u, amount, user); });
-  } else if (sk.kind === 'steal') {
-    stealBuff(state, user, target, add);
-  } else if (sk.kind === 'effect') {
-    // Any effect from the Effects tab, built in the skill's "effect" field
-    eachTarget(state, user, sk, target).forEach(function (t) {
-      add(t, Object.assign({ source: user }, sk.effect));
-    });
-  } else if (sk.kind === 'cleanse') {
-    // Removes all debuffs
-    eachTarget(state, user, sk, target).forEach(function (t) {
-      const gone = removeEffects(t, function (e) { return !isBuff(e); });
-      if (gone.length) state.emit('status', t, 'cleansed');
-    });
-  } else if (sk.kind === 'dispel') {
-    // Removes X random buffs (a Ward cannot be dispelled, and buffs marked "Can Be Dispelled = off" are skipped)
-    eachTarget(state, user, sk, target).forEach(function (t) {
-      dispelBuffs(state, t, sk.count || 1);
-    });
-  } else if (sk.kind === 'cdReduce' || sk.kind === 'cdIncrease') {
-    // Cooldown Increase also hits skills that are ready now, but never basic attacks
-    eachTarget(state, user, sk, target).forEach(function (t) {
-      shiftCooldowns(state, t, sk.amount, sk.kind === 'cdIncrease');
-    });
-  } else if (sk.kind === 'assist') {
-    // A random living ally uses their basic attack on the target
-    const helpers = livingAllies().filter(function (a) {
-      return a !== user && a.skills.some(function (k) { return SKILLS[k].basic; });
-    });
-    if (helpers.length && target && target.alive) {
-      const ally = randomOf(helpers);
-      const basic = ally.skills.find(function (k) { return SKILLS[k].basic; });
-      state.emit('info', ally, 'assists');
-      useSkill(state, ally, basic, target);
-    }
-  }
+  useSheetSkill(state, user, sk, target, add);
   checkOver(state);
 }
 
@@ -1511,7 +1308,7 @@ function reflectPercent(g) {
   return (g.x || 0) / 100;
 }
 
-// ----- shared actions (the older skill kinds use these too) -----
+// ----- shared actions -----
 
 // Steals one random buff (Taunt included): removed from the enemy and moved (not copied) to the caster
 function stealBuff(state, user, target, add) {
@@ -1547,7 +1344,7 @@ function shiftCooldowns(state, unit, amount, increase) {
   state.emit('status', unit, increase ? 'cooldowns +' + amount : 'cooldowns -' + amount);
 }
 
-// Puts a summon beside its summoner if there is room. base = the stats of the summon (a mob row built by unitFromRow, or the old test Undead Warrior).
+// Puts a summon beside its summoner if there is room. base = the stats of the summon (a mob row built by unitFromRow).
 function spawnSummon(state, user, base, duration, explosion) {
   const used = activeSummons(state, user.side).map(function (u) { return u.slot; });
   const slot = [0, 1].find(function (i) { return used.indexOf(i) === -1; });
@@ -1634,14 +1431,7 @@ function useSheetSkill(state, user, sk, target, add) {
     if (run === 'summon') {
       const row = mobRowFor(g.mobId);
       if (row) spawnSummon(state, user, unitFromRow(row, 'mob', user.side, 0, 'summon'), turns, undefined);
-      else {
-        const u = UNDEAD_FALLBACK;
-        spawnSummon(state, user, {
-          name: u.name, sprite: u.sprite, hp: u.hp, armor: 0, speed: 0, dex: 0, accuracy: 0,
-          attrs: { strength: 0, dexterity: 0, wisdom: 0, intelligence: 0, vitality: u.hp / VITALITY_HEALTH },
-          resist: { base: {} }, skills: u.skills,
-        }, turns, u.explosion);
-      }
+      else sheetWarn('Summon ID ' + (g.mobId || '(blank)') + ' is not in the Mobs tab, so ' + sk.name + ' summons nothing');
       return;
     }
     if (run === 'taunt') { add(user, { type: 'taunt', charges: turns }); return; }
@@ -1722,10 +1512,7 @@ function useSheetSkill(state, user, sk, target, add) {
 
 // Returns a short reason if the skill would do nothing, so the turn is not wasted. Returns '' when it can be used.
 function cannotUse(state, user, sk, target) {
-  if (sk.kind === 'steal' && !stealable(target).length) return 'needs an enemy that has a buff to steal';
-  if (sk.kind === 'massRes' && !fallenAllies(state, user).length) return 'has no fallen allies to revive';
-  if (sk.kind === 'summon' && activeSummons(state, user.side).length >= MAX_SUMMONS) return 'has no free summon spot';
-  if (sk.kind === 'sheet' && sk.groups.length) {
+  if (sk.groups.length) {
     const picks = { enemy: target && target.side !== user.side ? target : null, ally: target && target.side === user.side ? target : null };
     const real = sk.groups.filter(function (g) { return g.def.run !== 'ignoreTaunt'; });
     const only = function (run) { return real.every(function (g) { return g.def.run === run; }); };
@@ -1744,9 +1531,6 @@ function hasShield(unit) {
 }
 
 function worthUsing(state, user, sk, target) {
-  if (sk.kind === 'shield') return !hasShield(target);   // no new Shield while one is still up
-  if (sk.kind === 'ward') return target.ward < sk.pool;
-  if (sk.kind !== 'sheet') return true;
   const picks = { enemy: target && target.side !== user.side ? target : null, ally: target && target.side === user.side ? target : null };
   return sk.groups.some(function (g) {
     const targets = sheetTargets(state, user, g.token, picks);
@@ -1781,7 +1565,7 @@ function aiTargetFor(state, unit, sk, provoke) {
     const taunters = tauntersFor(state, unit, sk);
     return randomOf(taunters || foes);
   }
-  if (sk.target === 'ally' && sk.kind === 'sheet') { // the ally that has lost the most health
+  if (sk.target === 'ally') { // the ally that has lost the most health
     const allies = livingAllies(state, unit);
     return allies.slice().sort(function (a, b) { return (a.hp / a.maxHp) - (b.hp / b.maxHp); })[0] || unit;
   }
@@ -1908,23 +1692,22 @@ const battleScene = {
     this.heroRows = pickRandomHeroes(5);
     this.nodeData = startRandomNodeBattle();
     if (!this.nodeData) {
-      this.problem = 'No nodes found.\nCheck data/nodes.csv and that its ID column is headed Node ID.';
+      this.problem = 'No nodes found.\nCheck data/Nodes.csv and that its ID column is headed Node ID.';
       return;
     }
     if (!this.heroRows.length) {
-      this.problem = 'No heroes found.\nCheck data/heroes.csv.';
+      this.problem = 'No heroes found.\nCheck data/Hero.csv.';
       return;
     }
     let mobCount = 0;
     this.nodeData.waves.forEach(function (wave) { wave.forEach(function (m) { if (m) mobCount += 1; }); });
     if (!mobCount) {
-      this.problem = 'Node ' + this.nodeData.nodeId + ' has no enemies.\nCheck its Wave columns and mob IDs in data/nodes.csv.';
+      this.problem = 'Node ' + this.nodeData.nodeId + ' has no enemies.\nCheck its Wave columns and mob IDs in data/Nodes.csv.';
       return;
     }
 
     // Every image this battle needs, so preload can fetch them
     const keys = {};
-    ALWAYS_LOAD.forEach(function (k) { keys[k] = true; });
     this.heroRows.forEach(function (row) {
       const s = spriteValueOf(row, true);
       if (s) keys[s] = true;
@@ -2018,7 +1801,7 @@ const battleScene = {
     this.turnText = makeLabel(this, W / 2, 82, '', 24).setDepth(1500).setBackgroundColor('#000000').setPadding(10, 2, 10, 2);
     this.orderText = makeLabel(this, W / 2, 106, '', 14).setDepth(1500).setBackgroundColor('#000000').setPadding(8, 2, 8, 2);
     this.logText = this.add.text(W / 2 - 60, H - 8, '', {
-      fontSize: '16px', color: '#ffffff' backgroundColor:'#000000', padding: { x: 8, y: 6 } lineSpacing: 4, wordWrap: { width: 270 },
+      fontSize: '16px', color: '#ffffff', backgroundColor: '#000000', padding: { x: 8, y: 6 }, lineSpacing: 4, wordWrap: { width: 270 },
     }).setOrigin(0, 1).setDepth(1500).setVisible(false);
 
     // Four skill buttons in a 2 x 2 grid, bottom right. They show the skills of whichever hero is acting.
@@ -2095,7 +1878,7 @@ const battleScene = {
     const wardFill = this.add.rectangle(slot.x - bw / 2, top + 11, bw, 8, 0x4aa8ff)
       .setOrigin(0, 0.5).setDepth(1001).setVisible(false);
     const status = this.add.text(slot.x, slot.y - 8, '', {
-      fontSize: '18px', color: '#ffffff', align: 'center', backgroundColor: '#000000', padding: [ x: 6, y: 3],
+      fontSize: '18px', color: '#ffffff', align: 'center', backgroundColor: '#000000', padding: { x: 6, y: 3 },
     }).setOrigin(0.5, 1).setDepth(1000).setVisible(false);
     sprite.setInteractive(this.input.makePixelPerfect(HIT_ALPHA));
     sprite.on('pointerdown', function () {
@@ -2340,7 +2123,7 @@ loadGameData().then(function () {
     type: Phaser.CANVAS,
     width: 1280,
     height: 720,
-    backgroundColor: '#000000'
+    backgroundColor: '#000000',
     scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
     scene: [townScene, battleScene], // the first scene opens first: the town, whose Campaign Gate starts the battle
   });
