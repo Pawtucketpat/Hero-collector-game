@@ -1958,7 +1958,7 @@ const battleScene = {
       if (u.isSummon) lines.push(u.duration + ' turns left');
       if (u.ward > 0) lines.push('Ward ' + u.ward);
       u.effects.forEach(function (e) { lines.push(effectLabel(e)); });
-      v.status.setText(u.alive ? lines.join('\n') : '').setVisible(u.alive && line.length > 0);
+      v.status.setText(u.alive ? lines.join('\n') : '').setVisible(u.alive && lines.length > 0);
       v.hpFill.setFillStyle(u.hp / u.maxHp > 0.3 ? 0x44cc44 : 0xcc4444);
     });
     if (this.target && this.views[this.target.id]) {
