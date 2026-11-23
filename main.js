@@ -1,5 +1,5 @@
-// main.js: the battle scene, plus the game start-up (the game opens on the town, see town.js).
-// Needs these files loaded first, in this order (see index.html):
+// main.js: the battle scene, plus the game start-up (the game opens on the town, see town.js). 
+// // Needs these files loaded first, in this order (see index.html):
 //   Phaser, dataLoader.js, nodeBattle.js, town.js, then this file.
 
 // ===== SETTINGS =====
@@ -2015,11 +2015,11 @@ const battleScene = {
     this.updateWaveText();
 
     // Info text
-    this.turnText = makeLabel(this, W / 2, 82, '', 24).setDepth(1500);
-    this.orderText = makeLabel(this, W / 2, 106, '', 14).setDepth(1500);
-    this.logText = this.add.text(W / 2 - 60, H - 130, '', {
-      fontSize: '16px', color: '#dddddd', lineSpacing: 4, wordWrap: { width: 280 },
-    }).setDepth(1500);
+    this.turnText = makeLabel(this, W / 2, 82, '', 24).setDepth(1500).setBackgroundColor('#000000').setPadding(10, 2, 10, 2);
+    this.orderText = makeLabel(this, W / 2, 106, '', 14).setDepth(1500).setBackgroundColor('#000000').setPadding(8, 2, 8, 2);
+    this.logText = this.add.text(W / 2 - 60, H - 8, '', {
+      fontSize: '16px', color: '#ffffff' backgroundColor:'#000000', padding: { x: 8, y: 6 } lineSpacing: 4, wordWrap: { width: 270 },
+    }).setOrigin(0, 1).setDepth(1500).setVisible(false);
 
     // Four skill buttons in a 2 x 2 grid, bottom right. They show the skills of whichever hero is acting.
     // Order: skill 1 top left, skill 2 top right, skill 3 bottom left, skill 4 bottom right.
@@ -2095,8 +2095,8 @@ const battleScene = {
     const wardFill = this.add.rectangle(slot.x - bw / 2, top + 11, bw, 8, 0x4aa8ff)
       .setOrigin(0, 0.5).setDepth(1001).setVisible(false);
     const status = this.add.text(slot.x, slot.y - 8, '', {
-      fontSize: '18px', color: '#ffffff', align: 'center', stroke: '#000000', strokeThickness: 3,
-    }).setOrigin(0.5, 1).setDepth(1000);
+      fontSize: '18px', color: '#ffffff', align: 'center', backgroundColor: '#000000', padding: [ x: 6, y: 3],
+    }).setOrigin(0.5, 1).setDepth(1000).setVisible(false);
     sprite.setInteractive(this.input.makePixelPerfect(HIT_ALPHA));
     sprite.on('pointerdown', function () {
       if (u.side === 'enemy') scene.selectTarget(u);
@@ -2140,7 +2140,7 @@ const battleScene = {
     const view = this.views[unit.id];
     this.logLines.push(unit.name + ' ' + (type === 'info' ? text : '[' + text + ']'));
     if (this.logLines.length > 5) this.logLines.shift();
-    if (this.logText) this.logText.setText(this.logLines.join('\n'));
+    if (this.logText) this.logText.setText(this.logLines.join('\n')).setVisible(true);
     if (type === 'info' || !view) return;
     const t = this.add.text(view.slot.x + (Math.random() * 40 - 20), view.slot.y - view.h / 2, text, {
       fontSize: '30px', color: EVENT_COLORS[type] || '#ffffff', stroke: '#000000', strokeThickness: 5,
@@ -2175,7 +2175,7 @@ const battleScene = {
       if (u.isSummon) lines.push(u.duration + ' turns left');
       if (u.ward > 0) lines.push('Ward ' + u.ward);
       u.effects.forEach(function (e) { lines.push(effectLabel(e)); });
-      v.status.setText(u.alive ? lines.join('\n') : '');
+      v.status.setText(u.alive ? lines.join('\n') : '').setVisible(u.alive && line.length > 0);
       v.hpFill.setFillStyle(u.hp / u.maxHp > 0.3 ? 0x44cc44 : 0xcc4444);
     });
     if (this.target && this.views[this.target.id]) {
@@ -2340,7 +2340,7 @@ loadGameData().then(function () {
     type: Phaser.CANVAS,
     width: 1280,
     height: 720,
-    backgroundColor: '#000000',
+    backgroundColor: '#000000'
     scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
     scene: [townScene, battleScene], // the first scene opens first: the town, whose Campaign Gate starts the battle
   });
