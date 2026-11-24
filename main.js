@@ -877,8 +877,8 @@ function effectLabel(e) {
   const x = e.charges === undefined ? '' : ' x' + e.charges;
   switch (e.type) {
     case 'shield': return 'Shield' + (e.hits !== undefined ? ' x' + e.hits : x);
-    case 'dot': return 'DoT ' + Math.round(e.damage * 10) / 10 + x;
-    case 'hot': return 'HoT ' + e.heal + x;
+    case 'dot': return 'DoT ' + show(e.damage) + x;
+    case 'hot': return 'HoT ' + show(e.heal) + x;
     case 'taunt': return 'Taunt' + x;
     case 'provoke': return 'Provoked' + x;
     case 'armorReduce': return 'Armor -' + pct(e.percent) + x;
@@ -899,8 +899,8 @@ function effectLabel(e) {
     case 'shadow': return 'Shadow x' + e.mult + ' (' + e.charges + ')';
     case 'deathWard': return 'Death Ward x' + e.uses;
     case 'reflection': return 'Reflect ' + pct(e.percent) + (e.only && [].concat(e.only).length ? ' ' + [].concat(e.only).join('/') : '') + x;
-    case 'thorns': return 'Thorns ' + e.damage + x;
-    case 'reactiveHeal': return 'Reactive heal ' + e.heal + x;
+    case 'thorns': return 'Thorns ' + show(e.damage) + x;
+    case 'reactiveHeal': return 'Reactive heal ' + show(e.heal) + x;
     case 'resistance': return e.damageType + ' resist +' + e.delta + x;
     case 'weakenResistance': return e.damageType + ' resist -' + e.delta + x;
     case 'healthBoost': return 'Health +' + pct(e.percent) + x;
@@ -1462,7 +1462,7 @@ function useSheetSkill(state, user, sk, target, add) {
           const pool = Math.round(scaledAmount(user, sk, g.x));
           if (!t.isSummon && t.alive) { // a Ward only replaces the current one if it is larger
             if (pool > t.ward) { t.ward = pool; t.wardMax = pool; }
-            state.emit('status', t, 'Ward ' + t.ward);
+            state.emit('status', t, 'Ward ' + show(t.ward));
           }
           break;
         }
@@ -1956,7 +1956,7 @@ const battleScene = {
       if (v.pad) v.pad.setVisible(u.alive);
       const lines = [];
       if (u.isSummon) lines.push(u.duration + ' turns left');
-      if (u.ward > 0) lines.push('Ward ' + u.ward);
+      if (u.ward > 0) lines.push('Ward ' + show(u.ward));
       u.effects.forEach(function (e) { lines.push(effectLabel(e)); });
       v.status.setText(u.alive ? lines.join('\n') : '').setVisible(u.alive && lines.length > 0);
       v.hpFill.setFillStyle(u.hp / u.maxHp > 0.3 ? 0x44cc44 : 0xcc4444);
