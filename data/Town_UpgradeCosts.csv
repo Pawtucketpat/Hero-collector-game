@@ -1,0 +1,6 @@
+FromRarity,ToRarity,DustCost,GoldCost
+Common,Uncommon,50,500
+Uncommon,Rare,150,2000
+Rare,Epic,450,8000
+Epic,Legendary,1500,30000
+Legendary,Mythical,5000,120000

@@ -1,0 +1,29 @@
+Key,Value,Notes
+town_max_level,50,Town level cap
+xp_base,100,"XP for Mine, Farm and Lumber Mill level 1 to 2"
+xp_growth,1.12,Each level costs this many times the last
+xp_per_hero_hour,10,XP one hero earns per hour of work
+xp_crew_bonus,0.05,Each extra hero on a building adds this share of XP
+vault_stack_size,100,Most of one item that fits in a single vault slot (a stack)
+vault_band_length,10,Town levels per vault band
+offline_max_hours,168,Safety cap on away time counted in one collection
+mine_hero_cap_per_vein,5,Miners per vein
+lumber_woodworkers_per_area,3,Woodworkers per area
+lumber_hunters_per_area,2,Hunters per area
+farm_max_crops,5,Most crop slots
+farm_forage_hero_cap,5,Most foragers
+mine_next_tier_chance,0.01,Chance a vein roll gives the next tier ore
+dig_drop_rate_per_hero_hour,0.6,Items per digger per hour (digging is not production)
+dig_next_tier_weight,0.05,"Share of dig drops that are the next, locked tier"
+hunt_meat_chance,0.3,Chance a hunter roll is meat instead of hide
+encounter_chance_per_hunter_hour,0.02,Chance per hunter per hour of a random encounter
+encounter_bonus_rolls,3,Extra rare rolls when an encounter happens
+cloth_alt_chance,0.01,Chance a foraging or hunting roll gives cloth of the same tier
+alchemist_max_queue_hours,48,Queue ceiling
+transmute_input_qty,5,Items consumed per transmute
+transmute_bonus_per_hero,0.01,Each Alchemist hero adds this to each transmute bonus chance
+expedition_team_size,5,Heroes per expedition
+upgrade_final_rung_multiplier,3,Last rung before a piece ceiling costs this many times more
+crafted_max_rungs_above,3,Crafted pieces climb at most this many rungs above start
+battle_consumable_slots,3,Food and potions per node
+hire_must_be_sequential,TRUE,Enchanter and Blacksmith hires must be bought tier by tier

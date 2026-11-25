@@ -1,0 +1,9 @@
+Building,Track,Role,MaxHeroes,ItemsPerHeroHour,Notes
+Mine,Dig,Digger,0,0.6,0 means no cap; digging levels the Mine and drops a little ore
+Mine,Mine,Miner,5,4,Cap is per vein
+Lumber Mill,Clear,Clearer,0,0.6,0 means no cap; clearing levels the Lumber Mill
+Lumber Mill,Wood,Woodworker,3,4,Cap is per area
+Lumber Mill,Hunt,Hunter,2,4,Cap is per area; hide plus some meat
+Farm,Forage,Forager,5,2,Random foraged finds
+Farm,Crops,Farmer,9,3,Output splits across the crop slots the crew has unlocked
+Alchemist,Brew,Alchemist,10,0,Crew size unlocks track steps; output is the brew queue

@@ -1,0 +1,12 @@
+ExpeditionID,Name,Rarity,DurationMinutes,StartsUnlocked,Gold,Gems,GemChance,MaterialRolls,CrystalChance,GearChance,ShardChance,ShardMin,ShardMax,RequiredTraits,Notes
+EX001,Scout the Old Road,Common,10,TRUE,10,0,0,3,0.004,0.008,0.12,1,1,,Intro expedition
+EX002,Patrol the Farmlands,Common,30,TRUE,40,0,0,3,0.007,0.014,0.12,1,1,,
+EX003,Clear the Roadside Cave,Uncommon,60,TRUE,120,0,0,3,0.02,0.04,0.14,1,1,,
+EX004,Survey the Marshes,Uncommon,120,FALSE,270,0,0,4,0.028,0.057,0.14,1,1,,
+EX005,Raid the Bandit Camp,Rare,300,FALSE,1270,0,0,6,0.067,0.134,0.16,1,3,,
+EX006,Explore the Ruined Manor,Rare,480,FALSE,2190,0,0,8,0.085,0.17,0.16,1,4,,
+EX007,Delve the Sunken Crypt,Epic,960,FALSE,7760,3,0.25,12,0.16,0.32,0.18,1,8,,
+EX008,Cross the Shattered Peaks,Epic,1440,FALSE,12370,3,0.25,15,0.196,0.392,0.18,1,10,,
+EX009,The Arcane Library,Legendary,480,FALSE,6120,5,0.35,8,0.141,0.283,0.2,1,7,,
+EX010,The Dragon's Hoard,Legendary,1440,FALSE,21650,5,0.35,15,0.245,0.49,0.2,1,12,,
+EX011,Gate of the Void,Mythical,1440,FALSE,37110,8,0.5,15,0.294,0.5,0.22,1,15,,

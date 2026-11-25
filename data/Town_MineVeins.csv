@@ -1,0 +1,7 @@
+VeinID,Name,MineLevelRequired,OreMaterialID,StoneMaterialID,OreShare,NextTierChance,CrystalChance
+MV1,Copper Vein,1,MAT0002,MAT0001,0.45,0.01,0.002
+MV2,Tin Vein,10,MAT0003,MAT0001,0.45,0.01,0.0035
+MV3,Iron Vein,20,MAT0004,MAT0001,0.45,0.01,0.005
+MV4,Silver Vein,30,MAT0005,MAT0001,0.45,0.01,0.0065
+MV5,Mithril Vein,40,MAT0006,MAT0001,0.45,0.01,0.008
+MV6,Adamant Vein,50,MAT0007,MAT0001,0.45,0,0.01

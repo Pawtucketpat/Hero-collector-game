@@ -1,0 +1,204 @@
+ID,Gear Icon,Gear Sprite,Gear Name,Gear Slot,Rarity,Maximum Rarity,Skill ID,Gear Set ID,Level Required,Affinity Slot 1,Affinity Slot 2,Affinity Slot 3,Attribute 1,Attribute 1 Value,Attribute 2,Attribute 2 Value,Attribute 3,Attribute 3 Value,Vitality Bonus,Armor Value,Combat Stat 1,Combat Stat 1 Value,Combat Stat 2,Combat Stat 2 Value,Combat Stat 3,Combat Stat 3 Value,Gear Description
+G0001,,,Bulwark Maul,Main Hand,Rare,Legendary,SK0023,GS0001,1,Guardian,,,Vitality,4,Strength,2,,,0,0,Critical Chance,2%,,,,,Bulwark Plate main hand. Grants Shield Breaker.
+G0002,,,Bulwark Tower Shield,Off Hand,Rare,Legendary,SK0102,GS0001,1,Guardian,,,Vitality,2,Strength,2,,,2,6,,,,,,,Bulwark Plate off hand. Grants Stalwart Guard.
+G0003,,,Bulwark Greathelm,Head,Rare,Legendary,SK0025,GS0001,1,Guardian,,,Vitality,2,Strength,1,,,3,6,,,,,,,Bulwark Plate head. Grants Enraging Roar.
+G0004,,,Bulwark Breastplate,Chest,Rare,Legendary,SK0024,GS0001,1,Guardian,,,Vitality,3,Strength,2,,,5,12,,,,,,,Bulwark Plate chest. Grants Fortify.
+G0005,,,Bulwark Gauntlets,Gloves,Rare,Legendary,SK0103,GS0001,1,Guardian,,,Vitality,2,Strength,1,,,1,4,Accuracy,3,,,,,Bulwark Plate gloves. Grants Iron Constitution.
+G0006,,,Bulwark Greaves,Legs,Rare,Legendary,SK0026,GS0001,1,Guardian,,,Vitality,2,Strength,2,,,4,8,,,,,,,Bulwark Plate legs. Grants Provoke.
+G0007,,,Bulwark Sabatons,Feet,Rare,Legendary,SK0413,GS0001,1,Guardian,,,Vitality,1,Strength,2,Speed,1,2,4,,,,,,,Bulwark Plate feet. Grants Death Ward.
+G0008,,,Wildgrove Staff,Main Hand,Rare,Legendary,SK0016,GS0002,1,Druid,,,Wisdom,4,Vitality,2,,,0,0,Critical Chance,2%,,,,,Wildgrove Leathers main hand. Grants Natures Wrath.
+G0009,,,Wildgrove Totem,Off Hand,Rare,Legendary,SK0414,GS0002,1,Druid,,,Wisdom,2,Vitality,2,,,2,1,,,,,,,Wildgrove Leathers off hand. Grants Nature's Blessing.
+G0010,,,Wildgrove Circlet,Head,Rare,Legendary,SK0017,GS0002,1,Druid,,,Wisdom,2,Vitality,1,,,3,3,,,,,,,Wildgrove Leathers head. Grants Poison bloom.
+G0011,,,Wildgrove Vestments,Chest,Rare,Legendary,SK0018,GS0002,1,Druid,,,Wisdom,3,Vitality,2,,,5,6,,,,,,,Wildgrove Leathers chest. Grants Armor of Vines.
+G0012,,,Wildgrove Wraps,Gloves,Rare,Legendary,SK0415,GS0002,1,Druid,,,Wisdom,2,Vitality,1,,,1,2,Accuracy,3,,,,,Wildgrove Leathers gloves. Grants Verdant Touch.
+G0013,,,Wildgrove Leggings,Legs,Rare,Legendary,SK0019,GS0002,1,Druid,,,Wisdom,2,Vitality,2,,,4,4,,,,,,,Wildgrove Leathers legs. Grants Regrowth.
+G0014,,,Wildgrove Boots,Feet,Rare,Legendary,SK0416,GS0002,1,Druid,,,Wisdom,1,Vitality,2,Speed,1,2,2,,,,,,,Wildgrove Leathers feet. Grants Lasting Embrace.
+G0015,,,Sanctified Mace,Main Hand,Rare,Legendary,SK0012,GS0003,1,Cleric,,,Wisdom,4,Vitality,2,,,0,0,Critical Chance,2%,,,,,Sanctified Vestments main hand. Grants Radiant Strike.
+G0016,,,Sanctified Holy Symbol,Off Hand,Rare,Legendary,SK0417,GS0003,1,Cleric,,,Wisdom,2,Vitality,2,,,2,0,,,,,,,Sanctified Vestments off hand. Grants Holy Symbol.
+G0017,,,Sanctified Circlet,Head,Rare,Legendary,SK0013,GS0003,1,Cleric,,,Wisdom,2,Vitality,1,,,3,2,,,,,,,Sanctified Vestments head. Grants Divine aura.
+G0018,,,Sanctified Robe,Chest,Rare,Legendary,SK0418,GS0003,1,Cleric,,,Wisdom,3,Vitality,2,,,5,3,,,,,,,Sanctified Vestments chest. Grants Resurrection.
+G0019,,,Sanctified Gloves,Gloves,Rare,Legendary,SK0419,GS0003,1,Cleric,,,Wisdom,2,Vitality,1,,,1,1,Accuracy,3,,,,,Sanctified Vestments gloves. Grants Swift Prayer.
+G0020,,,Sanctified Leggings,Legs,Rare,Legendary,SK0014,GS0003,1,Cleric,,,Wisdom,2,Vitality,2,,,4,2,,,,,,,Sanctified Vestments legs. Grants Restore Vitality.
+G0021,,,Sanctified Sandals,Feet,Rare,Legendary,SK0420,GS0003,1,Cleric,,,Wisdom,1,Vitality,2,Speed,1,2,1,,,,,,,Sanctified Vestments feet. Grants Healing Reflection.
+G0022,,,Warbringer Axe,Main Hand,Rare,Legendary,SK0000,GS0004,1,Berserker,,,Strength,4,Vitality,2,,,0,0,Critical Chance,2%,,,,,Warbringer Gear main hand. Grants Lunge.
+G0023,,,Warbringer Hand Axe,Off Hand,Rare,Legendary,SK0421,GS0004,1,Berserker,,,Strength,2,Vitality,2,,,2,1,,,,,,,Warbringer Gear off hand. Grants Sweeping Strikes.
+G0024,,,Warbringer Horned Helm,Head,Rare,Legendary,SK0002,GS0004,1,Berserker,,,Strength,2,Vitality,1,,,3,3,,,,,,,Warbringer Gear head. Grants Primal Yell.
+G0025,,,Warbringer Harness,Chest,Rare,Legendary,SK0001,GS0004,1,Berserker,,,Strength,3,Vitality,2,,,5,6,,,,,,,Warbringer Gear chest. Grants Cleave.
+G0026,,,Warbringer Bracers,Gloves,Rare,Legendary,SK0422,GS0004,1,Berserker,,,Strength,2,Vitality,1,,,1,2,Accuracy,3,,,,,Warbringer Gear gloves. Grants Berserker's Fury.
+G0027,,,Warbringer Kilt,Legs,Rare,Legendary,SK0003,GS0004,1,Berserker,,,Strength,2,Vitality,2,,,4,4,,,,,,,Warbringer Gear legs. Grants Headbut.
+G0028,,,Warbringer Boots,Feet,Rare,Legendary,SK0423,GS0004,1,Berserker,,,Strength,1,Vitality,2,Speed,1,2,2,,,,,,,Warbringer Gear feet. Grants Last Stand.
+G0029,,,Nightblade Dagger,Main Hand,Rare,Legendary,SK0004,GS0005,1,Assassin,,,Dexterity,4,Strength,2,,,0,0,Critical Chance,2%,,,,,Nightblade Leathers main hand. Grants Kidney Shot.
+G0030,,,Nightblade Venom Dirk,Off Hand,Rare,Legendary,SK0424,GS0005,1,Assassin,,,Dexterity,2,Strength,2,,,2,1,,,,,,,Nightblade Leathers off hand. Grants Venom Coating.
+G0031,,,Nightblade Hood,Head,Rare,Legendary,SK0005,GS0005,1,Assassin,,,Dexterity,2,Strength,1,,,3,3,,,,,,,Nightblade Leathers head. Grants Vulerability.
+G0032,,,Nightblade Vest,Chest,Rare,Legendary,SK0006,GS0005,1,Assassin,,,Dexterity,3,Strength,2,,,5,6,,,,,,,Nightblade Leathers chest. Grants Execute.
+G0033,,,Nightblade Gloves,Gloves,Rare,Legendary,SK0425,GS0005,1,Assassin,,,Dexterity,2,Strength,1,,,1,2,Accuracy,3,,,,,Nightblade Leathers gloves. Grants Deadly Precision.
+G0034,,,Nightblade Trousers,Legs,Rare,Legendary,SK0007,GS0005,1,Assassin,,,Dexterity,2,Strength,2,,,4,4,,,,,,,Nightblade Leathers legs. Grants One With Shadows.
+G0035,,,Nightblade Boots,Feet,Rare,Legendary,SK0426,GS0005,1,Assassin,,,Dexterity,1,Strength,2,Speed,1,2,2,,,,,,,Nightblade Leathers feet. Grants Quick Reflexes.
+G0036,,,Ironfist Knuckles,Main Hand,Rare,Legendary,SK0027,GS0006,1,Monk,,,Strength,4,Dexterity,2,,,0,0,Critical Chance,2%,,,,,Ironfist Wraps main hand. Grants Quick Palms.
+G0037,,,Ironfist Prayer Beads,Off Hand,Rare,Legendary,SK0427,GS0006,1,Monk,,,Strength,2,Dexterity,2,,,2,0,,,,,,,Ironfist Wraps off hand. Grants Additional Hit.
+G0038,,,Ironfist Headband,Head,Rare,Legendary,SK0028,GS0006,1,Monk,,,Strength,2,Dexterity,1,,,3,2,,,,,,,Ironfist Wraps head. Grants Body and Soul.
+G0039,,,Ironfist Gi,Chest,Rare,Legendary,SK0029,GS0006,1,Monk,,,Strength,3,Dexterity,2,,,5,3,,,,,,,Ironfist Wraps chest. Grants Counter Stance.
+G0040,,,Ironfist Wraps,Gloves,Rare,Legendary,SK0428,GS0006,1,Monk,,,Strength,2,Dexterity,1,,,1,1,Accuracy,3,,,,,Ironfist Wraps gloves. Grants Infuriating Jab.
+G0041,,,Ironfist Leggings,Legs,Rare,Legendary,SK0030,GS0006,1,Monk,,,Strength,2,Dexterity,2,,,4,2,,,,,,,Ironfist Wraps legs. Grants Leg Sweep.
+G0042,,,Ironfist Sandals,Feet,Rare,Legendary,SK0429,GS0006,1,Monk,,,Strength,1,Dexterity,2,Speed,1,2,1,,,,,,,Ironfist Wraps feet. Grants Evasive Footwork.
+G0043,,,Gravebound Bone Wand,Main Hand,Rare,Legendary,SK0031,GS0007,1,Necromancer,,,Intelligence,4,Wisdom,2,,,0,0,Critical Chance,2%,,,,,Gravebound Regalia main hand. Grants Death Bolt.
+G0044,,,Gravebound Skull,Off Hand,Rare,Legendary,SK0430,GS0007,1,Necromancer,,,Intelligence,2,Wisdom,2,,,2,0,,,,,,,Gravebound Regalia off hand. Grants Necrotic Mastery.
+G0045,,,Gravebound Cowl,Head,Rare,Legendary,SK0032,GS0007,1,Necromancer,,,Intelligence,2,Wisdom,1,,,3,2,,,,,,,Gravebound Regalia head. Grants Summon Undead.
+G0046,,,Gravebound Burial Robe,Chest,Rare,Legendary,SK0033,GS0007,1,Necromancer,,,Intelligence,3,Wisdom,2,,,5,3,,,,,,,Gravebound Regalia chest. Grants Drain Life.
+G0047,,,Gravebound Grasp,Gloves,Rare,Legendary,SK0431,GS0007,1,Necromancer,,,Intelligence,2,Wisdom,1,,,1,1,Accuracy,3,,,,,Gravebound Regalia gloves. Grants Life Steal.
+G0048,,,Gravebound Leggings,Legs,Rare,Legendary,SK0034,GS0007,1,Necromancer,,,Intelligence,2,Wisdom,2,,,4,2,,,,,,,Gravebound Regalia legs. Grants Siphon Lifeforce.
+G0049,,,Gravebound Boots,Feet,Rare,Legendary,SK0432,GS0007,1,Necromancer,,,Intelligence,1,Wisdom,2,Speed,1,2,1,,,,,,,Gravebound Regalia feet. Grants Bone Shrapnel.
+G0050,,,Spiritcaller Staff,Main Hand,Rare,Legendary,SK0052,GS0008,1,Shaman,,,Wisdom,4,Intelligence,2,,,0,0,Critical Chance,2%,,,,,Spiritcaller Garb main hand. Grants Spirit Strike.
+G0051,,,Spiritcaller Totem,Off Hand,Rare,Legendary,SK0433,GS0008,1,Shaman,,,Wisdom,2,Intelligence,2,,,2,1,,,,,,,Spiritcaller Garb off hand. Grants Ward Mastery.
+G0052,,,Spiritcaller Mask,Head,Rare,Legendary,SK0053,GS0008,1,Shaman,,,Wisdom,2,Intelligence,1,,,3,3,,,,,,,Spiritcaller Garb head. Grants Offensive Blessing.
+G0053,,,Spiritcaller Vest,Chest,Rare,Legendary,SK0054,GS0008,1,Shaman,,,Wisdom,3,Intelligence,2,,,5,6,,,,,,,Spiritcaller Garb chest. Grants Greater Ward.
+G0054,,,Spiritcaller Wraps,Gloves,Rare,Legendary,SK0434,GS0008,1,Shaman,,,Wisdom,2,Intelligence,1,,,1,2,Accuracy,3,,,,,Spiritcaller Garb gloves. Grants Critical Ward.
+G0055,,,Spiritcaller Leggings,Legs,Rare,Legendary,SK0055,GS0008,1,Shaman,,,Wisdom,2,Intelligence,2,,,4,4,,,,,,,Spiritcaller Garb legs. Grants Mass Revival.
+G0056,,,Spiritcaller Moccasins,Feet,Rare,Legendary,SK0435,GS0008,1,Shaman,,,Wisdom,1,Intelligence,2,Speed,1,2,2,,,,,,,Spiritcaller Garb feet. Grants Shared Fortune.
+G0057,,,Prismatic Staff,Main Hand,Rare,Legendary,SK0020,GS0009,1,Elementalist,,,Intelligence,4,Wisdom,2,,,0,0,Critical Chance,2%,,,,,Prismatic Robes main hand. Grants Elemental Blast.
+G0058,,,Prismatic Orb,Off Hand,Rare,Legendary,SK0436,GS0009,1,Elementalist,,,Intelligence,2,Wisdom,2,,,2,0,,,,,,,Prismatic Robes off hand. Grants Elemental Focus.
+G0059,,,Prismatic Circlet,Head,Rare,Legendary,SK0021,GS0009,1,Elementalist,,,Intelligence,2,Wisdom,1,,,3,2,,,,,,,Prismatic Robes head. Grants Elemental Convergence.
+G0060,,,Prismatic Robe,Chest,Rare,Legendary,SK0048,GS0009,1,Elementalist,,,Intelligence,3,Wisdom,2,,,5,3,,,,,,,Prismatic Robes chest. Grants Elemental Weakness.
+G0061,,,Prismatic Gloves,Gloves,Rare,Legendary,SK0437,GS0009,1,Elementalist,,,Intelligence,2,Wisdom,1,,,1,1,Accuracy,3,,,,,Prismatic Robes gloves. Grants Elemental Mastery.
+G0062,,,Prismatic Leggings,Legs,Rare,Legendary,SK0022,GS0009,1,Elementalist,,,Intelligence,2,Wisdom,2,,,4,2,,,,,,,Prismatic Robes legs. Grants Elemental Aegis.
+G0063,,,Prismatic Slippers,Feet,Rare,Legendary,SK0438,GS0009,1,Elementalist,,,Intelligence,1,Wisdom,2,Speed,1,2,1,,,,,,,Prismatic Robes feet. Grants Elemental Precision.
+G0064,,,Hexbound Wand,Main Hand,Rare,Legendary,SK0060,GS0010,1,Warlock,,,Intelligence,4,Wisdom,2,,,0,0,Critical Chance,2%,,,,,Hexbound Vestments main hand. Grants Dark Curse.
+G0065,,,Hexbound Grimoire,Off Hand,Rare,Legendary,SK0439,GS0010,1,Warlock,,,Intelligence,2,Wisdom,2,,,2,0,,,,,,,Hexbound Vestments off hand. Grants Curse Potency.
+G0066,,,Hexbound Hood,Head,Rare,Legendary,SK0061,GS0010,1,Warlock,,,Intelligence,2,Wisdom,1,,,3,2,,,,,,,Hexbound Vestments head. Grants Siphon Soul.
+G0067,,,Hexbound Robe,Chest,Rare,Legendary,SK0062,GS0010,1,Warlock,,,Intelligence,3,Wisdom,2,,,5,3,,,,,,,Hexbound Vestments chest. Grants Demonic Pact.
+G0068,,,Hexbound Gloves,Gloves,Rare,Legendary,SK0440,GS0010,1,Warlock,,,Intelligence,2,Wisdom,1,,,1,1,Accuracy,3,,,,,Hexbound Vestments gloves. Grants Dark Affinity.
+G0069,,,Hexbound Leggings,Legs,Rare,Legendary,SK0063,GS0010,1,Warlock,,,Intelligence,2,Wisdom,2,,,4,2,,,,,,,Hexbound Vestments legs. Grants Curse of Weakness.
+G0070,,,Hexbound Boots,Feet,Rare,Legendary,SK0441,GS0010,1,Warlock,,,Intelligence,1,Wisdom,2,Speed,1,2,1,,,,,,,Hexbound Vestments feet. Grants Dark Communion.
+G0071,,,Troubadour Rapier,Main Hand,Rare,Legendary,SK0008,GS0011,1,Bard,,,Intelligence,4,Dexterity,2,,,0,0,Critical Chance,2%,,,,,Troubadour Finery main hand. Grants Harmonious Strike.
+G0072,,,Troubadour Lute,Off Hand,Rare,Legendary,SK0442,GS0011,1,Bard,,,Intelligence,2,Dexterity,2,,,2,0,,,,,,,Troubadour Finery off hand. Grants Lingering Melody.
+G0073,,,Troubadour Feathered Cap,Head,Rare,Legendary,SK0009,GS0011,1,Bard,,,Intelligence,2,Dexterity,1,,,3,2,,,,,,,Troubadour Finery head. Grants Discordant Note.
+G0074,,,Troubadour Doublet,Chest,Rare,Legendary,SK0010,GS0011,1,Bard,,,Intelligence,3,Dexterity,2,,,5,3,,,,,,,Troubadour Finery chest. Grants Refreshing melody.
+G0075,,,Troubadour Gloves,Gloves,Rare,Legendary,SK0443,GS0011,1,Bard,,,Intelligence,2,Dexterity,1,,,1,1,Accuracy,3,,,,,Troubadour Finery gloves. Grants Crowd Work.
+G0076,,,Troubadour Breeches,Legs,Rare,Legendary,SK0011,GS0011,1,Bard,,,Intelligence,2,Dexterity,2,,,4,2,,,,,,,Troubadour Finery legs. Grants Crippling Refrain.
+G0077,,,Troubadour Boots,Feet,Rare,Legendary,SK0444,GS0011,1,Bard,,,Intelligence,1,Dexterity,2,Speed,1,2,1,,,,,,,Troubadour Finery feet. Grants In Rhythm.
+G0078,,,Dawnforged Longsword,Main Hand,Rare,Legendary,SK0035,GS0012,1,Paladin,,,Strength,4,Wisdom,2,,,0,0,Critical Chance,2%,,,,,Dawnforged Plate main hand. Grants Divine Smite.
+G0079,,,Dawnforged Shield,Off Hand,Rare,Legendary,SK0445,GS0012,1,Paladin,,,Strength,2,Wisdom,2,,,2,6,,,,,,,Dawnforged Plate off hand. Grants Favor of the Gods.
+G0080,,,Dawnforged Helm,Head,Rare,Legendary,SK0037,GS0012,1,Paladin,,,Strength,2,Wisdom,1,,,3,6,,,,,,,Dawnforged Plate head. Grants Radiant Challenge.
+G0081,,,Dawnforged Cuirass,Chest,Rare,Legendary,SK0036,GS0012,1,Paladin,,,Strength,3,Wisdom,2,,,5,12,,,,,,,Dawnforged Plate chest. Grants Lay on Hands.
+G0082,,,Dawnforged Gauntlets,Gloves,Rare,Legendary,SK0446,GS0012,1,Paladin,,,Strength,2,Wisdom,1,,,1,4,Accuracy,3,,,,,Dawnforged Plate gloves. Grants Divine Strength.
+G0083,,,Dawnforged Greaves,Legs,Rare,Legendary,SK0038,GS0012,1,Paladin,,,Strength,2,Wisdom,2,,,4,8,,,,,,,Dawnforged Plate legs. Grants Aura of Vitality.
+G0084,,,Dawnforged Sabatons,Feet,Rare,Legendary,SK0447,GS0012,1,Paladin,,,Strength,1,Wisdom,2,Speed,1,2,4,,,,,,,Dawnforged Plate feet. Grants Divine Grace.
+G0085,,,Wildstalker Longbow,Main Hand,Rare,Legendary,SK0044,GS0013,1,Ranger,,,Dexterity,4,Strength,2,,,0,0,Critical Chance,2%,,,,,Wildstalker Leathers main hand. Grants Release Arrow.
+G0086,,,Wildstalker Quiver,Off Hand,Rare,Legendary,SK0139,GS0013,1,Ranger,,,Dexterity,2,Strength,2,,,2,1,,,,,,,Wildstalker Leathers off hand. Grants Predator's Instinct.
+G0087,,,Wildstalker Hood,Head,Rare,Legendary,SK0049,GS0013,1,Ranger,,,Dexterity,2,Strength,1,,,3,3,,,,,,,Wildstalker Leathers head. Grants Hunter's Mark.
+G0088,,,Wildstalker Jerkin,Chest,Rare,Legendary,SK0050,GS0013,1,Ranger,,,Dexterity,3,Strength,2,,,5,6,,,,,,,Wildstalker Leathers chest. Grants Multi-Shot.
+G0089,,,Wildstalker Gloves,Gloves,Rare,Legendary,SK0140,GS0013,1,Ranger,,,Dexterity,2,Strength,1,,,1,2,Accuracy,3,,,,,Wildstalker Leathers gloves. Grants Keen Aim.
+G0090,,,Wildstalker Leggings,Legs,Rare,Legendary,SK0051,GS0013,1,Ranger,,,Dexterity,2,Strength,2,,,4,4,,,,,,,Wildstalker Leathers legs. Grants Disorienting Shot.
+G0091,,,Wildstalker Boots,Feet,Rare,Legendary,SK0141,GS0013,1,Ranger,,,Dexterity,1,Strength,2,Speed,1,2,2,,,,,,,Wildstalker Leathers feet. Grants Thorns.
+G0092,,,Tempest Rod,Main Hand,Rare,Legendary,SK0056,GS0014,1,Stormcaller,,,Intelligence,4,Vitality,2,,,0,0,Critical Chance,2%,,,,,Tempest Regalia main hand. Grants Lightning Bolt.
+G0093,,,Tempest Static Orb,Off Hand,Rare,Legendary,SK0142,GS0014,1,Stormcaller,,,Intelligence,2,Vitality,2,,,2,0,,,,,,,Tempest Regalia off hand. Grants Static Charge.
+G0094,,,Tempest Crown,Head,Rare,Legendary,SK0057,GS0014,1,Stormcaller,,,Intelligence,2,Vitality,1,,,3,2,,,,,,,Tempest Regalia head. Grants Chain Lightning.
+G0095,,,Tempest Robe,Chest,Rare,Legendary,SK0058,GS0014,1,Stormcaller,,,Intelligence,3,Vitality,2,,,5,3,,,,,,,Tempest Regalia chest. Grants Thunderclash.
+G0096,,,Tempest Gloves,Gloves,Rare,Legendary,SK0143,GS0014,1,Stormcaller,,,Intelligence,2,Vitality,1,,,1,1,Accuracy,3,,,,,Tempest Regalia gloves. Grants Static Disruption.
+G0097,,,Tempest Leggings,Legs,Rare,Legendary,SK0059,GS0014,1,Stormcaller,,,Intelligence,2,Vitality,2,,,4,2,,,,,,,Tempest Regalia legs. Grants Storm Shield.
+G0098,,,Tempest Boots,Feet,Rare,Legendary,SK0144,GS0014,1,Stormcaller,,,Intelligence,1,Vitality,2,Speed,1,2,1,,,,,,,Tempest Regalia feet. Grants Lightning Conduction.
+G0099,,,Ironbound Greatsword,Main Hand,Rare,Legendary,,GS0015,1,,,,Strength,4,Dexterity,2,,,0,0,Critical Chance,2%,,,,,Ironbound Battlegear main hand. Set boosts Physical damage.
+G0100,,,Ironbound Buckler,Off Hand,Rare,Legendary,,GS0015,1,,,,Strength,2,Dexterity,2,,,2,1,,,,,,,Ironbound Battlegear off hand. Set boosts Physical damage.
+G0101,,,Ironbound Helm,Head,Rare,Legendary,,GS0015,1,,,,Strength,2,Dexterity,1,,,3,3,,,,,,,Ironbound Battlegear head. Set boosts Physical damage.
+G0102,,,Ironbound Hauberk,Chest,Rare,Legendary,,GS0015,1,,,,Strength,3,Dexterity,2,,,5,6,,,,,,,Ironbound Battlegear chest. Set boosts Physical damage.
+G0103,,,Ironbound Gauntlets,Gloves,Rare,Legendary,,GS0015,1,,,,Strength,2,Dexterity,1,,,1,2,Accuracy,3,,,,,Ironbound Battlegear gloves. Set boosts Physical damage.
+G0104,,,Ironbound Greaves,Legs,Rare,Legendary,,GS0015,1,,,,Strength,2,Dexterity,2,,,4,4,,,,,,,Ironbound Battlegear legs. Set boosts Physical damage.
+G0105,,,Ironbound Boots,Feet,Rare,Legendary,,GS0015,1,,,,Strength,1,Dexterity,2,Speed,1,2,2,,,,,,,Ironbound Battlegear feet. Set boosts Physical damage.
+G0106,,,Elementbound Scepter,Main Hand,Rare,Legendary,,GS0016,1,,,,Intelligence,4,Wisdom,2,,,0,0,Critical Chance,2%,,,,,Elementbound Raiment main hand. Set boosts Elemental damage.
+G0107,,,Elementbound Prism,Off Hand,Rare,Legendary,,GS0016,1,,,,Intelligence,2,Wisdom,2,,,2,0,,,,,,,Elementbound Raiment off hand. Set boosts Elemental damage.
+G0108,,,Elementbound Circlet,Head,Rare,Legendary,,GS0016,1,,,,Intelligence,2,Wisdom,1,,,3,2,,,,,,,Elementbound Raiment head. Set boosts Elemental damage.
+G0109,,,Elementbound Robe,Chest,Rare,Legendary,,GS0016,1,,,,Intelligence,3,Wisdom,2,,,5,3,,,,,,,Elementbound Raiment chest. Set boosts Elemental damage.
+G0110,,,Elementbound Gloves,Gloves,Rare,Legendary,,GS0016,1,,,,Intelligence,2,Wisdom,1,,,1,1,Accuracy,3,,,,,Elementbound Raiment gloves. Set boosts Elemental damage.
+G0111,,,Elementbound Leggings,Legs,Rare,Legendary,,GS0016,1,,,,Intelligence,2,Wisdom,2,,,4,2,,,,,,,Elementbound Raiment legs. Set boosts Elemental damage.
+G0112,,,Elementbound Slippers,Feet,Rare,Legendary,,GS0016,1,,,,Intelligence,1,Wisdom,2,Speed,1,2,1,,,,,,,Elementbound Raiment feet. Set boosts Elemental damage.
+G0113,,,Blightwoven Stiletto,Main Hand,Rare,Legendary,,GS0017,1,,,,Dexterity,4,Intelligence,2,,,0,0,Critical Chance,2%,,,,,Blightwoven Leathers main hand. Set boosts Noxious damage.
+G0114,,,Blightwoven Phial,Off Hand,Rare,Legendary,,GS0017,1,,,,Dexterity,2,Intelligence,2,,,2,1,,,,,,,Blightwoven Leathers off hand. Set boosts Noxious damage.
+G0115,,,Blightwoven Hood,Head,Rare,Legendary,,GS0017,1,,,,Dexterity,2,Intelligence,1,,,3,3,,,,,,,Blightwoven Leathers head. Set boosts Noxious damage.
+G0116,,,Blightwoven Jerkin,Chest,Rare,Legendary,,GS0017,1,,,,Dexterity,3,Intelligence,2,,,5,6,,,,,,,Blightwoven Leathers chest. Set boosts Noxious damage.
+G0117,,,Blightwoven Gloves,Gloves,Rare,Legendary,,GS0017,1,,,,Dexterity,2,Intelligence,1,,,1,2,Accuracy,3,,,,,Blightwoven Leathers gloves. Set boosts Noxious damage.
+G0118,,,Blightwoven Leggings,Legs,Rare,Legendary,,GS0017,1,,,,Dexterity,2,Intelligence,2,,,4,4,,,,,,,Blightwoven Leathers legs. Set boosts Noxious damage.
+G0119,,,Blightwoven Boots,Feet,Rare,Legendary,,GS0017,1,,,,Dexterity,1,Intelligence,2,Speed,1,2,2,,,,,,,Blightwoven Leathers feet. Set boosts Noxious damage.
+G0120,,,Penumbral Scepter,Main Hand,Rare,Legendary,,GS0018,1,,,,Wisdom,4,Intelligence,2,,,0,0,Critical Chance,2%,,,,,Penumbral Vestments main hand. Set boosts Divine damage and healing.
+G0121,,,Penumbral Chalice,Off Hand,Rare,Legendary,,GS0018,1,,,,Wisdom,2,Intelligence,2,,,2,0,,,,,,,Penumbral Vestments off hand. Set boosts Divine damage and healing.
+G0122,,,Penumbral Veil,Head,Rare,Legendary,,GS0018,1,,,,Wisdom,2,Intelligence,1,,,3,2,,,,,,,Penumbral Vestments head. Set boosts Divine damage and healing.
+G0123,,,Penumbral Robe,Chest,Rare,Legendary,,GS0018,1,,,,Wisdom,3,Intelligence,2,,,5,3,,,,,,,Penumbral Vestments chest. Set boosts Divine damage and healing.
+G0124,,,Penumbral Gloves,Gloves,Rare,Legendary,,GS0018,1,,,,Wisdom,2,Intelligence,1,,,1,1,Accuracy,3,,,,,Penumbral Vestments gloves. Set boosts Divine damage and healing.
+G0125,,,Penumbral Leggings,Legs,Rare,Legendary,,GS0018,1,,,,Wisdom,2,Intelligence,2,,,4,2,,,,,,,Penumbral Vestments legs. Set boosts Divine damage and healing.
+G0126,,,Penumbral Sandals,Feet,Rare,Legendary,,GS0018,1,,,,Wisdom,1,Intelligence,2,Speed,1,2,1,,,,,,,Penumbral Vestments feet. Set boosts Divine damage and healing.
+G0127,,,Deadeye Shortbow,Main Hand,Rare,Legendary,,GS0019,1,,,,Dexterity,4,Strength,2,,,0,0,Critical Chance,3%,,,,,Deadeye Leathers main hand. Set is built for critical hits.
+G0128,,,Deadeye Quickdraw Dagger,Off Hand,Rare,Legendary,,GS0019,1,,,,Dexterity,2,Strength,2,,,2,1,,,,,,,Deadeye Leathers off hand. Set is built for critical hits.
+G0129,,,Deadeye Mask,Head,Rare,Legendary,,GS0019,1,,,,Dexterity,2,Strength,1,,,3,3,Accuracy,3,,,,,Deadeye Leathers head. Set is built for critical hits.
+G0130,,,Deadeye Coat,Chest,Rare,Legendary,,GS0019,1,,,,Dexterity,3,Strength,2,,,5,6,,,,,,,Deadeye Leathers chest. Set is built for critical hits.
+G0131,,,Deadeye Gloves,Gloves,Rare,Legendary,,GS0019,1,,,,Dexterity,2,Strength,1,,,1,2,Critical Chance,2%,,,,,Deadeye Leathers gloves. Set is built for critical hits.
+G0132,,,Deadeye Trousers,Legs,Rare,Legendary,,GS0019,1,,,,Dexterity,2,Strength,2,,,4,4,,,,,,,Deadeye Leathers legs. Set is built for critical hits.
+G0133,,,Deadeye Boots,Feet,Rare,Legendary,,GS0019,1,,,,Dexterity,1,Strength,2,Speed,1,2,2,Critical Chance,1%,,,,,Deadeye Leathers feet. Set is built for critical hits.
+G0134,,,Warlord's Cleaver,Main Hand,Rare,Legendary,,GS0020,1,,,,Strength,5,Dexterity,2,,,0,0,Critical Chance,2%,,,,,Warlord's Panoply main hand. Set boosts all damage dealt.
+G0135,,,Warlord's Sidearm,Off Hand,Rare,Legendary,,GS0020,1,,,,Strength,2,Dexterity,2,,,2,2,,,,,,,Warlord's Panoply off hand. Set boosts all damage dealt.
+G0136,,,Warlord's Crown,Head,Rare,Legendary,,GS0020,1,,,,Strength,2,Dexterity,1,,,3,4,,,,,,,Warlord's Panoply head. Set boosts all damage dealt.
+G0137,,,Warlord's Cuirass,Chest,Rare,Legendary,,GS0020,1,,,,Strength,4,Dexterity,2,,,5,8,,,,,,,Warlord's Panoply chest. Set boosts all damage dealt.
+G0138,,,Warlord's Gauntlets,Gloves,Rare,Legendary,,GS0020,1,,,,Strength,2,Dexterity,1,,,1,3,Accuracy,3,,,,,Warlord's Panoply gloves. Set boosts all damage dealt.
+G0139,,,Warlord's Greaves,Legs,Rare,Legendary,,GS0020,1,,,,Strength,2,Dexterity,2,,,4,5,,,,,,,Warlord's Panoply legs. Set boosts all damage dealt.
+G0140,,,Warlord's Sabatons,Feet,Rare,Legendary,,GS0020,1,,,,Strength,1,Dexterity,2,Speed,1,2,3,,,,,,,Warlord's Panoply feet. Set boosts all damage dealt.
+G0141,,,Ironwall Warhammer,Main Hand,Rare,Legendary,,GS0021,1,,,,Vitality,4,Strength,2,,,0,0,Critical Chance,2%,,,,,Ironwall Plate main hand. Set is built to absorb hits.
+G0142,,,Ironwall Kite Shield,Off Hand,Rare,Legendary,,GS0021,1,,,,Vitality,2,Strength,2,,,3,9,,,,,,,Ironwall Plate off hand. Set is built to absorb hits.
+G0143,,,Ironwall Greathelm,Head,Rare,Legendary,,GS0021,1,,,,Vitality,2,Strength,1,,,4,9,Critical Resistance,2%,,,,,Ironwall Plate head. Set is built to absorb hits.
+G0144,,,Ironwall Breastplate,Chest,Rare,Legendary,,GS0021,1,,,,Vitality,3,Strength,2,,,6,18,Critical Resistance,3%,,,,,Ironwall Plate chest. Set is built to absorb hits.
+G0145,,,Ironwall Gauntlets,Gloves,Rare,Legendary,,GS0021,1,,,,Vitality,2,Strength,1,,,2,6,Accuracy,3,,,,,Ironwall Plate gloves. Set is built to absorb hits.
+G0146,,,Ironwall Greaves,Legs,Rare,Legendary,,GS0021,1,,,,Vitality,2,Strength,2,,,5,12,,,,,,,Ironwall Plate legs. Set is built to absorb hits.
+G0147,,,Ironwall Sabatons,Feet,Rare,Legendary,,GS0021,1,,,,Vitality,1,Strength,2,Speed,1,3,6,,,,,,,Ironwall Plate feet. Set is built to absorb hits.
+G0148,,,Evergreen Staff,Main Hand,Rare,Legendary,,GS0022,1,,,,Vitality,4,Wisdom,2,,,0,0,Critical Chance,2%,,,,,Evergreen Mantle main hand. Set raises health and healing received.
+G0149,,,Evergreen Charm,Off Hand,Rare,Legendary,,GS0022,1,,,,Vitality,2,Wisdom,2,,,4,1,,,,,,,Evergreen Mantle off hand. Set raises health and healing received.
+G0150,,,Evergreen Wreath,Head,Rare,Legendary,,GS0022,1,,,,Vitality,2,Wisdom,1,,,5,3,,,,,,,Evergreen Mantle head. Set raises health and healing received.
+G0151,,,Evergreen Vestments,Chest,Rare,Legendary,,GS0022,1,,,,Vitality,3,Wisdom,2,,,7,6,Healing Received,3%,,,,,Evergreen Mantle chest. Set raises health and healing received.
+G0152,,,Evergreen Mitts,Gloves,Rare,Legendary,,GS0022,1,,,,Vitality,2,Wisdom,1,,,3,2,Accuracy,3,,,,,Evergreen Mantle gloves. Set raises health and healing received.
+G0153,,,Evergreen Leggings,Legs,Rare,Legendary,,GS0022,1,,,,Vitality,2,Wisdom,2,,,6,4,Healing Received,2%,,,,,Evergreen Mantle legs. Set raises health and healing received.
+G0154,,,Evergreen Boots,Feet,Rare,Legendary,,GS0022,1,,,,Vitality,1,Wisdom,2,Speed,1,4,2,,,,,,,Evergreen Mantle feet. Set raises health and healing received.
+G0155,,,Worldsoul Branch,Main Hand,Rare,Legendary,,GS0023,1,,,,Wisdom,4,Dexterity,2,,,0,0,Critical Chance,2%,,,,,Worldsoul Garb main hand. Set boosts Nature damage.
+G0156,,,Worldsoul Seedstone,Off Hand,Rare,Legendary,,GS0023,1,,,,Wisdom,2,Dexterity,2,,,2,1,,,,,,,Worldsoul Garb off hand. Set boosts Nature damage.
+G0157,,,Worldsoul Crown,Head,Rare,Legendary,,GS0023,1,,,,Wisdom,2,Dexterity,1,,,3,3,,,,,,,Worldsoul Garb head. Set boosts Nature damage.
+G0158,,,Worldsoul Vest,Chest,Rare,Legendary,,GS0023,1,,,,Wisdom,3,Dexterity,2,,,5,6,,,,,,,Worldsoul Garb chest. Set boosts Nature damage.
+G0159,,,Worldsoul Wraps,Gloves,Rare,Legendary,,GS0023,1,,,,Wisdom,2,Dexterity,1,,,1,2,Accuracy,3,,,,,Worldsoul Garb gloves. Set boosts Nature damage.
+G0160,,,Worldsoul Leggings,Legs,Rare,Legendary,,GS0023,1,,,,Wisdom,2,Dexterity,2,,,4,4,,,,,,,Worldsoul Garb legs. Set boosts Nature damage.
+G0161,,,Worldsoul Boots,Feet,Rare,Legendary,,GS0023,1,,,,Wisdom,1,Dexterity,2,Speed,1,2,2,,,,,,,Worldsoul Garb feet. Set boosts Nature damage.
+G0162,,,Aetherbound Rod,Main Hand,Rare,Legendary,,GS0024,1,,,,Intelligence,4,Dexterity,2,,,0,0,Critical Chance,2%,,,,,Aetherbound Raiment main hand. Set boosts Arcane damage.
+G0163,,,Aetherbound Focus,Off Hand,Rare,Legendary,,GS0024,1,,,,Intelligence,2,Dexterity,2,,,2,0,,,,,,,Aetherbound Raiment off hand. Set boosts Arcane damage.
+G0164,,,Aetherbound Circlet,Head,Rare,Legendary,,GS0024,1,,,,Intelligence,2,Dexterity,1,,,3,2,,,,,,,Aetherbound Raiment head. Set boosts Arcane damage.
+G0165,,,Aetherbound Robe,Chest,Rare,Legendary,,GS0024,1,,,,Intelligence,3,Dexterity,2,,,5,3,,,,,,,Aetherbound Raiment chest. Set boosts Arcane damage.
+G0166,,,Aetherbound Gloves,Gloves,Rare,Legendary,,GS0024,1,,,,Intelligence,2,Dexterity,1,,,1,1,Accuracy,3,,,,,Aetherbound Raiment gloves. Set boosts Arcane damage.
+G0167,,,Aetherbound Leggings,Legs,Rare,Legendary,,GS0024,1,,,,Intelligence,2,Dexterity,2,,,4,2,,,,,,,Aetherbound Raiment legs. Set boosts Arcane damage.
+G0168,,,Aetherbound Slippers,Feet,Rare,Legendary,,GS0024,1,,,,Intelligence,1,Dexterity,2,Speed,1,2,1,,,,,,,Aetherbound Raiment feet. Set boosts Arcane damage.
+G0169,,,Lifebinder Rod,Main Hand,Rare,Legendary,,GS0025,1,,,,Wisdom,4,Intelligence,2,,,0,0,Critical Chance,2%,,,,,Lifebinder Vestments main hand. Set boosts healing done.
+G0170,,,Lifebinder Tome,Off Hand,Rare,Legendary,,GS0025,1,,,,Wisdom,2,Intelligence,2,,,2,0,,,,,,,Lifebinder Vestments off hand. Set boosts healing done.
+G0171,,,Lifebinder Circlet,Head,Rare,Legendary,,GS0025,1,,,,Wisdom,2,Intelligence,1,,,3,2,,,,,,,Lifebinder Vestments head. Set boosts healing done.
+G0172,,,Lifebinder Robe,Chest,Rare,Legendary,,GS0025,1,,,,Wisdom,3,Intelligence,2,,,5,3,Healing Done,3%,,,,,Lifebinder Vestments chest. Set boosts healing done.
+G0173,,,Lifebinder Gloves,Gloves,Rare,Legendary,,GS0025,1,,,,Wisdom,2,Intelligence,1,,,1,1,Healing Done,2%,,,,,Lifebinder Vestments gloves. Set boosts healing done.
+G0174,,,Lifebinder Leggings,Legs,Rare,Legendary,,GS0025,1,,,,Wisdom,2,Intelligence,2,,,4,2,,,,,,,Lifebinder Vestments legs. Set boosts healing done.
+G0175,,,Lifebinder Slippers,Feet,Rare,Legendary,,GS0025,1,,,,Wisdom,1,Intelligence,2,Speed,1,2,1,,,,,,,Lifebinder Vestments feet. Set boosts healing done.
+G0176,,,Lifebinder Staff,Main Hand,Rare,Legendary,,GS0026,1,,,,Wisdom,4,Dexterity,2,,,0,0,Critical Chance,2%,,,,,Lifebinder Leathers main hand. Set boosts healing done.
+G0177,,,Lifebinder Satchel,Off Hand,Rare,Legendary,,GS0026,1,,,,Wisdom,2,Dexterity,2,,,2,1,,,,,,,Lifebinder Leathers off hand. Set boosts healing done.
+G0178,,,Lifebinder Hood,Head,Rare,Legendary,,GS0026,1,,,,Wisdom,2,Dexterity,1,,,3,3,,,,,,,Lifebinder Leathers head. Set boosts healing done.
+G0179,,,Lifebinder Jerkin,Chest,Rare,Legendary,,GS0026,1,,,,Wisdom,3,Dexterity,2,,,5,6,Healing Done,3%,,,,,Lifebinder Leathers chest. Set boosts healing done.
+G0180,,,Lifebinder Wraps,Gloves,Rare,Legendary,,GS0026,1,,,,Wisdom,2,Dexterity,1,,,1,2,Healing Done,2%,,,,,Lifebinder Leathers gloves. Set boosts healing done.
+G0181,,,Lifebinder Trousers,Legs,Rare,Legendary,,GS0026,1,,,,Wisdom,2,Dexterity,2,,,4,4,,,,,,,Lifebinder Leathers legs. Set boosts healing done.
+G0182,,,Lifebinder Boots,Feet,Rare,Legendary,,GS0026,1,,,,Wisdom,1,Dexterity,2,Speed,1,2,2,,,,,,,Lifebinder Leathers feet. Set boosts healing done.
+G0183,,,Lifebinder Mace,Main Hand,Rare,Legendary,,GS0027,1,,,,Wisdom,4,Strength,2,,,0,0,Critical Chance,2%,,,,,Lifebinder Mail main hand. Set boosts healing done.
+G0184,,,Lifebinder Buckler,Off Hand,Rare,Legendary,,GS0027,1,,,,Wisdom,2,Strength,2,,,2,3,,,,,,,Lifebinder Mail off hand. Set boosts healing done.
+G0185,,,Lifebinder Coif,Head,Rare,Legendary,,GS0027,1,,,,Wisdom,2,Strength,1,,,3,4,,,,,,,Lifebinder Mail head. Set boosts healing done.
+G0186,,,Lifebinder Hauberk,Chest,Rare,Legendary,,GS0027,1,,,,Wisdom,3,Strength,2,,,5,8,Healing Done,3%,,,,,Lifebinder Mail chest. Set boosts healing done.
+G0187,,,Lifebinder Mitts,Gloves,Rare,Legendary,,GS0027,1,,,,Wisdom,2,Strength,1,,,1,3,Healing Done,2%,,,,,Lifebinder Mail gloves. Set boosts healing done.
+G0188,,,Lifebinder Chausses,Legs,Rare,Legendary,,GS0027,1,,,,Wisdom,2,Strength,2,,,4,5,,,,,,,Lifebinder Mail legs. Set boosts healing done.
+G0189,,,Lifebinder Treads,Feet,Rare,Legendary,,GS0027,1,,,,Wisdom,1,Strength,2,Speed,1,2,3,,,,,,,Lifebinder Mail feet. Set boosts healing done.
+G0190,,,Lifebinder Warhammer,Main Hand,Rare,Legendary,,GS0028,1,,,,Wisdom,4,Vitality,2,,,0,0,Critical Chance,2%,,,,,Lifebinder Plate main hand. Set boosts healing done.
+G0191,,,Lifebinder Aegis,Off Hand,Rare,Legendary,,GS0028,1,,,,Wisdom,2,Vitality,2,,,3,6,,,,,,,Lifebinder Plate off hand. Set boosts healing done.
+G0192,,,Lifebinder Helm,Head,Rare,Legendary,,GS0028,1,,,,Wisdom,2,Vitality,1,,,4,6,,,,,,,Lifebinder Plate head. Set boosts healing done.
+G0193,,,Lifebinder Cuirass,Chest,Rare,Legendary,,GS0028,1,,,,Wisdom,3,Vitality,2,,,6,12,Healing Done,3%,,,,,Lifebinder Plate chest. Set boosts healing done.
+G0194,,,Lifebinder Gauntlets,Gloves,Rare,Legendary,,GS0028,1,,,,Wisdom,2,Vitality,1,,,2,4,Healing Done,2%,,,,,Lifebinder Plate gloves. Set boosts healing done.
+G0195,,,Lifebinder Greaves,Legs,Rare,Legendary,,GS0028,1,,,,Wisdom,2,Vitality,2,,,5,8,,,,,,,Lifebinder Plate legs. Set boosts healing done.
+G0196,,,Lifebinder Sabatons,Feet,Rare,Legendary,,GS0028,1,,,,Wisdom,1,Vitality,2,Speed,1,3,4,,,,,,,Lifebinder Plate feet. Set boosts healing done.
+G0197,,,Bloodsworn Falchion,Main Hand,Rare,Legendary,,GS0029,1,,,,Strength,4,Vitality,2,,,0,0,Life Steal,2%,,,,,Bloodsworn Mail main hand. Set heals you for a share of damage dealt.
+G0198,,,Bloodsworn Chalice,Off Hand,Rare,Legendary,,GS0029,1,,,,Strength,2,Vitality,2,,,2,3,,,,,,,Bloodsworn Mail off hand. Set heals you for a share of damage dealt.
+G0199,,,Bloodsworn Helm,Head,Rare,Legendary,,GS0029,1,,,,Strength,2,Vitality,1,,,3,4,,,,,,,Bloodsworn Mail head. Set heals you for a share of damage dealt.
+G0200,,,Bloodsworn Hauberk,Chest,Rare,Legendary,,GS0029,1,,,,Strength,3,Vitality,2,,,5,8,,,,,,,Bloodsworn Mail chest. Set heals you for a share of damage dealt.
+G0201,,,Bloodsworn Gauntlets,Gloves,Rare,Legendary,,GS0029,1,,,,Strength,2,Vitality,1,,,1,3,Life Steal,1%,,,,,Bloodsworn Mail gloves. Set heals you for a share of damage dealt.
+G0202,,,Bloodsworn Chausses,Legs,Rare,Legendary,,GS0029,1,,,,Strength,2,Vitality,2,,,4,5,,,,,,,Bloodsworn Mail legs. Set heals you for a share of damage dealt.
+G0203,,,Bloodsworn Boots,Feet,Rare,Legendary,,GS0029,1,,,,Strength,1,Vitality,2,Speed,1,2,3,,,,,,,Bloodsworn Mail feet. Set heals you for a share of damage dealt.

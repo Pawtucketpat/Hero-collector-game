@@ -1,0 +1,10 @@
+ParentID,ChildID,Chance,Notes
+EX003,EX004,0.2,Found a marsh map
+EX004,EX005,0.15,Overheard bandit talk
+EX005,EX006,0.12,Letter pointing to a manor
+EX005,EX007,0.1,Crypt key
+EX006,EX009,0.1,A strange book leads to an arcane library
+EX007,EX008,0.1,Peak pass found
+EX008,EX010,0.08,Dragon scale trail
+EX009,EX011,0.05,Void sigil
+EX010,EX011,0.06,Void sigil

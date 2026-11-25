@@ -1,0 +1,7 @@
+VaultID,Name,Categories,Notes,StartSlots
+V01,Ore Vault,Mining,Stone and ore,4
+V02,Wood and Hide Vault,Wood;Hide,,6
+V03,Food Vault,Meat;Farm,"Crops, meat and farm animals",8
+V04,Foraging Vault,Foraged,"Herbs, mushrooms, roots, flowers, berries, bark and the rest",18
+V05,Cloth Vault,Cloth,,3
+V06,Brewed Goods Vault,Consumables,Placeholder: own vault; could share the Food Vault instead,12

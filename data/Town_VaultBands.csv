@@ -1,0 +1,6 @@
+Band,TownLevelFrom,TownLevelTo,TotalUpgradesPerVault,SlotMultiplierAfterBand,GoldPerUpgrade,StonePerUpgrade,WoodPerUpgrade,WoodMaterialID
+1,1,10,3,2,2000,40,40,MAT0008
+2,11,20,5,4,10000,80,80,MAT0009
+3,21,30,7,8,50000,160,160,MAT0010
+4,31,40,9,16,250000,320,320,MAT0011
+5,41,50,11,32,1250000,640,640,MAT0012

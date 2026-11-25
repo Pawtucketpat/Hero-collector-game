@@ -1,0 +1,6 @@
+ArmorType,PrimaryCategory,SecondaryCategory,SecondarySubcategory,Notes
+Plate,Mining,Wood,,Ore plus planks
+Chain,Mining,Hide,,Ore plus hide lining
+Leather,Hide,Wood,,Hide plus planks
+Cloth,Cloth,Foraged,Herb,Fabric plus herbs
+Weapon,Mining,Wood,,Placeholder for weapons

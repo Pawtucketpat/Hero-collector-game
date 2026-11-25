@@ -1,0 +1,13 @@
+HireID,Building,Name,Tier,TownLevelRequired,GoldCost
+ENC1,Enchanter,Apprentice Enchanter,Common,0,0
+ENC2,Enchanter,Journeyman Enchanter,Uncommon,10,2500
+ENC3,Enchanter,Adept Enchanter,Rare,20,12500
+ENC4,Enchanter,Master Enchanter,Epic,30,60000
+ENC5,Enchanter,Grand Enchanter,Legendary,40,300000
+ENC6,Enchanter,Archmage,Mythical,50,1500000
+SMT1,Blacksmith,Apprentice Smith,Common,0,0
+SMT2,Blacksmith,Journeyman Smith,Uncommon,10,1250
+SMT3,Blacksmith,Adept Smith,Rare,20,6250
+SMT4,Blacksmith,Master Smith,Epic,30,30000
+SMT5,Blacksmith,Grand Smith,Legendary,40,150000
+SMT6,Blacksmith,Legendary Smith,Mythical,50,750000

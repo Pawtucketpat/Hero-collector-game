@@ -1,0 +1,30 @@
+ID,Set Name,2 Piece Bonus,4 Piece Bonus,6 Piece Bonus
+GS0001,Bulwark Plate,Placeholder: +5% Vitality,Placeholder: +10% Vitality and +5% Strength,Placeholder: Guardian skills are 10% stronger
+GS0002,Wildgrove Leathers,Placeholder: +5% Wisdom,Placeholder: +10% Wisdom and +5% Vitality,Placeholder: Druid skills are 10% stronger
+GS0003,Sanctified Vestments,Placeholder: +5% Wisdom,Placeholder: +10% Wisdom and +5% Vitality,Placeholder: Cleric skills are 10% stronger
+GS0004,Warbringer Gear,Placeholder: +5% Strength,Placeholder: +10% Strength and +5% Vitality,Placeholder: Berserker skills are 10% stronger
+GS0005,Nightblade Leathers,Placeholder: +5% Dexterity,Placeholder: +10% Dexterity and +5% Strength,Placeholder: Assassin skills are 10% stronger
+GS0006,Ironfist Wraps,Placeholder: +5% Strength,Placeholder: +10% Strength and +5% Dexterity,Placeholder: Monk skills are 10% stronger
+GS0007,Gravebound Regalia,Placeholder: +5% Intelligence,Placeholder: +10% Intelligence and +5% Wisdom,Placeholder: Necromancer skills are 10% stronger
+GS0008,Spiritcaller Garb,Placeholder: +5% Wisdom,Placeholder: +10% Wisdom and +5% Intelligence,Placeholder: Shaman skills are 10% stronger
+GS0009,Prismatic Robes,Placeholder: +5% Intelligence,Placeholder: +10% Intelligence and +5% Wisdom,Placeholder: Elementalist skills are 10% stronger
+GS0010,Hexbound Vestments,Placeholder: +5% Intelligence,Placeholder: +10% Intelligence and +5% Wisdom,Placeholder: Warlock skills are 10% stronger
+GS0011,Troubadour Finery,Placeholder: +5% Intelligence,Placeholder: +10% Intelligence and +5% Dexterity,Placeholder: Bard skills are 10% stronger
+GS0012,Dawnforged Plate,Placeholder: +5% Strength,Placeholder: +10% Strength and +5% Wisdom,Placeholder: Paladin skills are 10% stronger
+GS0013,Wildstalker Leathers,Placeholder: +5% Dexterity,Placeholder: +10% Dexterity and +5% Strength,Placeholder: Ranger skills are 10% stronger
+GS0014,Tempest Regalia,Placeholder: +5% Intelligence,Placeholder: +10% Intelligence and +5% Vitality,Placeholder: Stormcaller skills are 10% stronger
+GS0015,Ironbound Battlegear,"Placeholder: +5% Physical damage (Slashing, Crushing, Piercing)",Placeholder: +10% Physical damage,Placeholder: +15% Physical damage and +10 Accuracy
+GS0016,Elementbound Raiment,"Placeholder: +5% Elemental damage (Earth, Water, Wind, Fire, Cold)",Placeholder: +10% Elemental damage and +5% Critical Chance,Placeholder: +15% Elemental damage and +10% Critical Chance
+GS0017,Blightwoven Leathers,"Placeholder: +5% Noxious damage (Poison, Disease, Acid)",Placeholder: +10% Noxious damage,Placeholder: +15% Noxious damage and damage over time effects last 1 turn longer
+GS0018,Penumbral Vestments,"Placeholder: +5% Divine damage (Radiant, Dark, Necrotic, Chaos)",Placeholder: +10% Divine damage and +5% healing done,Placeholder: +15% Divine damage and +10% healing done
+GS0019,Deadeye Leathers,Placeholder: +5% Critical Chance,Placeholder: +10% Critical Chance and +10 Accuracy,Placeholder: +10% Critical Chance and +25 Critical Bonus damage
+GS0020,Warlord's Panoply,Placeholder: +5% damage dealt,Placeholder: +10% damage dealt,Placeholder: +15% damage dealt and +5% Critical Chance
+GS0021,Ironwall Plate,Placeholder: +5% armor effectiveness,Placeholder: +10% armor effectiveness and 5% less damage taken,Placeholder: +15% armor effectiveness and 10% less damage taken
+GS0022,Evergreen Mantle,Placeholder: +5% maximum health,Placeholder: +10% maximum health and +10% healing received,Placeholder: +15% maximum health and heal 3% of maximum health at the start of each turn
+GS0023,Worldsoul Garb,"Placeholder: +5% Nature damage (Lightning, Thunder, Primal, Astral, Spiritual)",Placeholder: +10% Nature damage,Placeholder: +15% Nature damage and +5% Critical Chance
+GS0024,Aetherbound Raiment,"Placeholder: +5% Arcane damage (Force, Psychic, Gravity, Temporal)",Placeholder: +10% Arcane damage,Placeholder: +15% Arcane damage and +10 Accuracy
+GS0025,Lifebinder Vestments,Placeholder: +5% healing done,Placeholder: +10% healing done,Placeholder: +15% healing done
+GS0026,Lifebinder Leathers,Placeholder: +5% healing done,Placeholder: +10% healing done,Placeholder: +15% healing done
+GS0027,Lifebinder Mail,Placeholder: +5% healing done,Placeholder: +10% healing done,Placeholder: +15% healing done
+GS0028,Lifebinder Plate,Placeholder: +5% healing done,Placeholder: +10% healing done,Placeholder: +15% healing done
+GS0029,Bloodsworn Mail,Placeholder: Heal for 3% of damage dealt,Placeholder: Heal for 6% of damage dealt,Placeholder: Heal for 10% of damage dealt and +5% healing received

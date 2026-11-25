@@ -1,0 +1,6 @@
+EncounterID,Name,Weight,RewardType,Qty,Notes
+EN1,Prize Buck,30,NextTierMeat,1,Meat from the next area up
+EN2,Old Hunter's Cache,25,NextTierHide,2,Hide from the next area up
+EN3,Fallen Giant,20,NextTierWood,2,Wood from the next area up
+EN4,Merchant's Lost Bolt,15,Cloth,1,Cloth of this area's tier
+EN5,Herbalist's Hidden Patch,25,Foraged,2,Foraged items of this area's tier

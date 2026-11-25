@@ -1,0 +1,11 @@
+Step,HeroesRequired,RewardType,Value,Notes
+1,1,QueueHours,8,Base queue
+2,2,QueueHours,10,
+3,3,ExtraCopyChance,0.05,
+4,4,QueueHours,10,
+5,5,RarityUpChance,0.02,
+6,6,QueueHours,8,
+7,7,ExtraCopyChance,0.05,
+8,8,QueueHours,6,
+9,9,RarityUpChance,0.03,
+10,10,QueueHours,6,Queue reaches the 48 hour ceiling
