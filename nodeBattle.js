@@ -30,7 +30,9 @@ function buildNodeBattle(nodeId) {
     }
     waves.push(wave);
   }
-  return { nodeId: nodeId, name: node['Name'] || nodeId, background: node['Background'] || node['W1Background'] || '', waves: waves };
+  // Ability Multiplier: enemies' attributes are multiplied by this on this node (blank or below 0 counts as 1)
+  const mult = Number(node['Ability Multiplier'] !== undefined ? node['Ability Multiplier'] : node['AbilityMultiplier']);
+  return { nodeId: nodeId, name: node['Name'] || nodeId, background: node['Background'] || node['W1Background'] || '', waves: waves, abilityMultiplier: mult > 0 ? mult : 1 };
 }
 function startRandomNodeBattle() {
   const id = pickRandomNodeId();
