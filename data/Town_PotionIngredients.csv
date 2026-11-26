@@ -1,0 +1,6 @@
+StatPrefix,Families,Notes
+Crit Chance,Mushroom;Flower,Potion needs foraged items of its own rarity from these families
+Damage,Root;Berry,
+Armor,"Bark, Sap, Moss and Lichen;Root",
+Accuracy,Flower;Herb,
+Resistance,Herb;Berry,All resistance potions
