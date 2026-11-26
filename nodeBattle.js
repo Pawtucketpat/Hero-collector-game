@@ -32,7 +32,14 @@ function buildNodeBattle(nodeId) {
   }
   // Ability Multiplier: enemies' attributes are multiplied by this on this node (blank or below 0 counts as 1)
   const mult = Number(node['Ability Multiplier'] !== undefined ? node['Ability Multiplier'] : node['AbilityMultiplier']);
-  return { nodeId: nodeId, name: node['Name'] || nodeId, background: node['Background'] || node['W1Background'] || '', waves: waves, abilityMultiplier: mult > 0 ? mult : 1 };
+  // One background per stage (W1Background to W3Background). A blank one keeps the stage before it.
+  const backgrounds = [];
+  let lastBackground = node['Background'] || '';
+  for (let w = 1; w <= WAVE_COUNT; w++) {
+    lastBackground = node['W' + w + 'Background'] || node['Wave ' + w + ' Background'] || lastBackground;
+    backgrounds.push(lastBackground);
+  }
+  return { nodeId: nodeId, name: node['Name'] || nodeId, background: backgrounds[0], backgrounds: backgrounds, waves: waves, abilityMultiplier: mult > 0 ? mult : 1 };
 }
 function startRandomNodeBattle() {
   const id = pickRandomNodeId();

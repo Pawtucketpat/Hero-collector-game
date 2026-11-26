@@ -231,9 +231,9 @@ const battleScene = {
     });
     this.load.setPath(ASSET_PATH);
     this.spriteKeys.forEach(function (key) { scene.load.image(key, imageFile(key)); });
-    if (this.nodeData.background) {
-      this.load.image('bg_' + this.nodeData.background, imageFile(this.nodeData.background));
-    }
+    (this.nodeData.backgrounds || [this.nodeData.background]).forEach(function (bg) {
+      if (bg) scene.load.image('bg_' + bg, imageFile(bg)); // every stage's background
+    });
     this.load.setPath('');
   },
 
@@ -251,13 +251,9 @@ const battleScene = {
       return;
     }
 
-    // Background: the node's background image if it exists, otherwise the plain room
-    const bgKey = this.nodeData.background ? 'bg_' + this.nodeData.background : '';
-    if (bgKey && this.textures.exists(bgKey)) {
-      this.add.image(W / 2, H / 2, bgKey).setDisplaySize(W, H).setDepth(-10);
-    } else {
-      drawBackdrop(this, W, H);
-    }
+    // Background for the first stage
+    this.background = null; // forget the picture from the last battle
+    this.showBackground(0);
 
     // Top bar
     this.add.rectangle(W / 2, 30, W, 60, 0x000000, 0.6);
@@ -504,6 +500,24 @@ const battleScene = {
     else this.nextTurn();
   },
 
+  // Shows one stage's background. A stage with no picture keeps the one already on screen.
+  showBackground: function (stage) {
+    const list = this.nodeData.backgrounds || [this.nodeData.background];
+    const key = list[stage] ? 'bg_' + list[stage] : '';
+    if (!key || !this.textures.exists(key)) {
+      if (stage === 0) drawBackdrop(this, this.W, this.H); // no picture at all: the plain room
+      return;
+    }
+    const old = this.background;
+    if (old && old.texture.key === key) return;
+    const picture = this.add.image(this.W / 2, this.H / 2, key).setDisplaySize(this.W, this.H).setDepth(-10);
+    this.background = picture;
+    if (old) {
+      picture.setAlpha(0); // fade the new picture in over the old one
+      this.tweens.add({ targets: picture, alpha: 1, duration: 500, onComplete: function () { old.destroy(); } });
+    }
+  },
+
   // The wave is cleared: its defeated enemies leave and the next wave walks in
   startNextWave: function () {
     const scene = this;
@@ -511,6 +525,7 @@ const battleScene = {
     battle.units.filter(function (u) { return u.side === 'enemy'; })
       .forEach(function (u) { scene.destroyView(u.id); });
     const fresh = advanceWave(battle);
+    this.showBackground(battle.waveIndex);
     fresh.forEach(function (u) { scene.makeView(u); });
     this.target = fresh.find(function (u) { return u.alive; });
     this.updateWaveText();
