@@ -376,8 +376,6 @@ function installPassives() {
     }
     return result;
   };
-
-  installPassiveDisplay();
 }
 
 // On screen: a small "passives" line under each unit, and the names on that hero's turn
@@ -416,11 +414,13 @@ function installPassiveDisplay() {
 // main.js starts the game as soon as the data has loaded. The hooks go in just before that.
 (function () {
   const install = function () { installRandomTypes(); installPassives(); };
-  if (typeof newBattle === 'function') { install(); return; } // this file was placed after main.js
+  const rulesReady = typeof newBattle === 'function'; // combatEngine.js loads before this file
+  if (rulesReady) install();
   const baseLoad = loadGameData;
   loadGameData = function () {
     return baseLoad.apply(this, arguments).then(function (result) {
-      install();
+      if (!rulesReady) install();
+      installPassiveDisplay(); // the battle screen (main.js) exists by now
       return result;
     });
   };

@@ -182,6 +182,8 @@ function unitFromRow(row, kind, side, slot, id) {
       vitality: vitality !== null ? vitality : hp / VITALITY_HEALTH,
     },
     resist: { base: resistBaseFromRow(row) }, // base Resistance states, like { fire: 'Immune', elemental: 'Resistant' }
+    gear: row.gearBonus || null,               // set bonuses, Healing Done, Life Steal and so on (built in playerGear.js)
+    isMainCharacter: !!row.isMainCharacter,
     skills: skillsFor(row),
   };
 }
@@ -891,6 +893,30 @@ function tauntersFor(state, unit, sk) {
   return list.length ? list : null;
 }
 
+// ----- gear bonuses -----
+// Bonuses from gear that are not a plain stat. They are always on and cannot be dispelled. Units without gear have none.
+// They are shares: 0.05 = 5%. (dotTurns is a number of turns.)
+function gearBonus(unit, key) {
+  return (unit && unit.gear && unit.gear[key]) || 0;
+}
+
+// "+X% Fire/Elemental damage" for a hit of one type, or a split hit (each part counts for its share)
+function gearTypeBonus(unit, type, parts) {
+  const byGroup = unit && unit.gear && unit.gear.typePct;
+  if (!byGroup) return 0;
+  const list = parts && parts.length ? parts : [{ type: type, share: 1 }];
+  return list.reduce(function (n, p) {
+    const t = normType(p.type);
+    return n + p.share * (byGroup[PARENT_OF[t] || t] || 0);
+  }, 0);
+}
+
+// "<Class> skills are X% stronger": extra share for one skill's damage, heals, Wards and over-time amounts
+function gearSkillBoost(unit, skillId) {
+  const boost = unit && unit.gear && unit.gear.skillBoost;
+  return (boost && boost[skillId]) || 0;
+}
+
 // ----- damage calculation -----
 
 // The critical numbers of an attacker. The Critical Multiplier and the Critical Bonus are separate numbers.
@@ -924,7 +950,7 @@ function prepareDamage(user) {
   const crit = critNumbers(user);
   return {
     shadow: shadow,
-    percent: bestOf(user, 'dmgUp', 'percent') - bestOf(user, 'dmgOutReduce', 'percent'), // share of base damage
+    percent: bestOf(user, 'dmgUp', 'percent') - bestOf(user, 'dmgOutReduce', 'percent') + gearBonus(user, 'damagePct'), // share of base damage
     shieldBreak: bestOf(user, 'shieldBreak', 'percent'),
     flat: 0,                                                                              // flat Damage Modifiers
     critChance: crit.chance,
@@ -936,7 +962,7 @@ function prepareDamage(user) {
 // Damage Calculation: (Base + Attribute Bonus + Damage Modifiers) x Critical Multiplier + Critical Bonus.
 // Percent modifiers count as a percent of base damage. Then the hit goes to Damage Resolution.
 function dealHit(state, user, sk, target, mods, base) {
-  let pct = mods.percent;
+  let pct = mods.percent + gearTypeBonus(user, sk.damageType, sk.damageParts);
   if (mods.shieldBreak && target.ward > 0) pct += mods.shieldBreak;                           // Shield Break
   const attrBonus = sk.attr ? base * attrOf(user, sk.attr) * (sk.scale !== undefined ? sk.scale : ATTR_SCALING) : 0;
   let amt = Math.max(0, (base + attrBonus + base * pct + mods.flat) * mods.shadow);
@@ -947,7 +973,11 @@ function dealHit(state, user, sk, target, mods, base) {
     critExtra = amt - plain;
     state.emit('crit', target, 'CRIT!');
   }
-  return takeHit(state, target, amt, { attacker: user, type: sk.damageType, parts: sk.damageParts, critExtra: critExtra });
+  const result = takeHit(state, target, amt, { attacker: user, type: sk.damageType, parts: sk.damageParts, critExtra: critExtra });
+  // Life Steal from gear: heals for a share of the health damage done (at least 1)
+  const steal = gearBonus(user, 'lifesteal');
+  if (steal > 0 && result.dealt > 0 && user.alive) healUnit(state, user, Math.max(1, Math.round(result.dealt * steal)));
+  return result;
 }
 
 // ----- damage resolution -----
@@ -994,7 +1024,7 @@ function takeHit(state, unit, amount, opts) {
   const parts = hitParts(opts);
   const partDmg = parts.map(function (p) { return amount * p.share * RESIST_MULT[resistanceState(unit, p.type)]; });
   dmg = partDmg.reduce(function (a, b) { return a + b; }, 0);
-  dmg *= Math.max(0, 1 + bestOf(unit, 'vulnerable', 'percent') - bestOf(unit, 'dmgReduceIn', 'percent'));
+  dmg *= Math.max(0, 1 + bestOf(unit, 'vulnerable', 'percent') - bestOf(unit, 'dmgReduceIn', 'percent') - gearBonus(unit, 'damageTaken'));
   if (dmg <= 0) {
     result.nullified = true;
     const allImmune = parts.every(function (p) { return resistanceState(unit, p.type) === RESIST_STATES.length - 1; });
@@ -1110,8 +1140,8 @@ function reviveUnit(state, unit, fraction) {
 // source = who is healing (their Healing Outgoing effects count). The target's Healing Received effects count too.
 function healUnit(state, unit, amount, source) {
   if (!unit.alive || unit.isSummon) return 0; // summons cannot receive healing (14.6)
-  const out = source ? 1 + bestOf(source, 'healOutBoost', 'percent') - bestOf(source, 'healOutReduce', 'percent') : 1;
-  const inc = 1 + bestOf(unit, 'healReceivedBoost', 'percent') - bestOf(unit, 'healReceivedReduce', 'percent');
+  const out = source ? 1 + bestOf(source, 'healOutBoost', 'percent') - bestOf(source, 'healOutReduce', 'percent') + gearBonus(source, 'healDone') : 1;
+  const inc = 1 + bestOf(unit, 'healReceivedBoost', 'percent') - bestOf(unit, 'healReceivedReduce', 'percent') + gearBonus(unit, 'healReceived');
   const total = Math.floor(Math.max(0, amount * Math.max(0, out) * Math.max(0, inc)));
   const healed = Math.max(0, Math.min(total, unit.maxHp - unit.hp));
   unit.hp += healed;
@@ -1141,6 +1171,8 @@ function startTurn(state, unit) {
     .filter(function (e) { return e.type === 'hot'; })
     .sort(function (a, b) { return (b.heal - a.heal) || (a.serial - b.serial); });
   hots.forEach(function (h) { healUnit(state, unit, h.heal, h.source); });
+  const regen = gearBonus(unit, 'turnHeal');
+  if (regen > 0) healUnit(state, unit, Math.max(1, Math.round(unit.maxHp * regen)));
 }
 
 function endTurn(state, unit) {
@@ -1268,7 +1300,8 @@ function groupTurns(sk, g) {
 
 // An amount that grows with the skill's attribute: amount x (1 + attribute x scale per point)
 function scaledAmount(user, sk, x) {
-  return sk.attr ? x * (1 + attrOf(user, sk.attr) * sk.scale) : x;
+  const amount = sk.attr ? x * (1 + attrOf(user, sk.attr) * sk.scale) : x;
+  return amount * (1 + gearSkillBoost(user, sk.id));
 }
 
 // The percent a Reflection reflects: X, or CondVal when X is 0 and the condition carries it ("If elemental damage", 50)
@@ -1334,6 +1367,10 @@ function buildGroupEffect(user, sk, g, turns) {
   const e = { type: d.type };
   if (d.field) e[d.field] = d.pct ? (g.x || 0) / 100 : (d.scales ? scaledAmount(user, sk, g.x) : g.x);
   if (d.sub) e[d.sub] = d.sub === 'attr' ? g.type : (g.type || (d.type === 'thorns' ? 'piercing' : ''));
+  if (d.type === 'dot') { // gear damage bonuses also count for damage over time, and some sets make it last longer
+    e.damage *= 1 + gearBonus(user, 'damagePct') + gearTypeBonus(user, e.damageType);
+    if (turns !== undefined) turns += gearBonus(user, 'dotTurns');
+  }
   if (d.source) e.source = user;
   if (d.type === 'thorns') {
     // Y = how many times it retaliates. It also ends when the skill's Duration runs out (blank Y = no limit on retaliations).
@@ -1354,6 +1391,11 @@ function effectWouldApply(unit, e) {
   if (!old) return true;
   const s = strengthOf(e), so = strengthOf(old);
   return s > so || (s === so && (e.charges || 0) > (old.charges || 0));
+}
+
+// How big a Ward one cast puts on one target (some gear passives change it)
+function wardPoolFor(state, user, sk, g, target) {
+  return Math.round(scaledAmount(user, sk, g.x));
 }
 
 // ----- running one sheet skill -----
@@ -1384,7 +1426,7 @@ function useSheetSkill(state, user, sk, target, add) {
     if (g.def.run !== 'damage') return;
     targetsOf(g).forEach(function (t) {
       if (!t.alive) return;
-      const r = dealHit(state, user, { attr: sk.attr, scale: sk.scale, damageType: g.type, damageParts: g.parts }, t, mods, g.x);
+      const r = dealHit(state, user, { attr: sk.attr, scale: sk.scale, damageType: g.type, damageParts: g.parts }, t, mods, g.x * (1 + gearSkillBoost(user, sk.id)));
       ctx.dealt += r.dealt;
       if (r.nullified && ctx.blocked.indexOf(t) === -1) ctx.blocked.push(t);
     });
@@ -1433,7 +1475,7 @@ function useSheetSkill(state, user, sk, target, add) {
         case 'cdIncrease': shiftCooldowns(state, t, g.x, true); break;
         case 'resurrect': if (!t.alive && !t.isSummon) reviveUnit(state, t, (g.x || 0) / 100); break;
         case 'ward': {
-          const pool = Math.round(scaledAmount(user, sk, g.x));
+          const pool = wardPoolFor(state, user, sk, g, t);
           if (!t.isSummon && t.alive) { // a Ward only replaces the current one if it is larger
             if (pool > t.ward) { t.ward = pool; t.wardMax = pool; }
             state.emit('status', t, 'Ward ' + show(t.ward));

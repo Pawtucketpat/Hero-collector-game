@@ -176,7 +176,7 @@ function figureTop(scene, key) {
 const battleScene = {
   key: 'Battle',
 
-  // Runs every time the battle starts or restarts: picks the node and the five heroes
+  // Runs every time the battle starts or restarts: sets up the node and the five heroes
   init: function () {
     const scene = this;
     this.problem = '';
@@ -184,12 +184,29 @@ const battleScene = {
     this.nodeData = null;
     this.spriteKeys = [];
 
-    if (typeof startRandomNodeBattle !== 'function' || typeof pickRandomHeroes !== 'function') {
+    if (typeof gearPassiveNote !== 'function') {
+      this.problem = 'gearPassives.js is missing.\nUpload it, and check that index.html loads it right after passives.js.';
+      return;
+    }
+    if (typeof openBattlePrep !== 'function') {
+      this.problem = 'battlePrep.js is missing.\nUpload it, and check that index.html loads it before main.js.';
+      return;
+    }
+    if (typeof buildPlayerParty !== 'function') {
+      this.problem = 'playerGear.js is missing.\nUpload it, and check that index.html loads it before main.js.';
+      return;
+    }
+    if (typeof takeNextFight !== 'function') {
+      this.problem = 'fightRules.js is missing.\nUpload it, and check that index.html loads it before main.js.';
+      return;
+    }
+    if (typeof buildNodeBattle !== 'function' || typeof pickRandomHeroes !== 'function') {
       this.problem = 'nodeBattle.js is missing or out of date.\nIt needs the pickRandomHeroes function (Part 3 of the loader doc).';
       return;
     }
-    this.heroRows = pickRandomHeroes(5);
-    this.nodeData = startRandomNodeBattle();
+    this.fight = takeNextFight(); // the fight being retried, or a new node and 4 new heroes
+    this.heroRows = buildPlayerParty(this.fight.heroIds); // the main character plus those 4 heroes
+    this.nodeData = buildNodeBattle(this.fight.nodeId);
     if (!this.nodeData) {
       this.problem = 'No nodes found.\nCheck data/Nodes.csv and that its ID column is headed Node ID.';
       return;
@@ -264,6 +281,9 @@ const battleScene = {
     makeLabel(this, W / 2 - 80, 30, 'Stamina 0/0', 24);
     makeLabel(this, W / 2 + 120, 30, 'Gold 0', 24);
     this.waveText = makeLabel(this, W - 100, 30, '', 24);
+    this.limitText = makeLabel(this, W - 305, 30, '', 22).setVisible(false); // turn counter, near the turn limit only
+    this.resultShown = false;
+    this.resultTapped = false;
 
     // Ground pads for the 5 character positions (summon spots stay hidden until used)
     for (let i = 0; i < PLAYER_SLOTS.length; i++) {
@@ -275,6 +295,7 @@ const battleScene = {
 
     // Battle state
     const scene = this;
+    seedEngine(this.fight.seed); // so a retry can repeat the same dice rolls
     this.battle = newBattle(function (type, unit, text) { scene.onEvent(type, unit, text); }, this.heroRows, this.nodeData);
     this.active = null;       // the hero whose turn it is (or was last)
     this.allyTarget = null;   // who a single-target ally skill will hit
@@ -380,9 +401,12 @@ const battleScene = {
       if (u.side === 'enemy') scene.selectTarget(u);
       else scene.selectAlly(u);
     });
+    const tag = u.isMainCharacter ? this.add.text(slot.x, top - 8, '\u2605 YOU', {
+      fontSize: '15px', fontStyle: 'bold', color: '#ffd34d', backgroundColor: '#000000', padding: { x: 5, y: 1 },
+    }).setOrigin(0.5, 1).setDepth(1002) : null;
     this.views[u.id] = {
       slot: slot, ring: ring, sprite: sprite, hpBack: hpBack, hpFill: hpFill,
-      wardBack: wardBack, wardFill: wardFill, status: status, pad: pad, h: h, bw: bw, barY: top, k: k,
+      wardBack: wardBack, wardFill: wardFill, status: status, pad: pad, h: h, bw: bw, barY: top, k: k, tag: tag,
     };
   },
 
@@ -391,7 +415,7 @@ const battleScene = {
     const v = this.views[id];
     if (!v) return;
     this.tweens.killTweensOf(v.sprite);
-    [v.sprite, v.hpBack, v.hpFill, v.wardBack, v.wardFill, v.status, v.ring, v.pad].forEach(function (o) {
+    [v.sprite, v.hpBack, v.hpFill, v.wardBack, v.wardFill, v.status, v.ring, v.pad, v.tag].forEach(function (o) {
       if (o) o.destroy();
     });
     delete this.views[id];
@@ -454,6 +478,7 @@ const battleScene = {
       if (u.ward > 0) lines.push('Ward ' + show(u.ward));
       u.effects.forEach(function (e) { lines.push(effectLabel(e)); });
       v.status.setText(u.alive ? lines.join('\n') : '').setVisible(u.alive && lines.length > 0);
+      if (v.tag) v.tag.setAlpha(u.alive ? 1 : 0.35);
       v.hpFill.setFillStyle(u.hp / u.maxHp > 0.3 ? 0x44cc44 : 0xcc4444);
     });
     if (this.target && this.views[this.target.id]) {
@@ -518,6 +543,15 @@ const battleScene = {
     }
   },
 
+  // "Turn 250 / 300", shown only when the turn limit is getting close
+  updateTurnCounter: function () {
+    const show = showTurnCounter(this.battle);
+    this.limitText.setVisible(show);
+    if (!show) return;
+    const n = turnNumber(this.battle);
+    this.limitText.setText('Turn ' + n + ' / ' + TURN_LIMIT).setColor(n > TURN_LIMIT - 10 ? '#ff6666' : '#ffd34d');
+  },
+
   // The wave is cleared: its defeated enemies leave and the next wave walks in
   startNextWave: function () {
     const scene = this;
@@ -548,6 +582,7 @@ const battleScene = {
     for (const id in this.views) this.views[id].ring.setVisible(false);
     this.views[u.id].ring.setVisible(true);
     this.turnText.setText(u.name + "'s turn");
+    this.updateTurnCounter();
     this.orderText.setText('Next: ' + upcoming(this.battle, 3).map(function (x) { return x.name; }).join(' > '));
     startTurn(this.battle, u); // heal-over-time effects resolve at the start of the turn
 
@@ -618,14 +653,32 @@ const battleScene = {
 
   showResult: function () {
     const scene = this;
+    if (this.resultShown) return;
+    this.resultShown = true;
     this.awaitingPlayer = false;
     this.refresh();
     const W = this.W;
     const H = this.H;
-    this.add.rectangle(W / 2, H / 2, W, H, 0x000000, 0.6).setDepth(3000).setInteractive()
-      .on('pointerdown', function () { scene.scene.restart(); }); // a new random node and five new heroes
-    makeLabel(this, W / 2, H / 2 - 20, this.battle.over === 'victory' ? 'VICTORY' : 'DEFEAT', 72).setDepth(3001);
-    makeLabel(this, W / 2, H / 2 + 50, 'Tap to fight again', 28).setDepth(3001);
+    this.add.rectangle(W / 2, H / 2, W, H, 0x000000, 0.65).setDepth(3000).setInteractive(); // stops taps reaching the battle
+    makeLabel(this, W / 2, H / 2 - 70, this.battle.over === 'victory' ? 'VICTORY' : 'DEFEAT', 72).setDepth(3001);
+    if (this.battle.overReason === 'turnLimit') {
+      makeLabel(this, W / 2, H / 2 + 4, 'Turn limit reached (' + TURN_LIMIT + ' turns)', 28).setDepth(3001);
+    }
+    // Retry: back to gear up for this same fight. Town: leave; the Campaign Gate then gives a new fight.
+    this.resultButton(W / 2 - 175, H / 2 + 100, 'Retry', function () { queueRetry(scene.fight); openBattlePrep(scene); });
+    this.resultButton(W / 2 + 175, H / 2 + 100, 'Town', function () { scene.scene.start('Town'); });
+  },
+
+  resultButton: function (x, y, text, onTap) {
+    const scene = this;
+    const box = this.add.rectangle(x, y, 300, 96, 0x7a5a1e).setStrokeStyle(3, 0xf2c66a).setDepth(3001)
+      .setInteractive({ useHandCursor: true });
+    makeLabel(this, x, y, text, 38).setDepth(3001).setFontStyle('bold');
+    box.on('pointerdown', function () {
+      if (scene.resultTapped) return; // one choice per fight, even with a double tap
+      scene.resultTapped = true;
+      onTap();
+    });
   },
 
   },
@@ -639,6 +692,6 @@ loadGameData().then(function () {
     height: 720,
     backgroundColor: '#000000',
     scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
-    scene: [townScene, battleScene], // the first scene opens first: the town, whose Campaign Gate starts the battle
+    scene: [townScene, battleScene], // the first scene opens first: the town, whose Campaign Gate opens battle preparation
   });
 });
