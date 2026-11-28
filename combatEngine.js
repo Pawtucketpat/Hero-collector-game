@@ -266,6 +266,8 @@ const SHEET_EFFECTS = {
   EF045: { run: 'ignoreTaunt', noX: true },
   EF046: { run: 'resurrect' },
   EF047: { run: 'summon', noX: true },
+  EF048: { run: 'sacrifice' },                     // Health Sacrifice: X = percent of the caster's maximum health
+  EF049: { run: 'heal', fromSacrifice: true },     // Blood Mend: X = percent of the health sacrificed
 };
 
 // Target names from the lists tab. The side tells us where a target is when a skill needs the player to pick one.
@@ -401,7 +403,7 @@ function buildSheetSkill(id, row) {
     // Target: a blank one uses the group above it, or Self for helpful effects and OneEnemy for hostile ones
     let token = targetToken(field(row, [L + '_Target'], ''));
     if (!token) token = lastToken || (def.foe ? 'oneenemy' : 'self');
-    if (def.run === 'taunt' || def.run === 'ignoreTaunt' || def.run === 'summon') token = 'self'; // these always belong to the caster
+    if (def.run === 'taunt' || def.run === 'ignoreTaunt' || def.run === 'summon' || def.run === 'sacrifice') token = 'self'; // these always belong to the caster
     if (token !== 'self' && ENEMY_TARGETS.indexOf(token) === -1 && ALLY_TARGETS.indexOf(token) === -1) {
       sheetWarn(where + ': target "' + field(row, [L + '_Target'], '') + '" is not a target from the lists tab, so it is skipped');
       return;
@@ -1406,6 +1408,7 @@ function useSheetSkill(state, user, sk, target, add) {
     ally: target && target.side === user.side ? target : null,
   };
   const ctx = { dealt: 0, blocked: [], hpFrac: new Map() };
+  user.sacrificed = 0; // health paid by Health Sacrifice during this cast
   state.units.forEach(function (u) { ctx.hpFrac.set(u, u.maxHp > 0 ? u.hp / u.maxHp : 0); }); // conditions look at health before the skill
   const targetsOf = function (g) {
     return sheetTargets(state, user, g.token, picks).filter(function (t) {
@@ -1459,8 +1462,14 @@ function useSheetSkill(state, user, sk, target, add) {
 
     targets.forEach(function (t) {
       switch (run) {
+        case 'sacrifice': { // costs X% of maximum health. Nothing blocks or scales it, and it stops at 1 health
+          const paid = Math.max(0, Math.min(t.hp - 1, Math.floor(t.maxHp * g.x / 100)));
+          if (paid > 0) { t.hp -= paid; user.sacrificed += paid; state.emit('damage', t, '-' + show(paid)); }
+          break;
+        }
         case 'heal':
-          healUnit(state, t, scaledAmount(user, sk, g.x), user);
+          // Blood Mend (fromSacrifice) heals X% of the health just paid. For any other heal, X is the heal itself.
+          healUnit(state, t, scaledAmount(user, sk, g.def.fromSacrifice ? user.sacrificed * g.x / 100 : g.x), user);
           break;
         case 'cleanse': {
           const gone = removeEffects(t, function (e) { return !isBuff(e); });
@@ -1535,6 +1544,9 @@ function cannotUse(state, user, sk, target) {
     })) return 'needs an enemy that has a buff to steal';
     if (only('resurrect') && !fallenAllies(state, user).length) return 'has no fallen allies to revive';
     if (only('summon') && activeSummons(state, user.side).length >= MAX_SUMMONS) return 'has no free summon spot';
+    if (real.some(function (g) { return g.def.run === 'sacrifice'; }) && user.hp <= 1) return 'has no health left to sacrifice';
+    const mends = real.filter(function (g) { return g.def.fromSacrifice; });
+    if (mends.length && !mends.some(function (g) { return sheetTargets(state, user, g.token, picks).length; })) return 'has no ally to heal';
   }
   return '';
 }
@@ -1563,6 +1575,7 @@ function worthUsing(state, user, sk, target) {
       case 'dispel': return targets.some(function (t) { return dispellable(t).length; });
       case 'steal': return targets.some(function (t) { return stealable(t).length; });
       case 'taunt': return !user.effects.some(function (e) { return e.type === 'taunt'; });
+      case 'sacrifice': return false; // the AI lets the heal decide if the cost is worth it
       default: return true;
     }
   });

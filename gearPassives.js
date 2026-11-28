@@ -86,7 +86,7 @@ function isHealingSkill(sk) {
 // How much one cast of a healing ability gives each target (a heal over time counts all of its turns)
 function healOutput(user, sk) {
   return sk.groups.reduce(function (n, g) {
-    if (g.def.run === 'heal') return n + scaledAmount(user, sk, g.x);
+    if (g.def.run === 'heal') return n + scaledAmount(user, sk, g.def.fromSacrifice ? (user.sacrificed || 0) * g.x / 100 : g.x);
     if (g.def.type === 'hot') return n + scaledAmount(user, sk, g.x) * groupTurns(sk, g);
     return n;
   }, 0);
