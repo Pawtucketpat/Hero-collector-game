@@ -1,0 +1,1505 @@
+ID,Skill Name,Icon,Animation,Scaling Attribute ,Scale per point,Description,Duration,Cooldown,A_ID,A_Target,A_SubType,A_X,A_Y,A_Cond,A_CondVal,B_ID,B_Target,B_SubType,B_X,B_Y,B_Cond,B_CondVal,C_ID,C_Target,C_SubType,C_X,C_Y,C_Cond,C_CondVal,D_ID,D_Target,D_SubType,D_X,D_Y,D_Cond,D_CondVal,E_ID,E_Target,E_SubType,E_X,E_Y,E_Cond,E_CondVal,Can Be Dispelled,Can Be Stolen
+SK0000,Lunge,,,Strength,2,stabs an enemy,Instant,Basic Attack,EF001,OneEnemy,Piercing,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0001,Cleave,,,Strength,2,Cleaves all enemies,Instant,3 turns,EF001,AllEnemies,Slashing,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0002,Primal Yell,,,Strength,2,"Gain the Taunt buff, forcing all Enemies to attack this Character",2 turn,3 turns,EF026,Self,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0003,Headbut,,,Strength,2,Headbutt the enemy place a provoke on the target forcing the target to attack this character with its basic attack.,1 turn,3 turns,EF027,OneEnemy,Crushing,,,,,EF001,OneEnemy,Crushing,10,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0004,Kidney Shot,,,Dexterity,2,Stabs an enemy. ignores taunt.,Instant,Basic Attack,EF001,OneEnemy,Piercing,10,,,,EF045,Self,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0005,Vulerability,,,Dexterity,2,Lessens the effectiveness of armor of the target,Instant,4 turns,EF034,OneEnemy,,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0006,Execute,,,Dexterity,2,Deals massive damage plus bonus damage if the enemy is below 30%,Instant,4 turns,EF001,OneEnemy,Piercing,20,,,,EF001,OneEnemy,Piercing,10,,target below 30% health,30,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0007,One With Shadows,,,,,"The assassin ducks into the shadows making them harder to hit, before leaping out and striking the enemy with percision",1 turn,3 turns,EF014,Self,,25,,,,EF017,,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0008,Harmonious Strike,,,Intelligence,2,"The bard lashes forth, slashing the enemy",Instant,Basic Attack,EF001,OneEnemy,Slashing,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0009,Discordant Note,,,Intelligence,2,The bard plays an unnerving note making the enemies hesitate with their attacks,3 turn,4 turns,EF033,AllEnemies,,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0010,Refreshing melody,,,Intelligence,2,A calming melody rejuvenates the party,2 turn,3 turns,EF003,AllAllies,Astral,25,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0011,Crippling Refrain,,,Intelligence,2,Rattles the enemy in their armor exposing weak point in it,3 turn,4 turns,EF001,OneEnemy,Thunder,30,,,,EF034,OneEnemy,Thunder,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0012,Radiant Strike,,,Wisdom,2,Channels the divine into a heavy smack,Instant,Basic Attack,EF001,OneEnemy,Radiant,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0013,Divine aura,,,Wisdom,2,Radiates the divine to restore health to the allies of the cleric,Instant,3 turns,EF002,AllAllies,Radiant,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0014,Restore Vitality,,,Wisdom,2,Blesses the target with a great amount of health,Instant,4 turns,EF002,OneAlly,Radiant,60,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0015,Mass resurrection,,,,,Revives all fallen allies.,Instant,4 turns,EF046,AllDeadAllies,Radiant,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0016,Natures Wrath,,,Wisdom,2,A druids basic attack that smacks the enemy with nature damage,Instant,Basic Attack,EF001,OneEnemy,Primal,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0017,Poison bloom,,,Wisdom,2,Spores flow onto the enemy,3 turn,4 turns,EF005,AllEnemies,Poison,20,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0018,Armor of Vines,,,Wisdom,,Vines surround the druid protecting it from incoming attacks,4 turn,4 turns,EF008,Self,,4,4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0019,Regrowth,,,Wisdom,2,A healing bloom around the party,3 turn,3 turns,EF003,AllAllies,Primal,25,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0020,Elemental Blast,,,Intelligence,2,Summons forth the elements into a random bolt,Instant,Basic Attack,EF001,OneEnemy,Random Elemental,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0021,Elemental Convergence,,,Intelligence,2,Blasts the enemy with all the elements,Instant,3 turns,EF001,OneEnemy,Earth,10,,,,EF001,OneEnemy,Water,10,,,,EF001,OneEnemy,Wind,10,,,,EF001,OneEnemy,Fire,10,,,,EF001,OneEnemy,Cold,10,,,,TRUE,TRUE
+SK0022,Elemental Aegis,,,,,Reflects half of the elemental damage that the elementalist would take,5 turn,4 turns,EF010,Self,,0,5,If elemental damage,50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0023,Shield Breaker,,,Strength,2,A heavy slam to crush an enemies defenses.,Instant,Basic Attack,EF001,OneEnemy,Crushing,20,,,,EF015,OneEnemy,Crushing,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0024,Fortify,,,Strength,,Bolsters the Guardians defenses,3 turn,4 turns,EF016,Self,,50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0025,Enraging Roar,,,,,Unleash a primal yell gaining the attention of all enemies,3 turn,4 turns,EF026,Self,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0026,Provoke,,,,,Goading attack that forces the enemy to attack the Guardian on their next turn with just a basic attack,1 turn,4 turns,EF027,OneEnemy,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0027,Quick Palms,,,Dexterity,2,The monk strikes in rapid succession,Instant,Basic Attack,EF001,OneEnemy,Crushing,15,,,,EF001,OneEnemy,Crushing,10,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0028,Body and Soul,,,,,Shunts all negative energy on the monk,Instant,4 turns,EF006,Self,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0029,Counter Stance,,,,,Enters a stance the be able to counter attack back at the enemy,2 turn,3 turns,EF022,Self,Crushing,20,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0030,Leg Sweep,,,Dexterity,2,Take down an enemy disorienting them for a turn,Instant,3 turns,EF001,OneEnemy,Crushing,20,,,,EF029,OneEnemy,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0031,Death Bolt,,,Intelligence,2,Blasts a foe with necrotic energy,Instant,Basic Attack,EF001,OneEnemy,Necrotic,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0032,Summon Undead,,,Intelligence,2,Summons an Undead Ally,3 turn,3 turns,EF047,Self,,USKE001,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0033,Drain Life,,,Intelligence,2,Saps the life force of the enemy and gives it to the party,Instant,3 turns,EF001,AllEnemies,Necrotic,15,,,,EF004,AllAllies,Necrotic,100,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0034,Siphon Lifeforce,,,,,Steals a buff from an enemy,Instant,3 turns,EF043,OneEnemy,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0035,Divine Smite,,,Strength,2,Unleash the power of the divine across the enemies backside,Instant,Basic Attack,EF001,OneEnemy,Radiant,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0036,Lay on Hands,,,Wisdom,2,Channels energy into an ally,Instant,3 turns,EF002,OneAlly,Radiant,40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0037,Radiant Challenge,,,,,Taunts enemies,3 turn,4 turns,EF026,Self,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0038,Aura of Vitality,,,Wisdom,2,"Creates an aura to bolster nearby a
+Party members",4 turn,3 turns,EF020,AllAllies,Radiant,45,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0039,Jab,,,Strength,2,Stabs the enemy with a spear,Instant,Basic Attack,EF001,OneEnemy,Piercing,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0040,Slam,,,Strength,2,Delivers a heavy blow,Instant,Basic Attack,EF001,OneEnemy,Crushing,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0041,Rally,,,Strength,,Calls all allies to attack,Instant,5 turns,EF044,AllAllies,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0042,Yell,,,,,Taunt,Instant,3 turns,EF026,Self,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0043,Acid Splash,,,Intelligence,,Throws acid at the enemies,3 turn,3 turns,EF001,AllEnemies,Acid,6,,,,EF005,AllEnemies,Acid,2,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0044,Release Arrow,,,Dexterity,2,Shoots an arrow at a target,Instant,Basic Attack,EF001,OneEnemy,Piercing,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0045,Dagger,,,Dexterity,2,stabby stabby,Instant,Basic Attack,EF001,OneEnemy,Piercing,15,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0046,Healing word,,,Wisdom,2,Heals all allies,Instant,4 turns,EF002,AllAllies,Primal,24,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0047,Shield Bash,,,Strength,2,Bashes an enemy,Instant,2 turns,EF001,OneEnemy,Crushing,16,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0048,Elemental Weakness,,,,,"Exposes every enemy to the elements, making them easier to burn, freeze and shock",3 turn,4 turns,EF037,AllEnemies,Elemental,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0049,Hunter's Mark,,,,,Marks an enemy for the hunt so every hit on it lands harder,3 turn,4 turns,EF035,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0050,Multi-Shot,,,Dexterity,2,Looses a shot at the target and one more at the enemies beside it,Instant,3 turns,EF001,OneEnemy,Piercing,25,,,,EF001,AdjacentEnemies,Piercing,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0051,Disorienting Shot,,,Dexterity,2,A shot that rattles the target and throws off its aim,2 turn,3 turns,EF001,OneEnemy,Piercing,15,,,,EF030,OneEnemy,,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0052,Spirit Strike,,,Wisdom,2,Lashes an enemy with spirit energy and sends a surge of luck to a random ally,1 turn,Basic Attack,EF001,OneEnemy,Spiritual,20,,,,EF012,RandomAlly,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0053,Offensive Blessing,,,,,Calls on the spirits to fill the party with fury,2 turn,4 turns,EF014,AllAllies,,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0054,Greater Ward,,,Wisdom,2,Wraps the whole party in a large protective ward,Instant,4 turns,EF009,AllAllies,,40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0055,Mass Revival,,,Wisdom,2,The spirits call every fallen ally back to their feet,Instant,5 turns,EF046,AllDeadAllies,Spiritual,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0056,Lightning Bolt,,,Intelligence,2,Hurls a bolt of lightning at an enemy,Instant,Basic Attack,EF001,OneEnemy,Lightning,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0057,Chain Lightning,,,Intelligence,2,Lightning strikes one enemy then leaps to the enemies beside it,Instant,3 turns,EF001,OneEnemy,Lightning,25,,,,EF001,AdjacentEnemies,Lightning,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0058,Thunderclash,,,Intelligence,2,A booming wave of thunder crashes over every enemy,Instant,4 turns,EF001,AllEnemies,Thunder,15,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0059,Storm Shield,,,Intelligence,2,A crackling shield of lightning that shocks anyone who strikes the caster,3 turn,4 turns,EF008,Self,,3,3,,,EF022,Self,Lightning,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0060,Dark Curse,,,Intelligence,2,Strikes with dark energy then curses the enemy so the darkness keeps eating at them,3 turn,Basic Attack,EF001,OneEnemy,Dark,20,,,,EF005,OneEnemy,Dark,8,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0061,Siphon Soul,,,Intelligence,2,Rips life force from an enemy and feeds it to the Warlock,Instant,3 turns,EF001,OneEnemy,Dark,30,,,,EF004,Self,Dark,50,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0062,Demonic Pact,,,Wisdom,2,Pays for the pact in blood: the Warlock gives up some health to mend the rest of the party,Instant,4 turns,EF048,Self,,30,,,,EF049,AllAlliesMinusSelf,Dark,150,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0063,Curse of Weakness,,,,,A curse that saps the strength from every enemy's blows,3 turn,4 turns,EF033,AllEnemies,,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0064,Bite,,,Strength,2,Sinks its teeth into an enemy,Instant,Basic Attack,EF001,OneEnemy,Piercing,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0065,Claw,,,Strength,2,Rakes an enemy with its claws,Instant,Basic Attack,EF001,OneEnemy,Slashing,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0066,Peck,,,Dexterity,2,Stabs at an enemy with its beak,Instant,Basic Attack,EF001,OneEnemy,Piercing,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0067,Gore,,,Strength,2,Drives its horns or tusks into an enemy,Instant,Basic Attack,EF001,OneEnemy,Piercing,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0068,Tackle,,,Strength,2,Throws its whole body into an enemy,Instant,Basic Attack,EF001,OneEnemy,Crushing,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0069,Spit,,,Dexterity,2,Spits a glob of acid at an enemy,Instant,Basic Attack,EF001,OneEnemy,Acid,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0070,Slash,,,Strength,2,A straightforward swing of a blade,Instant,Basic Attack,EF001,OneEnemy,Slashing,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0071,Arcane Bolt,,,Intelligence,2,Flings a bolt of raw magic at an enemy,Instant,Basic Attack,EF001,OneEnemy,Force,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0072,Pounce,,,Dexterity,2,Leaps past the front line and lands on any target it likes,Instant,3 turns,EF001,OneEnemy,Slashing,30,,,,EF045,Self,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0073,Rend,,,Strength,2,Tears a ragged wound that keeps bleeding,3 turn,3 turns,EF001,OneEnemy,Slashing,15,,,,EF005,OneEnemy,Slashing,6,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0074,Maul,,,Strength,2,"A savage, crushing mauling",Instant,4 turns,EF001,OneEnemy,"Slashing 1, Crushing 1",40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0075,Venomous Bite,,,Strength,2,A bite that leaves poison behind,3 turn,3 turns,EF001,OneEnemy,Piercing,12,,,,EF005,OneEnemy,Poison,8,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0076,Tail Sweep,,,Strength,2,Sweeps its tail through every enemy,Instant,3 turns,EF001,AllEnemies,Crushing,12,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0077,Charge,,,Strength,2,Lowers its head and barrels into an enemy,Instant,3 turns,EF001,OneEnemy,Crushing,35,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0078,Howl,,,,,A rallying howl that sends the pack into a frenzy,2 turn,4 turns,EF014,AllAllies,,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0079,Shrill Screech,,,,,A piercing screech that throws every enemy off their strikes,2 turn,4 turns,EF033,AllEnemies,,15,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0080,Wing Buffet,,,Dexterity,2,Beats its wings and batters every enemy with gusts,Instant,3 turns,EF001,AllEnemies,Wind,12,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0081,Talon Dive,,,Dexterity,2,Plunges from above onto any target it chooses,Instant,4 turns,EF001,OneEnemy,Piercing,32,,,,EF045,Self,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0082,Harden,,,,,Toughens its hide against incoming blows,3 turn,4 turns,EF016,Self,,40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0083,Regenerate,,,Vitality,2,Knits its wounds back together,3 turn,4 turns,EF003,Self,Primal,8,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0084,Corrosive Engulf,,,Strength,2,Smothers an enemy in acid that eats at their armor,3 turn,3 turns,EF001,OneEnemy,Acid,15,,,,EF034,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0085,Web Shot,,,,,"Pins an enemy in sticky webbing, slowing their skills and their blows",2 turn,3 turns,EF029,OneEnemy,,1,,,,EF033,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0086,Festering Touch,,,Intelligence,2,A rotting touch that spoils any healing the enemy receives,3 turn,3 turns,EF001,OneEnemy,Disease,15,,,,EF039,OneEnemy,,50,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0087,Blood Drain,,,Strength,2,"Bites in and drinks, healing itself from the wound",Instant,3 turns,EF001,OneEnemy,Piercing,15,,,,EF004,Self,Piercing,100,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0088,Frenzy,,,,,Works itself into a rage and hits harder,3 turn,4 turns,EF014,Self,,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0089,Fire Breath,,,Intelligence,2,Breathes a wash of flame over every enemy,3 turn,4 turns,EF001,AllEnemies,Fire,18,,,,EF005,AllEnemies,Fire,6,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0090,Frost Nova,,,Intelligence,2,A burst of freezing air that chills every enemy's skills,Instant,4 turns,EF001,AllEnemies,Cold,12,,,,EF029,AllEnemies,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0091,Shadow Bolt,,,Intelligence,2,A bolt of shadow that hits one enemy hard,Instant,2 turns,EF001,OneEnemy,Dark,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0092,Fire Bolt,,,Intelligence,2,Hurls a ball of fire at one enemy,Instant,2 turns,EF001,OneEnemy,Fire,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0093,Spirit Ward,,,Wisdom,2,Calls up a spirit to absorb incoming harm,Instant,4 turns,EF009,Self,,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0094,Dispel Magic,,,,,Strips a magical effect from an enemy,Instant,3 turns,EF042,OneEnemy,,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0095,Shield Up,,,Strength,2,Braces behind its shield to block the next blows,3 turn,4 turns,EF008,Self,,2,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0096,Flurry,,,Dexterity,2,Two quick stabs at the same enemy,Instant,3 turns,EF001,OneEnemy,Piercing,8,,,,EF001,OneEnemy,Piercing,8,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0097,Sunder,,,Strength,2,A crushing blow that cracks the target's armor,2 turn,3 turns,EF001,OneEnemy,Crushing,10,,,,EF034,OneEnemy,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0098,Poison Arrow,,,Dexterity,2,An arrow tipped with poison,3 turn,3 turns,EF001,OneEnemy,Piercing,8,,,,EF005,OneEnemy,Poison,4,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0099,Volley,,,Dexterity,2,Fires a rain of arrows across the whole enemy line,Instant,4 turns,EF001,AllEnemies,Piercing,8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0102,Stalwart Guard,,,,,Passive. Reduces all damage the Guardian takes by 10%.,Passive,Passive,EF017,Self,,10,,,,EF033,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0103,Iron Constitution,,,,,Passive. Increases the Guardian's Vitality by 15%.,Passive,Passive,EF025,Self,Vitality,15,,,,EF017,Self,,15,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0137,Pinch,,,Strength,2,Snaps a claw shut on an enemy,Instant,Basic Attack,EF001,OneEnemy,Crushing,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0138,Tongue Lash,,,Dexterity,2,A sticky tongue snaps out at an enemy,Instant,Basic Attack,EF001,OneEnemy,Crushing,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0104,Kick,,,Strength,2,Wheels around and kicks an enemy,Instant,Basic Attack,EF001,OneEnemy,Crushing,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0105,Sting,,,Dexterity,2,Jabs an enemy with a stinger,Instant,Basic Attack,EF001,OneEnemy,Piercing,14,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0106,Water Jet,,,Dexterity,2,Shoots a pressurised jet of water at an enemy,Instant,Basic Attack,EF001,OneEnemy,Water,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0107,Swarming Bites,,,Dexterity,2,The swarm tears at one enemy and spills over onto the ones beside it,Instant,Basic Attack,EF001,OneEnemy,Piercing,12,,,,EF001,AdjacentEnemies,Piercing,6,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0108,Tentacle Lash,,,Strength,2,Whips an enemy with a tentacle,Instant,Basic Attack,EF001,OneEnemy,Crushing,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0109,Chilling Touch,,,Intelligence,2,A freezing touch that drains the warmth from an enemy,Instant,Basic Attack,EF001,OneEnemy,Cold,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0110,Shadow Lash,,,Intelligence,2,Lashes an enemy with a tendril of shadow,Instant,Basic Attack,EF001,OneEnemy,Dark,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0111,Ice Shard,,,Intelligence,2,Flings a razor shard of ice at an enemy,Instant,Basic Attack,EF001,OneEnemy,Cold,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0112,Flame Touch,,,Intelligence,2,Sears an enemy with a burning touch,Instant,Basic Attack,EF001,OneEnemy,Fire,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0113,Gust,,,Dexterity,2,A hard gust of wind slams into an enemy,Instant,Basic Attack,EF001,OneEnemy,Wind,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0114,Sand Blast,,,Dexterity,2,Hurls a stinging blast of sand at an enemy,Instant,Basic Attack,EF001,OneEnemy,Earth,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0115,Spore Burst,,,Wisdom,2,Puffs a cloud of toxic spores at an enemy,Instant,Basic Attack,EF001,OneEnemy,Poison,16,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0116,Mind Blast,,,Intelligence,2,A wave of raw thought crashes into an enemy's mind,Instant,Basic Attack,EF001,OneEnemy,Psychic,24,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0117,Trample,,,Strength,2,Stampedes across the whole enemy line,Instant,3 turns,EF001,AllEnemies,Crushing,14,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0118,Constrict,,,Strength,2,"Coils around an enemy and squeezes, weakening their blows",2 turn,3 turns,EF001,OneEnemy,Crushing,15,,,,EF033,OneEnemy,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0119,Ink Cloud,,,,,Squirts a cloud of ink that blinds and muddles every enemy,2 turn,4 turns,EF030,AllEnemies,,40,,,,EF033,AllEnemies,,10,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0120,Poison Sting,,,Dexterity,2,A stinger that leaves poison behind,3 turn,3 turns,EF001,OneEnemy,Piercing,12,,,,EF005,OneEnemy,Poison,8,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0121,Toxic Skin,,,Vitality,2,Poison seeps from its skin and burns anyone who strikes it,3 turn,4 turns,EF022,Self,Poison,8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0122,Spiked Hide,,,Strength,2,Bristles its spikes so attackers get hurt,3 turn,4 turns,EF022,Self,Piercing,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0123,Tidal Surge,,,Intelligence,2,Calls a surge of water that crashes over every enemy,Instant,4 turns,EF001,AllEnemies,Water,14,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0124,Enchanting Song,,,,,A lilting tune that entrances an enemy into attacking the singer,1 turn,4 turns,EF027,OneEnemy,,,,,,EF033,OneEnemy,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0125,Hypnotic Gaze,,,,,Locks eyes with an enemy and draws it into attacking,1 turn,4 turns,EF027,OneEnemy,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0126,Mind Control,,,Intelligence,2,Seizes an enemy's mind and turns its attack on the caster,1 turn,4 turns,EF001,OneEnemy,Psychic,15,,,,EF027,OneEnemy,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0127,Roar,,,,,A thundering roar that shakes every enemy's resolve,2 turn,4 turns,EF033,AllEnemies,,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0128,Paralyzing Claw,,,Strength,2,A claw that numbs the muscles and slows an enemy's skills,Instant,3 turns,EF001,OneEnemy,Slashing,12,,,,EF029,OneEnemy,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0129,Poisoned Blade,,,Dexterity,2,A blade smeared with poison,3 turn,3 turns,EF001,OneEnemy,Piercing,12,,,,EF005,OneEnemy,Poison,8,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0130,Sandstorm,,,Dexterity,2,Whips up a blinding storm of sand across the whole enemy line,2 turn,4 turns,EF001,AllEnemies,Earth,12,,,,EF030,AllEnemies,,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0131,Eye Rays,,,Intelligence,2,"Beams of force, fire and frost shoot from its eyes at random enemies",Instant,3 turns,EF001,RandomEnemy,Force,10,,,,EF001,RandomEnemy,Fire,10,,,,EF001,RandomEnemy,Cold,10,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0132,Frost Breath,,,Intelligence,2,A blast of freezing breath that chills every enemy,2 turn,4 turns,EF001,AllEnemies,Cold,18,,,,EF033,AllEnemies,,10,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0133,Lightning Breath,,,Intelligence,2,Breathes a torrent of lightning over every enemy,Instant,4 turns,EF001,AllEnemies,Lightning,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0134,Poison Breath,,,Intelligence,2,Exhales a toxic cloud that lingers in the lungs,3 turn,4 turns,EF001,AllEnemies,Poison,12,,,,EF005,AllEnemies,Poison,6,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0135,Radiant Breath,,,Intelligence,2,A searing breath of golden light,Instant,4 turns,EF001,AllEnemies,Radiant,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0136,Dragon's Roar,,,,,A terrifying roar that rattles every enemy and stalls their skills,3 turn,5 turns,EF033,AllEnemies,,20,,,,EF029,AllEnemies,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0139,Predator's Instinct,,,,,Passive. Increases the Ranger's critical chance against targets marked by Hunter's Mark.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0140,Keen Aim,,,,,Passive. Increases the Ranger's accuracy by 10%.,Passive,Passive,EF011,Self,,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0141,Thorns,,,,,Passive. Attackers take a small guaranteed retaliation every time they hit the Ranger.,Passive,Passive,EF022,Self,Piercing,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0142,Static Charge,,,,,"Passive. Gains 1 stack whenever the Stormcaller takes lightning damage or casts a lightning ability. Each stack adds 10% to the next lightning spell, up to 5 stacks. All stacks are used up when that spell is cast.",Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0143,Static Disruption,,,,,Passive. Enemies hit by Thunderclash have their ability cooldowns increased by 1 turn.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0144,Lightning Conduction,,,,,Passive. Lightning Bolt always jumps to 1 adjacent enemy for 50% of the damage dealt to the first target.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0100,Hex,,,Intelligence,2,A crooked little curse that weakens an enemy's blows,2 turn,3 turns,EF001,OneEnemy,Dark,5,,,,EF033,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0101,Bone Guard,,,,,Rattling bones lock into a tougher guard,3 turn,4 turns,EF016,Self,,30,,,,EF017,Self,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0145,Quick Cut,,,Dexterity,2,"A fast, light slash",Instant,Basic Attack,EF001,OneEnemy,Slashing,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0146,Frost Lance,,,Intelligence,2,Throws a spear of ice at an enemy,Instant,Basic Attack,EF001,OneEnemy,Cold,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0147,Acid Flask,,,Intelligence,2,Lobs a flask of bubbling acid at an enemy,Instant,Basic Attack,EF001,OneEnemy,Acid,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0148,Hex Bolt,,,Intelligence,2,A crackling bolt of cursed energy,Instant,Basic Attack,EF001,OneEnemy,Dark,24,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0149,Stone Shot,,,Intelligence,2,Flings a chunk of rock at an enemy,Instant,Basic Attack,EF001,OneEnemy,Earth,24,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0150,Venom Dart,,,Dexterity,2,A tiny dart tipped with poison,Instant,Basic Attack,EF001,OneEnemy,Poison,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0151,Mind Lash,,,Intelligence,2,A sharp mental whip that stings the mind,Instant,Basic Attack,EF001,OneEnemy,Psychic,24,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0152,Resonant Chord,,,Intelligence,2,A booming chord that rattles an enemy,Instant,Basic Attack,EF001,OneEnemy,Thunder,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0153,Wind Blade,,,Dexterity,2,A razor edge of wind,Instant,Basic Attack,EF001,OneEnemy,Wind,22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0154,Tidal Lash,,,Wisdom,2,A whip of crashing water,Instant,Basic Attack,EF001,OneEnemy,Water,24,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0155,Void Bolt,,,Intelligence,2,A bolt that bends light and weight around it,Instant,Basic Attack,EF001,OneEnemy,Gravity,24,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0156,Bulwark Stance,,,,,"Plants his feet behind his shield, hardening his armor and softening every blow",3 turn,4 turns,EF016,Self,,60,,,,EF017,Self,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0157,Hold the Line,,,,,Roars a challenge and raises his shield so every enemy has to come through him,3 turn,4 turns,EF026,Self,,,,,,EF008,Self,,3,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0158,Spellward Aegis,,,Wisdom,2,Weaves a ward of oath-bound light over the whole party,Instant,4 turns,EF009,AllAllies,,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0159,Silencing Strike,,,Strength,2,A hard blow that rattles an enemy's concentration and delays its next skill,Instant,3 turns,EF001,OneEnemy,Crushing,25,,,,EF029,OneEnemy,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0160,Barbed Plate,,,,,Spikes burst from his battered plate and hurt anyone who hits him,3 turn,4 turns,EF022,Self,Piercing,15,3,,,EF016,Self,,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0161,Intimidating Bellow,,,,,A bellow that makes every enemy hesitate before swinging,2 turn,4 turns,EF033,AllEnemies,,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0162,Elemental Shroud,,,,,"Wraps the party in a shimmering veil that turns aside fire, frost and storm",3 turn,4 turns,EF019,AllAllies,Elemental,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0163,Frostbound Smash,,,Strength,2,A frozen shield-slam that saps an enemy's strength,2 turn,3 turns,EF001,OneEnemy,Cold,28,,,,EF033,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0164,Sunlit Blade,,,Strength,2,Blazes a blade of sunlight through one foe,Instant,3 turns,EF001,OneEnemy,Radiant,40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0165,Hallowed Ground,,,,,Consecrates the ground so allies recover whenever they are struck,3 turn,4 turns,EF021,AllAllies,,10,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0166,Mending Light,,,Wisdom,2,"Pours warm light into an ally, closing wounds and burning off ailments",Instant,3 turns,EF002,OneAlly,Radiant,45,,,,EF006,OneAlly,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0167,Guardian Angel,,,,,Calls a guardian spirit to pull an ally back from the brink,4 turn,4 turns,EF007,OneAlly,,50,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0168,Judgment Hammer,,,Strength,2,"Brings a holy hammer down on an enemy, doing extra damage to anything warded",Instant,3 turns,EF001,OneEnemy,Crushing,30,,,,EF015,OneEnemy,Crushing,40,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0169,Sanctified Plate,,,,,Blessed plate hardens against heavy blows and killing strikes,3 turn,4 turns,EF016,Self,,40,,,,EF018,Self,,50,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0170,Rending Strike,,,Strength,2,Opens a deep wound that keeps bleeding,3 turn,3 turns,EF001,OneEnemy,Slashing,30,,,,EF005,OneEnemy,Slashing,8,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0171,Berserk Howl,,,,,Howls into a frenzy and hits far harder for a short while,2 turn,4 turns,EF014,Self,,40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0172,Whirling Axes,,,Strength,2,Spins with an axe in each hand and cuts down the whole line,Instant,3 turns,EF001,AllEnemies,Slashing,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0173,Bloodscent,,,,,Picks up the scent of a wounded foe and marks it for the pack,3 turn,4 turns,EF035,OneEnemy,,25,,,,EF011,Self,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0174,Skull Crusher,,,Strength,2,A skull-cracking overhead blow that dents armor,2 turn,4 turns,EF001,OneEnemy,Crushing,35,,,,EF034,OneEnemy,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0175,Unbreakable Rage,,,,,Shrugs off pain and fights on with fury,3 turn,4 turns,EF020,Self,,30,,,,EF014,Self,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0176,Nerve Strike,,,Dexterity,2,Strikes a pressure point that numbs an enemy's arms,2 turn,4 turns,EF001,OneEnemy,Crushing,20,,,,EF033,OneEnemy,,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0177,Flowing Stance,,,,,Settles into a flowing stance that turns blows aside and clears the mind,2 turn,4 turns,EF017,Self,,35,,,,EF006,Self,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0178,Flurry of Blows,,,Dexterity,2,Three lightning-fast strikes on the same foe,Instant,3 turns,EF001,OneEnemy,Crushing,10,,,,EF001,OneEnemy,Crushing,10,,,,EF001,OneEnemy,Crushing,10,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0179,Tumble,,,,,Rolls out of harm's way and comes up swinging,1 turn,3 turns,EF017,Self,,40,,,,EF012,Self,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0180,Healing Palm,,,Wisdom,2,A glowing palm that restores an ally and quiets their ailments,Instant,3 turns,EF002,OneAlly,Spiritual,40,,,,EF006,OneAlly,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0181,Serene Breath,,,Wisdom,2,A slow breath that sets the whole party at ease,3 turn,4 turns,EF003,AllAllies,Spiritual,15,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0182,Venomous Blade,,,Dexterity,2,A blade slick with poison that keeps working after the cut,3 turn,3 turns,EF001,OneEnemy,Piercing,20,,,,EF005,OneEnemy,Poison,10,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0183,Shadowstep Strike,,,Dexterity,2,"Slips behind the line and strikes whoever she likes, taunt or no taunt",Instant,4 turns,EF045,Self,,,,,,EF001,OneEnemy,Piercing,35,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0184,Pickpocket,,,Dexterity,2,Lifts a magical trinket right off an enemy,Instant,3 turns,EF001,OneEnemy,Piercing,15,,,,EF043,OneEnemy,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0185,Dirty Trick,,,Dexterity,2,"Flings dirt in the eyes, then stabs",2 turn,4 turns,EF001,OneEnemy,Piercing,20,,,,EF030,OneEnemy,,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0186,Death Mark,,,,,Marks an enemy for death so every blow lands harder,3 turn,4 turns,EF035,OneEnemy,,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0187,Twin Fangs,,,Dexterity,2,Two quick stabs in the same wound,Instant,3 turns,EF001,OneEnemy,Piercing,18,,,,EF001,OneEnemy,Piercing,18,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0188,Smoke Bomb,,,,,Bursts a smoke bomb that blinds the enemy line and hides her,2 turn,4 turns,EF030,AllEnemies,,30,,,,EF017,Self,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0189,Gas Trap,,,Dexterity,2,Springs a trap that fills the room with choking gas,3 turn,4 turns,EF005,AllEnemies,Poison,8,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0190,Piercing Shot,,,Dexterity,2,A hard-drawn shot that punches through armor,2 turn,4 turns,EF001,OneEnemy,Piercing,40,,,,EF034,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0191,Eagle Eye,,,,,Slows her breathing and lines up the perfect shot,3 turn,4 turns,EF011,Self,,40,,,,EF012,Self,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0192,Net Snare,,,,,Tangles an enemy in a net so its blows come slower and weaker,2 turn,4 turns,EF033,OneEnemy,,30,,,,EF029,OneEnemy,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0193,Pebble Storm,,,Dexterity,2,A rattling hail of sling stones across the line,Instant,3 turns,EF001,AllEnemies,Crushing,14,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0194,Rain of Thorns,,,Dexterity,2,Looses a high volley that falls across the whole enemy line,Instant,3 turns,EF001,AllEnemies,Piercing,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0195,Pinning Shot,,,Dexterity,2,A shot that pins an enemy in place and delays its next skill,Instant,3 turns,EF001,OneEnemy,Piercing,22,,,,EF029,OneEnemy,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0196,Rousing Anthem,,,,,A swelling anthem that sets the whole party's blood up,3 turn,4 turns,EF014,AllAllies,,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0197,Cutting Jibe,,,Intelligence,2,A barbed insult that stings and baits an enemy into attacking him,1 turn,3 turns,EF001,OneEnemy,Psychic,20,,,,EF027,OneEnemy,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0198,Soothing Chorus,,,Intelligence,2,A warm chorus that mends the whole party,Instant,3 turns,EF002,AllAllies,Astral,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0199,Haunting Dirge,,,,,A sorrowful tune that makes enemies lower their guard,3 turn,4 turns,EF035,AllEnemies,,15,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0200,Thunder Roll,,,Intelligence,2,A rolling drum solo that rattles every enemy,Instant,3 turns,EF001,AllEnemies,Thunder,16,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0201,Battle Cadence,,,,,A driving beat that quickens everyone's skills,Instant,4 turns,EF028,AllAllies,,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0202,Prayer of Renewal,,,Wisdom,2,A prayer that washes warmth over the whole party,Instant,3 turns,EF002,AllAllies,Radiant,35,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0203,Sanctuary,,,,,Raises a sphere of calm that softens incoming blows,2 turn,4 turns,EF017,AllAllies,,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0204,Holy Rebuke,,,Wisdom,2,A scolding blow of light that strips a buff from an enemy,Instant,3 turns,EF001,OneEnemy,Radiant,30,,,,EF042,OneEnemy,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0205,Rite of Cleansing,,,Wisdom,2,A rite that washes away every ailment and leaves a thin ward behind,Instant,4 turns,EF006,AllAllies,,,,,,EF009,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0206,Revive,,,Wisdom,2,Coaxes a fallen ally back to their feet,Instant,4 turns,EF046,OneDeadAlly,Radiant,40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0207,Blooming Light,,,Wisdom,2,A seed of light that blossoms into lasting care,3 turn,3 turns,EF002,OneAlly,Radiant,20,,,,EF003,OneAlly,Radiant,20,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0208,Soul Rot,,,Intelligence,2,Rots the life out of every enemy a little at a time,3 turn,4 turns,EF005,AllEnemies,Necrotic,10,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0209,Harvest of Souls,,,Intelligence,2,Tears life from one enemy and feeds it to himself,Instant,3 turns,EF001,OneEnemy,Necrotic,30,,,,EF004,Self,Necrotic,60,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0210,Withering Touch,,,Intelligence,2,A grave-cold touch that shrivels an enemy,3 turn,4 turns,EF001,OneEnemy,Necrotic,20,,,,EF038,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0211,Deathless Shroud,,,,,Wraps herself in grave-cloth that refuses to let her stay dead,4 turn,4 turns,EF007,Self,,50,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0212,Corpse Burst,,,Intelligence,2,Pops a rotting corpse so it blasts one enemy and splatters the rest,Instant,4 turns,EF001,OneEnemy,Necrotic,35,,,,EF001,AllEnemiesMinusTarget,Necrotic,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0213,Grave Robbing,,,Intelligence,2,Pinches a buff right off an enemy and zaps it for good measure,Instant,3 turns,EF043,OneEnemy,,,,,,EF001,OneEnemy,Necrotic,10,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0214,Ancestral Ward,,,Wisdom,2,Calls an ancestor's spirit to wrap one ally in a heavy ward,Instant,3 turns,EF009,OneAlly,,60,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0215,Stoneward Chant,,,,,A low chant that thickens the whole party's armor,3 turn,4 turns,EF016,AllAllies,,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0216,Thunder Totem,,,Wisdom,2,Slams down a totem that calls thunder on every enemy,Instant,3 turns,EF001,AllEnemies,Thunder,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0217,Bloodlust Chant,,,,,A war chant that stirs the whole party to hit harder and truer,2 turn,4 turns,EF014,AllAllies,,25,,,,EF012,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0218,Swamp Hex,,,Wisdom,2,A swampy hex that saps an enemy's strength and poisons it,3 turn,4 turns,EF033,OneEnemy,,35,,,,EF005,OneEnemy,Poison,8,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0219,Mire Mist,,,,,Calls a thick swamp mist that dulls blows and wards off poison,3 turn,4 turns,EF017,AllAllies,,15,,,,EF019,AllAllies,Noxious,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0220,Rejuvenating Rain,,,Wisdom,2,A soft rain that mends the whole party over time,3 turn,3 turns,EF003,AllAllies,Water,15,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0221,Entangling Roots,,,Wisdom,2,Roots burst from the ground and bind every enemy's skills,2 turn,4 turns,EF001,AllEnemies,Primal,10,,,,EF029,AllEnemies,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0222,Bark Armor,,,,,Hardens the whole party's skin into bark,3 turn,4 turns,EF016,AllAllies,,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0223,Briar Coat,,,,,A coat of briars that pricks anyone who hits the party,3 turn,4 turns,EF022,AllAllies,Primal,10,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0224,Cyclone,,,Wisdom,2,A whirling cyclone that tears across the whole enemy line,Instant,3 turns,EF001,AllEnemies,Wind,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0225,Tailwind,,,,,A following wind that steadies every hand and quickens every blow,3 turn,4 turns,EF011,AllAllies,,25,,,,EF014,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0226,Inferno,,,Intelligence,2,A roaring inferno that scorches and keeps burning the whole line,3 turn,4 turns,EF001,AllEnemies,Fire,16,,,,EF005,AllEnemies,Fire,6,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0227,Flame Wall,,,,,A ring of flame that burns anyone who strikes the party,3 turn,4 turns,EF022,AllAllies,Fire,12,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0228,Blizzard,,,Intelligence,2,A howling blizzard that chills the whole line and dulls their aim,2 turn,4 turns,EF001,AllEnemies,Cold,16,,,,EF030,AllEnemies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0229,Ice Armor,,,,,Sheathes herself in thick ice,3 turn,4 turns,EF008,Self,,3,3,,,EF016,Self,,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0230,Earthen Fist,,,Intelligence,2,A giant fist of rock punches up under one enemy,Instant,3 turns,EF001,OneEnemy,Earth,40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0231,Stoneskin,,,,,Coats an ally in stone so blows glance off,3 turn,4 turns,EF016,OneAlly,,60,,,,EF019,OneAlly,Physical,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0232,Overcharge,,,,,Lets lightning build up in his veins before the next strike,2 turn,4 turns,EF014,Self,,40,,,,EF012,Self,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0233,Thunder Spear,,,Intelligence,2,Hurls a single lance of lightning with terrifying force,Instant,4 turns,EF001,OneEnemy,Lightning,45,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0234,Conductive Rain,,,Intelligence,2,A drenching storm that leaves every enemy vulnerable to lightning,3 turn,4 turns,EF001,AllEnemies,Water,10,,,,EF037,AllEnemies,Lightning,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0235,Healing Tide,,,Wisdom,2,A cool tide that sweeps through the party and closes wounds,Instant,3 turns,EF002,AllAllies,Water,28,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0236,Static Burst,,,Intelligence,2,A crack of static that shocks every enemy and scrambles their timing,Instant,4 turns,EF001,AllEnemies,Thunder,15,,,,EF029,AllEnemies,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0237,Lightning Rod,,,,,Plants a lightning rod and dares the enemy to hit him,3 turn,4 turns,EF026,Self,,,,,,EF022,Self,Lightning,15,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0238,Arcane Missiles,,,Intelligence,2,Three darting missiles that all find the same target,Instant,3 turns,EF001,OneEnemy,Force,14,,,,EF001,OneEnemy,Force,14,,,,EF001,OneEnemy,Force,14,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0239,Mana Shield,,,,,Folds raw mana into a barrier around himself,Instant,4 turns,EF009,Self,,40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0240,Starfall,,,Intelligence,2,Calls stars down on the whole enemy line,Instant,4 turns,EF001,AllEnemies,Astral,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0241,Time Slip,,,,,Slips an ally a few seconds ahead of the rest so their skills recover faster,Instant,4 turns,EF028,OneAlly,,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0242,Gravity Well,,,Intelligence,2,Drags every enemy into a crushing well and loosens their armor,2 turn,4 turns,EF001,AllEnemies,Gravity,14,,,,EF034,AllEnemies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0243,Entropy Bolt,,,Intelligence,2,A bolt that ages whatever it touches and unravels a buff,Instant,3 turns,EF001,OneEnemy,Temporal,32,,,,EF042,OneEnemy,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0244,Healing Draught,,,Intelligence,2,Throws a potion that heals an ally and washes out ailments,Instant,3 turns,EF002,OneAlly,Primal,50,,,,EF006,OneAlly,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0245,Volatile Mixture,,,Intelligence,2,A fizzing flask that bursts into fire and acid at once,Instant,4 turns,EF001,AllEnemies,"Fire 1, Acid 1",22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0246,Toxic Cloud,,,Intelligence,2,A foul cloud of poison that eats at the whole enemy line,3 turn,4 turns,EF005,AllEnemies,Poison,10,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0247,Weakening Tonic,,,,,A tonic that thins an enemy's armor and curdles any healing it gets,3 turn,4 turns,EF034,OneEnemy,,25,,,,EF039,OneEnemy,,40,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0248,Strength Elixir,,,,,Presses a thick brew into an ally's hand that makes them stronger,3 turn,4 turns,EF025,OneAlly,Strength,40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0249,Dragonbreath Brew,,,Intelligence,2,Spits a mouthful of fiery brew across one enemy and its neighbors,Instant,3 turns,EF001,OneEnemy,Fire,32,,,,EF001,AdjacentEnemies,Fire,14,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0250,Curse of Frailty,,,,,A curse that withers an enemy's blows and loosens its armor,3 turn,4 turns,EF033,OneEnemy,,30,,,,EF034,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0251,Pact of Shadows,,,,,Opens herself to a dark patron for a surge of power,3 turn,4 turns,EF014,Self,,35,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0252,Hellfire Bolt,,,Intelligence,2,A bolt of hellfire that keeps burning,3 turn,3 turns,EF001,OneEnemy,Fire,35,,,,EF005,OneEnemy,Fire,10,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0253,Ashen Barrier,,,,,A shell of ash and ember that soaks up the next blows,Instant,4 turns,EF009,Self,,35,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0254,Spirit Leech,,,Intelligence,2,Pinches a buff right out of an enemy's spirit,Instant,3 turns,EF001,OneEnemy,Dark,15,,,,EF043,OneEnemy,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0255,Dread Whisper,,,,,A whisper of dread that makes every enemy hesitate and flinch,2 turn,4 turns,EF031,AllEnemies,,30,,,,EF030,AllEnemies,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0256,Warding Embrace,,,Wisdom,2,Wraps an ally in a ward of folded light and softens the next blows that land on them,2 turn,3 turns,EF009,OneAlly,,45,,,,EF017,OneAlly,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0257,Shepherd's Stand,,,,,"Steps in front of the wounded, draws every blade onto her shield and mends a little with each blow",3 turn,4 turns,EF026,Self,,,,,,EF021,Self,,12,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0258,Runic Bulwark,,,Intelligence,2,"Etches glowing runes across his shield, hardening his armor and raising a ward at the same time",3 turn,4 turns,EF016,Self,,40,,,,EF009,Self,,35,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0259,Force Slam,,,Strength,2,"Slams a shield wrapped in force, battering one enemy and dazing its next skill",Instant,3 turns,EF001,OneEnemy,Force,32,,,,EF029,OneEnemy,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0260,Rooted Stance,,,Wisdom,2,"Roots herself to the earth, shrugging off blows and drawing life up from the soil",3 turn,4 turns,EF017,Self,,30,,,,EF003,Self,Primal,15,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0261,Bramble Bash,,,Strength,2,A shield-bash wrapped in thorny vines that snarls the enemy's swing,2 turn,3 turns,EF001,OneEnemy,Primal,28,,,,EF033,OneEnemy,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0262,Shield Charge,,,Strength,2,Lowers the shield and bulls through the whole line,2 turn,4 turns,EF001,AllEnemies,Crushing,16,,,,EF033,AllEnemies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0263,Rage Wall,,,,,"Roars and braces, drawing every blow while he hits harder and shrugs off the pain",3 turn,4 turns,EF026,Self,,,,,,EF014,Self,,25,,,,EF017,Self,,25,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0264,Smiting Shot,,,Dexterity,2,An arrow blessed in the draw that burns where it lands and leaves the target exposed,2 turn,4 turns,EF001,OneEnemy,Radiant,34,,,,EF035,OneEnemy,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0265,Vow of the Hunt,,,,,"Swears an oath to run one quarry to ground, sharpening his aim and his blows",3 turn,4 turns,EF011,Self,,35,,,,EF014,Self,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0266,Thunderlance Charge,,,Strength,2,Hurls a lance of crackling light clean through one enemy,Instant,4 turns,EF001,OneEnemy,Lightning,30,,,,EF001,OneEnemy,Radiant,18,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0267,Stormbright Oath,,,,,"Swears an oath in the thunder, wrapping the party in crackling light that bites back",3 turn,4 turns,EF022,AllAllies,Lightning,10,3,,,EF019,AllAllies,Lightning,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0268,Spirit Cleaver,,,Strength,2,A cleaving blow guided by ancestor spirits that also cuts a buff loose,Instant,3 turns,EF001,OneEnemy,Slashing,30,,,,EF042,OneEnemy,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0269,Ancestor's Fury,,,,,Calls the old war-spirits to fill the party with battle fury,3 turn,4 turns,EF014,AllAllies,,20,,,,EF020,AllAllies,,10,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0270,Brand of Ruin,,,Intelligence,2,Burns a cursed brand into an enemy that makes every wound cut deeper,3 turn,4 turns,EF001,OneEnemy,Fire,25,,,,EF035,OneEnemy,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0271,Blood Pact,,,,,Opens a vein for a dark patron and fights in a demonic frenzy,2 turn,4 turns,EF014,Self,,40,,,,EF012,Self,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0272,Throwing Axes,,,Dexterity,2,Hurls a pair of hand axes that bite across the whole line,Instant,3 turns,EF001,AllEnemies,Slashing,17,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0273,Run Down,,,Strength,2,"Charges an exposed foe and cuts it down, whoever is guarding it",Instant,4 turns,EF045,Self,,,,,,EF001,OneEnemy,Slashing,38,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0274,Windstep Kick,,,Dexterity,2,A spinning kick riding a gust that sweeps across the whole line,Instant,3 turns,EF001,AllEnemies,Wind,16,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0275,Bamboo Breath,,,Wisdom,2,Draws a slow green breath that mends and steadies the whole party,3 turn,4 turns,EF003,AllAllies,Primal,12,3,,,EF011,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0276,Fist of Embers,,,Dexterity,2,A glowing palm-strike that sets an enemy ablaze,3 turn,3 turns,EF001,OneEnemy,Fire,24,,,,EF005,OneEnemy,Fire,9,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0277,Heat Haze,,,,,Wraps himself in shimmering heat that blurs his shape and scorches anyone who touches him,3 turn,4 turns,EF017,Self,,30,,,,EF022,Self,Fire,12,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0278,Thunderclap Palm,,,Dexterity,2,Two palms slapped together to burst thunder through a single foe,Instant,3 turns,EF001,OneEnemy,Thunder,32,,,,EF031,OneEnemy,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0279,Chain Step,,,,,"Dances through crackling air, speeding up her next skills and sharpening her strikes",2 turn,4 turns,EF028,Self,,1,,,,EF012,Self,,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0280,Serenade of Steel,,,Dexterity,2,Hums a lullaby while slipping a blade between the ribs and dulling the foe's swing,2 turn,3 turns,EF001,OneEnemy,Piercing,28,,,,EF033,OneEnemy,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0281,Whisper Network,,,,,Plants a rumor in the enemy's ear that marks one foe and sends an ally to pile on,3 turn,4 turns,EF035,OneEnemy,,25,,,,EF044,OneEnemy,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0282,Grave Dagger,,,Dexterity,2,A dagger dug out of a tomb that leaves wounds that refuse to close,3 turn,3 turns,EF001,OneEnemy,Necrotic,24,,,,EF039,OneEnemy,,40,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0283,Bone Whisper,,,,,Whispers old names that make an enemy forget how to dodge and leave it open to blades,3 turn,4 turns,EF037,OneEnemy,Physical,1,,,,EF035,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0284,Blink Strike,,,Dexterity,2,"Blinks behind the line and stabs through a gap in a spell, whoever stands guard",Instant,4 turns,EF045,Self,,,,,,EF001,OneEnemy,Force,36,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0285,Veil of Shadows,,,,,Folds the light around himself so blows slide past and his next strikes land true,3 turn,4 turns,EF017,Self,,35,,,,EF012,Self,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0286,Pressure Point,,,Dexterity,2,Finds the one nerve that turns an enemy's arm to jelly,2 turn,3 turns,EF001,OneEnemy,Crushing,24,,,,EF041,OneEnemy,Strength,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0287,Breath Control,,,,,"Slows her breath until she is nearly invisible, and her next blows land like hammers",2 turn,4 turns,EF014,Self,,35,,,,EF017,Self,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0288,Thornwood Volley,,,Dexterity,2,A volley of thorn-tipped arrows that keep bleeding after they land,3 turn,4 turns,EF001,AllEnemies,Piercing,14,,,,EF005,AllEnemies,Primal,5,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0289,Call of the Wild,,,Wisdom,2,Whistles up a forest wind that sharpens the party's aim and soothes their hurts,3 turn,4 turns,EF011,AllAllies,,25,,,,EF003,AllAllies,Primal,8,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0290,Lightning Arrow,,,Dexterity,2,An arrow charged with lightning that jumps to the target's neighbors,Instant,3 turns,EF001,OneEnemy,Lightning,30,,,,EF001,AdjacentEnemies,Lightning,14,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0291,Storm Eye,,,,,Rides the updraft of a storm and sees every opening,3 turn,4 turns,EF012,Self,,35,,,,EF011,Self,,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0292,Flask Arrow,,,Dexterity,2,An arrow tipped with a corrosive flask that eats armor on impact,2 turn,3 turns,EF001,OneEnemy,Acid,26,,,,EF034,OneEnemy,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0293,Tripwire Cocktail,,,Dexterity,2,Strings a trap line of foul-smelling flasks that poison and slow the whole enemy line,3 turn,4 turns,EF005,AllEnemies,Poison,7,3,,,EF029,AllEnemies,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0294,Arcane Aria,,,Intelligence,2,A sung spell that rolls over the whole line like a wave,Instant,3 turns,EF001,AllEnemies,Force,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0295,Verse of Insight,,,,,A rhyme that sharpens every mind in the party,3 turn,4 turns,EF025,AllAllies,Intelligence,25,,,,EF014,AllAllies,,10,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0296,Hymn of Mending,,,Wisdom,2,A long hymn that closes wounds across the party and clears their heads,Instant,4 turns,EF002,AllAllies,Radiant,24,,,,EF006,AllAllies,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0297,Chorus of Resolve,,,,,A rousing chorus that steels every heart against hard hits,3 turn,4 turns,EF018,AllAllies,,30,,,,EF017,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0298,Devil's Trill,,,Intelligence,2,A screeching tune that scrapes at the mind and spits out a curse,2 turn,3 turns,EF001,OneEnemy,Dark,28,,,,EF033,OneEnemy,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0299,Deal at Midnight,,,,,"Offers one enemy a bargain they cannot refuse, leeching their strength and spurring the party on",3 turn,4 turns,EF041,OneEnemy,Strength,30,,,,EF014,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0300,Thornlight Ward,,,Wisdom,2,"Spreads a ward of living light over the whole party, with thorns that prick anyone who strikes it",3 turn,4 turns,EF009,AllAllies,,20,,,,EF022,AllAllies,Primal,8,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0301,Sap of Life,,,Wisdom,2,"Presses golden sap to a wound, healing an ally in a heartbeat and a little more each turn",3 turn,3 turns,EF002,OneAlly,Primal,38,,,,EF003,OneAlly,Primal,10,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0302,Last Rites,,,Wisdom,2,Speaks the last rites over a fallen ally and calls them back to their feet,Instant,4 turns,EF046,OneDeadAlly,Radiant,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0303,Mourner's Curse,,,,,Lays a quiet curse on an enemy that rots healing away and thins its life,3 turn,4 turns,EF039,OneEnemy,,40,,,,EF038,OneEnemy,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0304,Poultice Rounds,,,Wisdom,2,"Bandages and balms all round, mending the whole party and numbing their pain",2 turn,3 turns,EF002,AllAllies,Primal,26,,,,EF017,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0305,Panacea,,,,,A bitter tonic that clears every ailment and toughens the drinker against poison and disease,2 turn,4 turns,EF006,OneAlly,,,,,,EF019,OneAlly,Noxious,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0306,Plague Flask,,,Intelligence,2,Cracks a flask of bottled plague over the enemy line,3 turn,4 turns,EF005,AllEnemies,Disease,9,3,,,EF039,AllEnemies,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0307,Patchwork Vigor,,,,,Stitches a fresh scrap of vitality onto himself,3 turn,4 turns,EF020,Self,,30,,,,EF003,Self,Necrotic,15,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0308,Ancestral Rattle,,,Intelligence,2,Shakes a drum of bones that calls hungry spirits out of enemy flesh and rattles their nerve,Instant,3 turns,EF001,AllEnemies,Spiritual,15,,,,EF031,AllEnemies,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0309,Spirit Pact,,,Wisdom,2,Bargains with the spirits to ward one ally and bleed the power from one foe,3 turn,4 turns,EF009,OneAlly,,40,,,,EF033,OneEnemy,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0310,Soul Harvest,,,Intelligence,2,Rips out one soul to feed her own wounds,Instant,3 turns,EF001,OneEnemy,Necrotic,36,,,,EF002,Self,Necrotic,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0311,Binding Dread,,,,,A chain of dread that drags every enemy's next skill back and dims their luck,2 turn,4 turns,EF029,AllEnemies,,1,,,,EF031,AllEnemies,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0312,Mushroom Circle,,,Wisdom,2,A ring of puffball mushrooms that spews spores across the enemy line,Instant,3 turns,EF001,AllEnemies,Poison,14,,,,EF030,AllEnemies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0313,Bramble Song,,,,,A cackling chant that makes thorns sprout from the party's armor,3 turn,4 turns,EF022,AllAllies,Primal,9,3,,,EF016,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0314,Storm Drum,,,Wisdom,2,Beats a war drum that calls lightning down on one enemy and thins its resistance,3 turn,4 turns,EF001,OneEnemy,Lightning,34,,,,EF037,OneEnemy,Lightning,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0315,Thunderhide,,,,,"A thunder-spirit settles on the whole party, hardening them against storm and strike",3 turn,4 turns,EF019,AllAllies,Lightning,1,,,,EF017,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0316,Swamp Brew,,,Wisdom,2,A fizzing swamp-brew that mends one ally and puts muscle on them,3 turn,4 turns,EF002,OneAlly,Primal,36,,,,EF025,OneAlly,Strength,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0317,Hexed Cauldron,,,,,"Throws a bubbling pot at the line, fouling blows and armor alike",3 turn,4 turns,EF033,AllEnemies,,20,,,,EF034,AllEnemies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0318,Kindleroot,,,Intelligence,2,A root bursts into flame under one enemy and spreads to its neighbors,3 turn,4 turns,EF001,OneEnemy,Fire,30,,,,EF005,AdjacentEnemies,Fire,8,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0319,Ash and Bloom,,,Wisdom,2,Scatters ash that closes wounds and sprouts new growth over the party,3 turn,4 turns,EF003,AllAllies,Primal,12,3,,,EF016,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0320,Strangleweed Draught,,,Wisdom,2,A bitter draught of strangleweed that poisons one enemy and saps its strength,3 turn,3 turns,EF005,OneEnemy,Poison,10,3,,,EF041,OneEnemy,Strength,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0321,Hearty Stew,,,,,A thick stew of roots and herbs that toughens the whole party,3 turn,4 turns,EF020,AllAllies,,15,,,,EF023,AllAllies,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0322,Hexroot,,,Wisdom,2,Dark roots coil around an enemy's ankles and hold back its next skill,2 turn,3 turns,EF001,OneEnemy,Dark,24,,,,EF029,OneEnemy,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0323,Fey Bargain,,,Wisdom,2,Strikes a bargain with the wood-spirits for a ward and a lucky streak across the party,3 turn,4 turns,EF009,AllAllies,,18,,,,EF012,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0324,Prismatic Beam,,,Intelligence,2,"Splits one beam of light into fire, cold and lightning in the same breath",Instant,4 turns,EF001,OneEnemy,"Fire 1, Cold 1, Lightning 1",40,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0325,Prismatic Ward,,,Intelligence,2,Draws rainbow light into a ward that bends every elemental blow,3 turn,4 turns,EF009,Self,,35,,,,EF019,Self,Elemental,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0326,Basalt Wall,,,,,"Stands as an immovable pillar of basalt, drawing every blow and shrugging off the worst",3 turn,4 turns,EF026,Self,,,,,,EF016,Self,,50,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0327,Quake Slam,,,Strength,2,Slams the ground so the whole enemy line staggers and loses its footing,Instant,3 turns,EF001,AllEnemies,Earth,16,,,,EF030,AllEnemies,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0328,Sunfire Hymn,,,Intelligence,2,A burst of sacred flame that scorches foes and warms allies,Instant,4 turns,EF001,AllEnemies,Fire,15,,,,EF002,AllAllies,Radiant,12,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0329,Candle of Ward,,,Wisdom,2,Lights a candle whose flame becomes a ward over one ally,Instant,3 turns,EF009,OneAlly,,50,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0330,Tempest Overture,,,Intelligence,2,A rolling overture that crashes thunder on one enemy while quickening an ally,Instant,4 turns,EF001,OneEnemy,Thunder,30,,,,EF028,OneAlly,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0331,Windlass Refrain,,,,,A whistling refrain that gives the whole party a tailwind,3 turn,4 turns,EF011,AllAllies,,20,,,,EF012,AllAllies,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0332,Equation of Lightning,,,Intelligence,2,"Calculates the exact path of a bolt, then guides it through a breach in the enemy's resistance",3 turn,4 turns,EF037,OneEnemy,Lightning,1,,,,EF001,OneEnemy,Lightning,38,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0333,Surge Protector,,,,,Draws a protective circuit around the party that softens damage and shocks attackers,3 turn,4 turns,EF017,AllAllies,,15,,,,EF022,AllAllies,Lightning,8,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0334,Thunder Axe,,,Strength,2,Swings an axe wreathed in lightning that bites across the whole line,Instant,3 turns,EF001,AllEnemies,Lightning,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0335,Stormhide Roar,,,,,"Roars into the storm until her hide crackles, hitting harder and shocking anyone who hits back",3 turn,4 turns,EF014,Self,,35,,,,EF022,Self,Lightning,12,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0336,Rimeburn Flask,,,Intelligence,2,"A flask that freezes and eats away at the same time, splashed over the whole line",Instant,4 turns,EF001,AllEnemies,"Acid 1, Cold 1",20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0337,Philosopher's Draught,,,,,Sips an experimental draught that sharpens the mind painfully,3 turn,4 turns,EF025,Self,Intelligence,40,,,,EF012,Self,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0338,Forbidden Footnote,,,Intelligence,2,Reads a forbidden line aloud and an enemy's mind buckles,3 turn,3 turns,EF001,OneEnemy,Psychic,34,,,,EF033,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0339,Pact Scroll,,,,,Signs a pact in ink that fills her with power and her enemies with doubt,3 turn,4 turns,EF014,Self,,35,,,,EF030,AllEnemies,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0340,Illuminate,,,,,"Floods the field with bright light, steadying allies' aim and exposing enemy weak points",3 turn,4 turns,EF011,AllAllies,,20,,,,EF035,AllEnemies,,10,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0341,Scholar's Mercy,,,Wisdom,2,A studied healing word that closes a wound and leaves a thin ward behind,Instant,3 turns,EF002,OneAlly,Astral,34,,,,EF009,OneAlly,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0342,Iron Elixir,,,,,Downs a bitter elixir that turns his skin to iron,3 turn,4 turns,EF016,Self,,45,,,,EF020,Self,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0343,Anvil Throw,,,Strength,2,"Heaves a small anvil at one enemy, denting its armor",2 turn,3 turns,EF001,OneEnemy,Crushing,32,,,,EF034,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0344,Dose of Doom,,,Dexterity,2,A syringe of something nasty that poisons an enemy and thins its armor,3 turn,3 turns,EF005,OneEnemy,Poison,12,3,,,EF034,OneEnemy,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0345,Smothering Mist,,,,,Blows a sleepy mist across the line that slows hands and dulls aim,2 turn,4 turns,EF030,AllEnemies,,25,,,,EF033,AllEnemies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0346,Overboil,,,Intelligence,2,"Shakes a flask until it bursts over the whole line, burning an opening in their defenses",3 turn,4 turns,EF001,AllEnemies,Fire,16,,,,EF037,AllEnemies,Fire,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0347,Steam Cloud,,,,,A hissing cloud of steam that hides the party and scalds the enemy,3 turn,4 turns,EF017,AllAllies,,20,,,,EF005,AllEnemies,Fire,5,3,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0348,Fallen Smite,,,Strength,2,"A holy smite curdled by a broken oath, burning one enemy with dark flame",Instant,3 turns,EF001,OneEnemy,Dark,28,,,,EF001,OneEnemy,Radiant,14,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0349,Oathbreaker's Bargain,,,Intelligence,2,Trades the last of his oath for a ward and a bite of armor,3 turn,4 turns,EF009,Self,,35,,,,EF016,Self,,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0350,Hollow Palm,,,Intelligence,2,A palm-strike that hits the spirit rather than the flesh,3 turn,4 turns,EF001,OneEnemy,Spiritual,30,,,,EF038,OneEnemy,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0351,Fasting Pact,,,,,Gives up a meal for a dark patron's favor: speed and power for a short while,3 turn,4 turns,EF011,Self,,30,,,,EF014,Self,,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0352,Hexdrum Beat,,,Intelligence,2,A cursed drumbeat that rattles the whole line and shakes their armor loose,2 turn,4 turns,EF001,AllEnemies,Dark,14,,,,EF034,AllEnemies,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0353,Voice of the Dead,,,Intelligence,2,"Lets a dead voice speak through the drum, stealing a buff from one enemy",Instant,3 turns,EF043,OneEnemy,,,,,,EF001,OneEnemy,Spiritual,14,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0354,Herald's Charge,,,Strength,2,"Sounds a horn and rides down the line, hitting one enemy and rallying the party",3 turn,4 turns,EF001,OneEnemy,Radiant,28,,,,EF014,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0355,Banner of Valor,,,,,Plants a banner whose light steels every ally against the worst blows,3 turn,4 turns,EF017,AllAllies,,20,,,,EF018,AllAllies,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0356,Carrion Feast,,,Strength,2,"Tears off a mouthful and heals from it, worse for the wounded",Instant,4 turns,EF001,OneEnemy,Piercing,16,,,,EF001,OneEnemy,Piercing,12,,target below 50% health,50,EF004,Self,Piercing,100,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0357,Plague Bite,,,Dexterity,2,A filthy bite that festers and spoils healing,3 turn,4 turns,EF001,OneEnemy,Piercing,8,,,,EF005,OneEnemy,Disease,5,3,,,EF039,OneEnemy,,30,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0358,Dancing Blade,,,Dexterity,2,"The blade darts on its own, striking where it pleases",Instant,3 turns,EF001,RandomEnemy,Slashing,16,,,,EF001,RandomEnemy,Lightning,16,,,,EF045,Self,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0359,Barbed Net,,,Dexterity,2,"Tangles an enemy, delaying its skills and weakening its blows",2 turn,3 turns,EF001,OneEnemy,Piercing,8,,,,EF029,OneEnemy,,1,,,,EF033,OneEnemy,,20,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0360,Thought Drain,,,Intelligence,2,"Siphons thoughts, healing itself and stalling the target's skills",Instant,4 turns,EF001,OneEnemy,Psychic,16,,,,EF029,OneEnemy,,1,,,,EF004,Self,Psychic,50,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0361,Many Heads,,,Dexterity,2,Three heads strike wherever they can reach,Instant,3 turns,EF001,RandomEnemy,Piercing,12,,,,EF001,RandomEnemy,Piercing,12,,,,EF001,RandomEnemy,Piercing,12,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0362,Bramble Hide,,,Vitality,2,Thorny growth toughens the hide and pricks attackers,3 turn,4 turns,EF016,Self,,30,,,,EF022,Self,Primal,6,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0363,Soul Leech,,,Intelligence,2,Drinks the life from an enemy and heals itself,Instant,3 turns,EF001,OneEnemy,Necrotic,18,,,,EF004,Self,Necrotic,100,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0364,Skull Bash,,,Strength,2,A brutal headbutt that goads the target into hitting back,1 turn,3 turns,EF001,OneEnemy,Crushing,18,,,,EF027,OneEnemy,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0365,Coordinated Attack,,,Strength,2,Strikes and calls a partner to hit the same target,Instant,3 turns,EF001,OneEnemy,Piercing,8,,,,EF044,OneEnemy,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0366,Go for the Throat,,,Strength,2,A killing lunge that hits far harder on a badly wounded enemy,Instant,4 turns,EF001,OneEnemy,Piercing,18,,,,EF001,OneEnemy,Piercing,18,,target below 30% health,30,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0367,Blood in the Water,,,Strength,2,Scents blood and tears hardest into wounded prey,Instant,3 turns,EF001,OneEnemy,Piercing,18,,,,EF001,OneEnemy,Piercing,16,,target below 50% health,50,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0368,Death Roll,,,Strength,2,"Clamps down and rolls, leaving the target reeling",Instant,4 turns,EF001,OneEnemy,"Crushing 1, Slashing 1",36,,,,EF029,OneEnemy,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0369,Antler Sweep,,,Strength,2,Swings its antlers through the target and those beside it,Instant,3 turns,EF001,OneEnemy,Piercing,22,,,,EF001,AdjacentEnemies,Piercing,10,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0370,Rearing Stomp,,,Strength,2,"Rears up and crashes down, shaking the target's nerve",2 turn,4 turns,EF001,OneEnemy,Crushing,24,,,,EF033,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0371,Dig In,,,,,Plants itself and dares the enemy to move it,2 turn,4 turns,EF026,Self,,,,,,EF016,Self,,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0372,Snatch,,,Dexterity,2,A darting swipe that makes off with a buff,Instant,3 turns,EF001,OneEnemy,Slashing,12,,,,EF043,OneEnemy,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0373,Vanish,,,,,Slips out of sight and looks for an opening,2 turn,4 turns,EF017,Self,,30,,,,EF012,Self,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0374,Pixie Dust,,,Wisdom,2,A sparkling shower that cleanses and soothes every ally,Instant,4 turns,EF006,AllAllies,,,,,,EF002,AllAllies,Primal,8,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0375,Beguiling Light,,,,,A hypnotic glow that leaves the target open and unfocused,2 turn,3 turns,EF035,OneEnemy,,20,,,,EF030,OneEnemy,,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0376,Molten Core,,,Intelligence,2,"Its core flares, toughening it and burning attackers",3 turn,4 turns,EF022,Self,Fire,10,,,,EF016,Self,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0377,Eruption,,,Intelligence,2,Bursts and showers every enemy with clinging fire,2 turn,4 turns,EF001,AllEnemies,Fire,12,,,,EF005,AllEnemies,Fire,4,2,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0378,Umbral Embrace,,,Intelligence,2,Smothers an enemy in darkness that blocks healing,2 turn,3 turns,EF001,OneEnemy,Dark,20,,,,EF039,OneEnemy,,50,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0379,Stone Form,,,,,"Turns to living stone, shrugging off and returning blows",2 turn,5 turns,EF017,Self,,35,,,,EF010,Self,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0380,Grasping Roots,,,Wisdom,2,"Roots burst up and tangle every enemy, delaying their skills",Instant,4 turns,EF001,AllEnemies,Primal,8,,,,EF029,AllEnemies,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0381,Earthshaker Stomp,,,Strength,2,Shakes the ground and cracks every enemy's armor,2 turn,4 turns,EF001,AllEnemies,Earth,12,,,,EF034,AllEnemies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0382,Soothing Pollen,,,Wisdom,2,Sweet pollen heals allies and helps further healing take hold,2 turn,4 turns,EF002,AllAllies,Primal,14,,,,EF023,AllAllies,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0383,Fireball,,,Intelligence,2,A fireball that bursts over the target and those beside it,Instant,4 turns,EF001,OneEnemy,Fire,26,,,,EF001,AdjacentEnemies,Fire,14,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0384,Reveler's Reel,,,,,A wild tune that sharpens every ally's strikes,2 turn,4 turns,EF014,AllAllies,,15,,,,EF012,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0385,Skewer,,,Strength,2,Drives a spear through a gap in the armor,2 turn,3 turns,EF001,OneEnemy,Piercing,22,,,,EF034,OneEnemy,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0386,Chest Beat,,,,,"Pounds its chest, drawing every eye and hitting harder",2 turn,4 turns,EF026,Self,,,,,,EF014,Self,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0387,False Treasure,,,,,"Glints temptingly, then throws part of each blow back",2 turn,4 turns,EF026,Self,,,,,,EF010,Self,,25,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0388,Gaping Maw,,,Strength,2,Takes a huge bite and swallows some of the life,Instant,4 turns,EF001,OneEnemy,Piercing,28,,,,EF004,Self,Piercing,50,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0389,Antimagic Gaze,,,Intelligence,2,A dead stare that hurts the mind and strips magic from every enemy,Instant,4 turns,EF001,AllEnemies,Psychic,6,,,,EF042,AllEnemies,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0390,Gravity Slam,,,Strength,2,A blow with impossible weight behind it,Instant,4 turns,EF001,OneEnemy,"Crushing 1, Gravity 1",36,,,,EF029,OneEnemy,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0391,Bile Spew,,,Strength,2,"Heaves rotting bile over every enemy, spoiling their healing",2 turn,4 turns,EF001,AllEnemies,Acid,10,,,,EF039,AllEnemies,,30,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0392,Void Breath,,,Intelligence,2,A violet breath that drags every enemy down and delays their skills,2 turn,4 turns,EF001,AllEnemies,Gravity,18,,,,EF029,AllEnemies,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0393,Moonsilver Breath,,,Intelligence,2,Silver starlight that burns every enemy and strips their magic,Instant,4 turns,EF001,AllEnemies,Astral,18,,,,EF042,AllEnemies,,1,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0394,Magma Breath,,,Intelligence,2,Molten rock that softens every enemy's armor,2 turn,4 turns,EF001,AllEnemies,"Fire 1, Earth 1",18,,,,EF034,AllEnemies,,20,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0395,Nip,,,Dexterity,2,A quick little bite from a small creature,Instant,Basic Attack,EF001,OneEnemy,Piercing,12,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0396,Scratch,,,Dexterity,2,A quick swipe from small claws,Instant,Basic Attack,EF001,OneEnemy,Slashing,12,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0397,Spore Cloud,,,Wisdom,2,A choking cloud of spores that poisons every enemy,3 turn,4 turns,EF005,AllEnemies,Poison,5,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0398,Grove Mending,,,Wisdom,2,New growth slowly mends every ally,3 turn,4 turns,EF003,AllAllies,Primal,6,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0399,Field Mending,,,Wisdom,2,Patches up one ally,Instant,3 turns,EF002,OneAlly,Radiant,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0400,Benediction,,,,,A blessing that raises every ally's maximum health,3 turn,5 turns,EF020,AllAllies,,15,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0401,Nine Lives,,,,,Gets back up once after being knocked down,Instant,5 turns,EF007,Self,,20,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0402,Refuses to Die,,,,,Dead flesh drags itself back up once,Instant,5 turns,EF007,Self,,25,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0403,Wake-Up Call,,,,,A sharp call that gets every ally moving sooner,Instant,4 turns,EF028,AllAllies,,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0404,Glacial Smash,,,Strength,2,A frozen fist that lands as both ice and stone,Instant,3 turns,EF001,OneEnemy,"Crushing 1, Cold 1",32,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0405,Fog Shroud,,,,,Wraps every ally in thick mist that dulls incoming blows,2 turn,4 turns,EF017,AllAllies,,20,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0406,Incorporeal,,,,,Fades halfway out of the world so weapons pass through,2 turn,4 turns,EF019,Self,Physical,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0407,Sprout Colony,,,,,A patch of toxic mushrooms springs up to fight alongside it,3 turn,5 turns,EF047,Self,,PMSH002,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0408,Call Imp,,,,,Opens a small rift and pulls an imp through,3 turn,5 turns,EF047,Self,,IIMP001,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0409,Call the Brood,,,,,A smaller spider skitters out to join the fight,3 turn,5 turns,EF047,Self,,BSPD003,3,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0410,Swamp Ward,,,Wisdom,2,Murky spirits ward every ally,Instant,4 turns,EF009,AllAllies,,18,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0411,Shield Wall,,,,,Closes ranks so every ally's armor counts for more,2 turn,4 turns,EF016,AllAllies,,25,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0412,Stormfire Breath,,,Intelligence,2,Flame and lightning braided into a single breath,Instant,4 turns,EF001,AllEnemies,"Fire 1, Lightning 1",22,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0413,Death Ward,,,,,"Passive. Once per encounter, when the Guardian reaches 0 health they come back with 30% health.",Passive,Passive,EF007,Self,,30,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0414,Nature's Blessing,,,,,Passive. Increases all Nature damage the Druid deals.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0415,Verdant Touch,,,,,Passive. Increases the Druid's healing by 10%.,Passive,Passive,EF024,Self,,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0416,Lasting Embrace,,,,,Passive. Adds one extra charge to the shield from Armor of Vines.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0417,Holy Symbol,,,,,Passive. Increases the Cleric's healing by 10%.,Passive,Passive,EF024,Self,,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0418,Resurrection,,,,,Resurrects one fallen ally with 30% health.,Instant,4 turns,EF046,OneDeadAlly,Radiant,30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+SK0419,Swift Prayer,,,,,Passive. Reduces the cooldown of the Cleric's healing abilities.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0420,Healing Reflection,,,,,"Passive. When the Cleric casts a healing ability, the Cleric also heals for 10% of its healing. Once per cast. Resurrection does not trigger it.",Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0421,Sweeping Strikes,,,,,Passive. The basic axe attack also hits the two enemies next to the target for reduced damage.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0422,Berserker's Fury,,,,,Passive. The Berserker deals more damage the more health they have lost.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0423,Last Stand,,,,,"Passive. The first time the Berserker drops to 0 health in an encounter, they make three area attacks before going down.",Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0424,Venom Coating,,,,,Passive. The basic dagger attack also applies a poison damage over time effect.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0425,Deadly Precision,,,,,Passive. Adds 10 damage to the Assassin's critical hits.,Passive,Passive,EF013,Self,,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0426,Quick Reflexes,,,,,Passive. Adds a bonus to the Assassin's initiative rolls.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0427,Additional Hit,,,,,Passive. Quick Palms hits one extra time and Counter Stance counters twice. The extra hit deals reduced damage.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0428,Infuriating Jab,,,,,Passive. Each of the Monk's hits has a small chance to Provoke the enemy hit.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0429,Evasive Footwork,,,,,Passive. Increases the Monk's armor by 10%.,Passive,Passive,EF016,Self,,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0430,Necrotic Mastery,,,,,Passive. Increases the Necromancer's Necrotic damage.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0431,Life Steal,,,,,Passive. The Necromancer heals for part of the damage dealt by the main hand attack.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0432,Bone Shrapnel,,,,,"Passive. When the Necromancer's undead is defeated, it explodes and damages all enemies.",Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0433,Ward Mastery,,,,,Passive. Increases the strength of Wards the Shaman applies.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0434,Critical Ward,,,,,"Passive. The Shaman's Wards have a 30% chance to apply as a critical, using the Shaman's critical damage.",Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0435,Shared Fortune,,,,,Passive. The critical chance buff from the Shaman's basic attack goes to all allies instead of one random ally.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0436,Elemental Focus,,,,,Passive. Elemental Blast uses the element the target is weakest against instead of a random one.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0437,Elemental Mastery,,,,,Passive. Increases the damage of the Elementalist's elemental spells.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0438,Elemental Precision,,,,,Passive. Increases the Elementalist's critical chance by 10%.,Passive,Passive,EF012,Self,,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0439,Curse Potency,,,,,Passive. The Warlock's curses last one extra turn.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0440,Dark Affinity,,,,,"Passive. While any enemy has one of the Warlock's curses, the Warlock deals 10% more Dark damage.",Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0441,Dark Communion,,,,,"Passive. At the start of the Warlock's turn, they heal 3% of maximum health for each of their debuffs on enemies.",Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0442,Lingering Melody,,,,,Passive. The Bard's heal over time effects and debuffs last one extra turn.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0443,Crowd Work,,,,,"Passive. When an enemy hits the Bard, there is a very low chance to counterattack with Harmonious Strike's damage.",Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0444,In Rhythm,,,,,Passive. Increases the damage the Bard deals by 10%.,Passive,Passive,EF014,Self,,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0445,Favor of the Gods,,,,,"Passive. When the Paladin casts Aura of Vitality, the Paladin gains 5 charges of Reactive Healing.",Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0446,Divine Strength,,,,,Passive. Increases the damage of the Paladin's main hand attack.,Passive,Passive,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+SK0447,Divine Grace,,,,,Passive. Increases the Paladin's healing by 10%.,Passive,Passive,EF024,Self,,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,FALSE,FALSE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,TRUE,TRUE
