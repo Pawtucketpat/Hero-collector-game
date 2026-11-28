@@ -1,7 +1,7 @@
 // armory.js - the working Armory screen.
 // SCREEN ONLY: every gear change and every number comes from playerGear.js.
 // Load order in index.html: after buildingsAdventure.js (this replaces the sample Armory in buildingsCenter.js)
-// and after playerGear.js, before main.js.
+// and after playerGear.js and itemIcons.js, before main.js.
 
 const ARM_SAMPLE = BUILDINGS.armory; // the Heroes and Gear Vault tabs still show the sample layouts
 const ARM_SLOT_SHORT = { 'Main Hand': 'MH', 'Off Hand': 'OH', 'Head': 'H', 'Chest': 'C', 'Gloves': 'G', 'Legs': 'L', 'Feet': 'F' };
@@ -59,6 +59,9 @@ function armWearerName(who) {
   return row ? String(field(row, ['Hero Name', 'Name'], who)) : who;
 }
 
+// Gear tiles come from itemIcons.js. Without it the screens show the old letter boxes.
+function armHasIcons() { return typeof drawItemTile === 'function'; }
+
 // The wearer's portrait, bottom right of an item tile
 function armBadge(ui, x, y, who) {
   ui.rect(x, y, 30, 30, { fill: 0x0a090c, stroke: BLD_C.gold, sw: 2, r: 15 });
@@ -102,10 +105,17 @@ function armLoadout(ui, st, sheet) {
   const worn = getEquipped(MC_ID);
   GEAR_SLOTS.forEach(function (slot) {
     const item = worn[slot] ? getItem(worn[slot]) : null;
-    ui.slot(spots[slot][0], spots[slot][1], 82, {
+    const x = spots[slot][0], y = spots[slot][1];
+    const pick = function () { st.slot = slot; st.setf = ''; st.afff = ''; st.item = item ? item.itemId : ''; st.scroll.inv = 0; st.scroll.insp = 0; ui.refresh(); };
+    if (item && armHasIcons()) {
+      drawItemTile(ui, x, y, 82, item.gear, { label: slot, fallback: ARM_SLOT_SHORT[slot] });
+      if (st.slot === slot) ui.rect(x - 4, y - 4, 90, 90, { stroke: 0xffffff, sw: 3, r: 13 }); // white ring = picked
+      ui.tap(x, y, 82, 82, pick);
+      return;
+    }
+    ui.slot(x, y, 82, {
       filled: !!item, rarity: item ? RARITIES.indexOf(item.gear.rarity) : undefined, selected: st.slot === slot,
-      icon: item ? ARM_SLOT_SHORT[slot] : '+', label: slot,
-      onTap: function () { st.slot = slot; st.setf = ''; st.afff = ''; st.item = item ? item.itemId : ''; st.scroll.inv = 0; st.scroll.insp = 0; ui.refresh(); },
+      icon: item ? ARM_SLOT_SHORT[slot] : '+', label: slot, onTap: pick,
     });
   });
 
@@ -163,12 +173,16 @@ function armInventory(ui, st, items) {
   ui.grid('inv', area, items, 3, 112, function (item, x, y, w, h) {
     const g = item.gear;
     ui.card(x, y, w, h, { selected: st.item === item.itemId, onTap: function () { st.item = item.itemId; st.scroll.insp = 0; ui.refresh(); } });
-    const ix = x + w / 2 - 28;
-    ui.rect(ix, y + 8, 56, 56, { fill: 0x332a22, stroke: RARITY_COLOR[Math.max(0, RARITIES.indexOf(g.rarity))], sw: 3, r: 6 });
-    ui.text(ix + 28, y + 36, ARM_SLOT_SHORT[g.slot] || '?', { size: 21, bold: true, color: BLD_T.gold, ox: 0.5, oy: 0.5 });
-    ui.text(x + w / 2, y + 68, g.name, { size: 15, ox: 0.5, align: 'center', wrap: w - 8, lines: 2 });
+    const icons = armHasIcons(), size = icons ? 64 : 56;
+    const ix = x + w / 2 - size / 2;
+    if (icons) drawItemTile(ui, ix, y + 4, size, g, { fallback: ARM_SLOT_SHORT[g.slot] });
+    else {
+      ui.rect(ix, y + 8, size, size, { fill: 0x332a22, stroke: RARITY_COLOR[Math.max(0, RARITIES.indexOf(g.rarity))], sw: 3, r: 6 });
+      ui.text(ix + 28, y + 36, ARM_SLOT_SHORT[g.slot] || '?', { size: 21, bold: true, color: BLD_T.gold, ox: 0.5, oy: 0.5 });
+    }
+    ui.text(x + w / 2, y + (icons ? 71 : 68), g.name, { size: 15, ox: 0.5, align: 'center', wrap: w - 8, lines: 2 });
     const who = wearerOfItem(item.itemId);
-    if (who) armBadge(ui, ix + 40, y + 34, who);
+    if (who) armBadge(ui, ix + size - 16, y + (icons ? 40 : 34), who);
   }, 8);
 }
 
@@ -188,10 +202,15 @@ function armInspect(ui, st, sheet) {
 
   armScroll(ui, 'insp', p.x, p.y, p.w, 622 - p.y, function () {
     let y = p.y;
-    y = armPara(ui, p.x, y, g.name, { size: 21, bold: true, wrap: w, color: RARITY_TEXT[Math.max(0, RARITIES.indexOf(g.rarity))] });
-    y = armPara(ui, p.x, y, g.rarity + ' · ' + g.slot, { size: 16, color: BLD_T.dim });
-    if (who) y = armPara(ui, p.x, y, 'Worn by ' + armWearerName(who), { size: 16, color: BLD_T.gold, wrap: w });
-    y += 6;
+    let tx = p.x, tw = w, tileEnd = 0; // the name sits to the right of the picture
+    if (armHasIcons()) {
+      drawItemTile(ui, p.x, y + 2, 76, g, { fallback: ARM_SLOT_SHORT[g.slot] });
+      tx = p.x + 86; tw = w - 86; tileEnd = y + 80;
+    }
+    y = armPara(ui, tx, y, g.name, { size: 21, bold: true, wrap: tw, color: RARITY_TEXT[Math.max(0, RARITIES.indexOf(g.rarity))] });
+    y = armPara(ui, tx, y, g.rarity + ' · ' + g.slot, { size: 16, color: BLD_T.dim, wrap: tw });
+    if (who) y = armPara(ui, tx, y, 'Worn by ' + armWearerName(who), { size: 16, color: BLD_T.gold, wrap: tw });
+    y = Math.max(y, tileEnd) + 6;
 
     // skill
     const skill = g.skillId ? describeSkill(g.skillId, g.slot) : null;
