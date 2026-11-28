@@ -664,8 +664,13 @@ const battleScene = {
     if (this.battle.overReason === 'turnLimit') {
       makeLabel(this, W / 2, H / 2 + 4, 'Turn limit reached (' + TURN_LIMIT + ' turns)', 28).setDepth(3001);
     }
-    // Retry: back to gear up for this same fight. Town: leave; the Campaign Gate then gives a new fight.
-    this.resultButton(W / 2 - 175, H / 2 + 100, 'Retry', function () { queueRetry(scene.fight); openBattlePrep(scene); });
+    // Victory: New Battle (gear up, then a fresh fight). Defeat: Retry (gear up for this same fight).
+    // Town: leave; the Campaign Gate then gives a new fight.
+    const won = this.battle.over === 'victory';
+    this.resultButton(W / 2 - 175, H / 2 + 100, won ? 'New Battle' : 'Retry', function () {
+      if (won) clearRetry(); else queueRetry(scene.fight);
+      openBattlePrep(scene);
+    });
     this.resultButton(W / 2 + 175, H / 2 + 100, 'Town', function () { scene.scene.start('Town'); });
   },
 

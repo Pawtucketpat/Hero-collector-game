@@ -6,6 +6,7 @@
 const HOLD_MS = 400;            // how long a button must be held (in thousandths of a second) before the popup opens
 const SHOW_SHEET_TEXT = true;   // show the skill's Description from the Skills tab under its name
 const POPUP_W = 620;            // popup width
+const HOLD_HINT = 'Hold a skill for details'; // small label above the buttons ('' = no label)
 
 // ===== WORDING (nothing in this part draws on the screen or rolls any dice) =====
 
@@ -200,7 +201,7 @@ function showSkillPopup(scene, user, key) {
   if (info.note) { y += 4; add(info.note, 18, '#99bbdd', 0); }
   const height = y + pad;
 
-  const bottom = scene.H - BTN_MARGIN - BTN_H * 2 - BTN_GAP - 12; // just above the top row of buttons
+  const bottom = scene.H - BTN_MARGIN - BTN_H * 2 - BTN_GAP - 4;  // just above the top row of buttons (covers the label)
   const room = bottom - 66;                                       // stay under the top bar
   const k = Math.min(1, room / height);                           // a very long skill is drawn a little smaller
   const back = scene.add.rectangle(0, 0, POPUP_W, height, 0x101018, 0.96).setOrigin(0, 0).setStrokeStyle(3, 0xf2c66a);
@@ -233,7 +234,7 @@ function addSkillHold(scene) {
       const key = hero ? hero.skills[i] : null;
       if (!key) return;
       // remember whose turn it was when the finger went down, so a late release never uses the next hero's skill
-      const press = { index: i, pointerId: pointer.id, hero: hero, yourTurn: scene.awaitingPlayer, held: false };
+      const press = { index: i, pointerId: pointer.id, hero: hero, yourTurn: scene.awaitingPlayer, held: false, start: Date.now() };
       press.timer = scene.time.delayedCall(HOLD_MS, function () {
         press.held = true;
         showSkillPopup(scene, hero, key);
@@ -247,7 +248,8 @@ function addSkillHold(scene) {
     b.box.on('pointerup', function (pointer) {
       const press = mine(pointer);
       if (!press) return;
-      const use = !press.held && !pointer.wasCanceled && press.yourTurn && press.hero === scene.active;
+      const quick = !press.held && Date.now() - press.start < HOLD_MS; // a long press never uses the skill
+      const use = quick && !pointer.wasCanceled && press.yourTurn && press.hero === scene.active;
       endSkillPress(scene);
       if (use) scene.playerUse(i);
     });
@@ -256,6 +258,11 @@ function addSkillHold(scene) {
   const letGo = function (pointer) {
     if (scene.skillPress && scene.skillPress.pointerId === pointer.id) endSkillPress(scene);
   };
+  if (HOLD_HINT) {
+    scene.add.text(scene.W - BTN_MARGIN, scene.H - BTN_MARGIN - BTN_H * 2 - BTN_GAP - 8, HOLD_HINT, {
+      fontFamily: BTN_FONT, fontSize: '20px', color: '#ffffff', backgroundColor: '#000000', padding: { x: 8, y: 3 },
+    }).setOrigin(1, 1).setDepth(1500);
+  }
   scene.input.on('pointerup', letGo);
   scene.input.on('pointerupoutside', letGo);
   scene.input.on('gameout', function () { endSkillPress(scene); });
